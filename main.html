@@ -14,39 +14,96 @@
 <style>
     #container_map {
         border: 2px solid #000;
-        border-radius: 5px;
+        border-radius: 0px;
         background: #F0F8FF;
     }
 
     #container_stacked {
         border: 2px solid #000;
-        border-radius: 5px;
+        border-radius: 0px;
         background: #F0F8FF;
     }
 
     #container_line {
         border: 2px solid #000;
-        border-radius: 5px;
+        border-radius: 0px;
         background: #F0F8FF;
     }
 
     #container_sankey {
         border: 2px solid #000;
-        border-radius: 5px;
+        border-radius: 0px;
         background: #F0F8FF;
     }
 
     #container_heatmap {
         border: 2px solid #000;
-        border-radius: 5px;
+        border-radius: 0px;
         background: #F0F8FF;
     }
 
     #container_circular {
         border: 2px solid #000;
-        border-radius: 5px;
+        border-radius: 0px;
         background: #F0F8FF;
     }
+
+    [class ^="col-md-12"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        background-color: #eee;
+        border: 1px solid #ddd;
+        background-color: rgba(86, 61, 124, .15);
+        border: 1px solid rgba(86, 61, 124, .2);
+    }
+
+    [class ^="col-md-7"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 30px;
+        padding-right: 13px;
+        background-color: #eee;
+        border: 1px solid #ddd;
+        background-color: rgba(86, 61, 124, .15);
+        border: 1px solid rgba(86, 61, 124, .2);
+    }
+
+    [class ^="col-md-5"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 13px;
+        padding-right: 30px;
+        background-color: #eee;
+        border: 1px solid #ddd;
+        background-color: rgba(86, 61, 124, .15);
+        border: 1px solid rgba(86, 61, 124, .2);
+    }
+
+    [class ^="col-md-4"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        background-color: #eee;
+        border: 1px solid #ddd;
+        background-color: rgba(86, 61, 124, .15);
+        border: 1px solid rgba(86, 61, 124, .2);
+    }
+
+    [class ^="col-md-8"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        background-color: #eee;
+        border: 1px solid #ddd;
+        background-color: rgba(86, 61, 124, .15);
+        border: 1px solid rgba(86, 61, 124, .2);
+    }
+
+
 </style>
 
 
@@ -64,12 +121,12 @@
                             </div>
                         </div>
                         <div class="row clearfix">
-                            <div class="col-md-6 column">
+                            <div class="col-md-4 column">
                                 <div id="container_circular">
                                     <h4>container_circular</h4>
                                 </div>
                             </div>
-                            <div class="col-md-6 column">
+                            <div class="col-md-8 column">
                                 <div id="container_line">
                                     <h4>container_line</h4>
                                 </div>
@@ -114,7 +171,7 @@
     var height2 = width2 / 2.8;
 
     var width3 = document.getElementById('container_line').offsetWidth;
-    var height3 = width3 / 2;
+    var height3 = width3 / 2.7;
 
     var width4 = document.getElementById('container_sankey').offsetWidth;
     var height4 = width4 / 3;
@@ -123,7 +180,7 @@
     var height5 = width5 / 3;
 
     var width6 = document.getElementById('container_circular').offsetWidth;
-    var height6 = width6 / 2;
+    var height6 = width6 / 1.35;
 
     var svg1, svg2, svg3, svg4, svg5, svg6;
 
