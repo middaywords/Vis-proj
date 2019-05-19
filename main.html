@@ -8,6 +8,9 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="js/lineChart.js"></script>
+    <script src="js/heatMap.js"></script>
+    <script src="js/stackBarChart.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
 </head>
@@ -76,6 +79,8 @@
         padding-left: 0px;
         padding-right: 0px;
     }
+
+
 </style>
 
 
@@ -141,10 +146,10 @@
     .tick text {
         fill: white;
     }
-
     .tick line {
         stroke: white;
     }
+
 </style>
 <script>
 
@@ -167,6 +172,8 @@
     var throttleTimer;
 
     setup();
+    draw_line();
+    draw_stack();
 
     function setup() {
         margin1 = { top: 10, right: 10, bottom: 10, left: 10 },
@@ -252,6 +259,8 @@
 
         d3.selectAll('svg').remove();
         setup();
+        draw_line();
+        draw_stack();
     }
 
     function throttle() {
