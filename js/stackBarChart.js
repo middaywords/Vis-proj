@@ -184,7 +184,7 @@ function draw_stack() {
             .data(keys)
             .enter()
             .append("rect")
-            .attr("x", 450)
+            .attr("x", 480)
             .attr("y", function (d, i) { return -30 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
             .attr("width", size)
             .attr("height", size)
@@ -197,7 +197,7 @@ function draw_stack() {
             .data(keys)
             .enter()
             .append("text")
-            .attr("x", 450 + size * 1.2)
+            .attr("x", 480 + size * 1.2)
             .attr("y", function (d, i) { return -30 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
             .style("fill", function (d) { return color(d) })
             .text(function (d) { return d })

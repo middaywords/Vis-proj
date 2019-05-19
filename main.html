@@ -174,6 +174,7 @@
     setup();
     draw_line();
     draw_stack();
+    draw_heatmap();
 
     function setup() {
         margin1 = { top: 10, right: 10, bottom: 10, left: 10 },
@@ -187,7 +188,7 @@
             .attr("transform",
                 "translate(" + margin1.left + "," + margin1.top + ")");
 
-        margin2 = { top: 40, right: 150, bottom: 50, left: 60 },
+        margin2 = { top: 40, right: 120, bottom: 50, left: 60 },
             width2 = width2 - margin2.left - margin2.right,
             height2 = height2 - margin2.top - margin2.bottom;
 
@@ -220,7 +221,7 @@
             .attr("transform",
                 "translate(" + margin4.left + "," + margin4.top + ")");
 
-        margin5 = { top: 10, right: 10, bottom: 10, left: 10 },
+        margin5 = { top: 10, right: 10, bottom: 30, left: 35 },
             width5 = width5 - margin5.left - margin5.right,
             height5 = height5 - margin5.top - margin5.bottom;
 
@@ -261,6 +262,7 @@
         setup();
         draw_line();
         draw_stack();
+        draw_heatmap();
     }
 
     function throttle() {
