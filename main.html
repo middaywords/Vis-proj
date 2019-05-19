@@ -153,19 +153,14 @@
     d3.select(window).on("resize", throttle);
     var width4 = document.getElementById('container_map').offsetWidth;
     var height1 = width4 / 1.9;
-
     var width2 = document.getElementById('container_stacked').offsetWidth;
     var height2 = width2 / 2.8;
-
     var width3 = document.getElementById('container_line').offsetWidth;
     var height3 = width3 / 2.7;
-
     var width4 = document.getElementById('container_sankey').offsetWidth;
     var height4 = width4 / 3;
-
     var width5 = document.getElementById('container_heatmap').offsetWidth;
     var height5 = width5 / 3;
-
     var width6 = document.getElementById('container_circular').offsetWidth;
     var height6 = width6 / 1.35;
 
@@ -245,17 +240,17 @@
 
     function redraw() {
         width4 = document.getElementById('container_map').offsetWidth;
-        height1 = width4 / 1.71;
+        height1 = width4 / 1.9;
         width2 = document.getElementById('container_stacked').offsetWidth;
-        height2 = width2 / 2;
+        height2 = width2 / 2.8;
         width3 = document.getElementById('container_line').offsetWidth;
-        height3 = width3 / 2;
+        height3 = width3 / 2.7;
         width4 = document.getElementById('container_sankey').offsetWidth;
         height4 = width4 / 3;
         width5 = document.getElementById('container_heatmap').offsetWidth;
         height5 = width5 / 3;
         width6 = document.getElementById('container_circular').offsetWidth;
-        height6 = width6 / 2;
+        height6 = width6 / 1.35;
 
         d3.selectAll('svg').remove();
         setup();
