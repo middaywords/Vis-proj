@@ -76,8 +76,6 @@
         padding-left: 0px;
         padding-right: 0px;
     }
-
-
 </style>
 
 
@@ -143,24 +141,24 @@
     .tick text {
         fill: white;
     }
+
     .tick line {
         stroke: white;
     }
-
 </style>
 <script>
 
     d3.select(window).on("resize", throttle);
     var width4 = document.getElementById('container_map').offsetWidth;
-    var height1 = width4 / 1.9;
+    var height1 = width4 / 2.05;
     var width2 = document.getElementById('container_stacked').offsetWidth;
-    var height2 = width2 / 2.8;
+    var height2 = width2 / 2.88;
     var width3 = document.getElementById('container_line').offsetWidth;
     var height3 = width3 / 2.7;
     var width4 = document.getElementById('container_sankey').offsetWidth;
-    var height4 = width4 / 3;
+    var height4 = width4 / 3.2;
     var width5 = document.getElementById('container_heatmap').offsetWidth;
-    var height5 = width5 / 3;
+    var height5 = width5 / 3.19;
     var width6 = document.getElementById('container_circular').offsetWidth;
     var height6 = width6 / 1.35;
 
@@ -240,15 +238,15 @@
 
     function redraw() {
         width4 = document.getElementById('container_map').offsetWidth;
-        height1 = width4 / 1.9;
+        height1 = width4 / 2.05;
         width2 = document.getElementById('container_stacked').offsetWidth;
-        height2 = width2 / 2.8;
+        height2 = width2 / 2.88;
         width3 = document.getElementById('container_line').offsetWidth;
         height3 = width3 / 2.7;
         width4 = document.getElementById('container_sankey').offsetWidth;
-        height4 = width4 / 3;
+        height4 = width4 / 3.2;
         width5 = document.getElementById('container_heatmap').offsetWidth;
-        height5 = width5 / 3;
+        height5 = width5 / 3.19;
         width6 = document.getElementById('container_circular').offsetWidth;
         height6 = width6 / 1.35;
 
