@@ -8,6 +8,8 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="./js/ForceSvg.js"></script>
+    <script src="./js/PersonalSchedule.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
 </head>
@@ -187,6 +189,10 @@
     var throttleTimer;
 
     setup();
+
+    // draw forceSvg and heat map
+    // drawForceSvg()
+    // drawPsnSdl()
 
     function setup() {
         margin1 = { top: 10, right: 10, bottom: 10, left: 10 },
