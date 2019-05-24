@@ -79,8 +79,6 @@
         padding-left: 0px;
         padding-right: 0px;
     }
-
-
 </style>
 
 
@@ -146,10 +144,10 @@
     .tick text {
         fill: white;
     }
+
     .tick line {
         stroke: white;
     }
-
 </style>
 <script>
 
@@ -172,9 +170,85 @@
     var throttleTimer;
 
     setup();
-    draw_line();
-    draw_stack();
-    draw_heatmap();
+    var mainHall = [];
+    var a_string, b_string;
+    for (var a = 2; a < 12; ++a) {
+        for (var b = 19; b < 29; ++b) {
+            if (a < 10)
+                a_string = '10' + a.toString();
+            else
+                a_string = '1' + a.toString();
+            if (b < 10)
+                b_string = '0' + b.toString();
+            else
+                b_string = b.toString();
+            mainHall.push(a_string + b_string);
+        }
+    }
+
+    var HallA = [];
+    for (var a = 2; a < 4; ++a) {
+        for (var b = 1; b < 6; ++b) {
+            if (a < 10)
+                a_string = '10' + a.toString();
+            else
+                a_string = '1' + a.toString();
+            if (b < 10)
+                b_string = '0' + b.toString();
+            else
+                b_string = b.toString();
+            HallA.push(a_string + b_string);
+        }
+    }
+
+    var HallB = [];
+    for (var a = 4; a < 6; ++a) {
+        for (var b = 1; b < 6; ++b) {
+            if (a < 10)
+                a_string = '10' + a.toString();
+            else
+                a_string = '1' + a.toString();
+            if (b < 10)
+                b_string = '0' + b.toString();
+            else
+                b_string = b.toString();
+            HallB.push(a_string + b_string);
+        }
+    }
+
+    var HallC = [];
+    for (var a = 6; a < 8; ++a) {
+        for (var b = 1; b < 6; ++b) {
+            if (a < 10)
+                a_string = '10' + a.toString();
+            else
+                a_string = '1' + a.toString();
+            if (b < 10)
+                b_string = '0' + b.toString();
+            else
+                b_string = b.toString();
+            HallC.push(a_string + b_string);
+        }
+    }
+
+    var HallD = [];
+    var a_string, b_string;
+    for (var a = 8; a < 10; ++a) {
+        for (var b = 1; b < 6; ++b) {
+            if (a < 10)
+                a_string = '10' + a.toString();
+            else
+                a_string = '1' + a.toString();
+            if (b < 10)
+                b_string = '0' + b.toString();
+            else
+                b_string = b.toString();
+            HallD.push(a_string + b_string);
+        }
+    }
+    draw_line(mainHall);
+    draw_stack(["hallD"]);
+    // draw_heatmap();
 
     function setup() {
         margin1 = { top: 10, right: 10, bottom: 10, left: 10 },
@@ -260,9 +334,9 @@
 
         d3.selectAll('svg').remove();
         setup();
-        draw_line();
-        draw_stack();
-        draw_heatmap();
+        draw_line(mainHall);
+        draw_stack(["hallA"]);
+        //draw_heatmap();
     }
 
     function throttle() {
