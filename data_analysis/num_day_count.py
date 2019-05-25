@@ -1,4 +1,6 @@
-
+"""
+	count number of members in day1-3.
+"""
 import pandas as pd
 
 
