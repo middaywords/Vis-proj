@@ -11,6 +11,4 @@ if __name__ == "__main__":
         ids.extend(today['id'])
     ids = Counter(ids)
     newsman = ids.most_common(100)
-    print(len(ids))
-    print(newsman)
-    print(ids)
+
