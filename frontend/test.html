@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/d3.v4.js"></script>
-    <script src="js/force.js"></script>
-    <script src="js/psnSdl.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/lib/d3.v4.js"></script>
+    <script src="js/api/request.js"></script>
+    <script src="js/api/index.js"></script>
+    <script src="js/src/force.js"></script>
+    <script src="js/src/psnSdl.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
 </head>
@@ -34,7 +36,7 @@
         font-size: 14px;
         border-style: solid;
         border-width: 2px;
-        background-color: black;
+        background-color: white;
         border-radius: 5px;
         padding: 5px;
     }
@@ -116,6 +118,11 @@
 </body>
 
 <script>
+    // api用例
+    apiRoute(10001,1).then(res=>{
+        console.log(res)
+    })
+    
     d3.select(window).on("resize", throttle);
     var width1 = document.getElementById('container_force').offsetWidth;
     var height1 = width1 / 2;
@@ -130,9 +137,8 @@
     setup();
 
     // draw forceSvg and heat map for person
-    let pid = 16332;
-    let day = 3;
-    drawForceSvg(day,pid);
+    let day = 1,pid=1;
+    drawForceSvg(day);
     drawPersonalSchedule(pid);
 
     function setup() {

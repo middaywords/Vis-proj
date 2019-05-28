@@ -1,5 +1,4 @@
-
-function drawForceSvg(day,pid){
+function drawForceSvg(day){
     // para: day(integer) selected day
     // para: pid(integer) selected pid
     const X = 16
@@ -171,6 +170,7 @@ function drawForceSvg(day,pid){
                         .append("line")
                         .attr("stroke",(d,i)=> COLOR)
                         .attr("stroke-width",d=>d.value/4)
+
                     let circles = g.selectAll(".circleText")
                         .data(nodes)
                         .enter()
@@ -196,9 +196,17 @@ function drawForceSvg(day,pid){
                             d.fy = null
                         })
                         )
+                    
+                    let selectedPeople = ["19145","18608","18364","16975"]        
                     circles.append("circle")
-                        .attr("r",d=> RADIUS)
-                        .attr("fill",d=> COLOR)
+                        .attr("r",d=> {
+                            if(selectedPeople.includes(d.id)){
+                                return RADIUS*10
+                            }else{
+                                return RADIUS
+                            }
+                        })
+                        .attr("fill",d=>COLOR)
                         .on("mouseover", function(d) {
                             // 边框突出
                             // 悬浮框

@@ -1,0 +1,27 @@
+{
+    "name": "chinavis-server",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "server": "nodemon src/start.js"
+    },
+    "devDependencies": {
+        "babel-preset-env": "^1.7.0",
+        "babel-register": "^6.26.0"
+    },
+    "dependencies": {
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "boom": "^7.3.0",
+        "koa": "^2.7.0",
+        "koa-bodyparser": "^4.2.1",
+        "koa-compress": "^3.0.0",
+        "koa-cors": "0.0.16",
+        "koa-helmet": "^4.1.0",
+        "koa-logger": "^3.2.0",
+        "koa-respond": "^2.1.0",
+        "koa-router": "^7.4.0",
+        "koa-static": "^5.0.0",
+        "mysql": "^2.17.1",
+        "path": "^0.12.7"
+    }
+}

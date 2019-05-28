@@ -40,15 +40,35 @@ def storeRoute(db):
                     POSITION INT NOT NULL,
                     TIME INT NOT NULL
                     """
-    routeName = 'route'
-    routeData = pd.read_csv('../static/route.csv', header=None)
-    if not tableExists(db, routeName):
-        createTable(db, routeName, routeSetting)
-        for _, row in tqdm(routeData.iterrows()):
+    route1Name = 'route1'
+    route2Name = 'route2'
+    route3Name = 'route3'
+    route1Data = pd.read_csv('../static/route1.csv', header=None)
+    route2Data = pd.read_csv('../static/route2.csv', header=None)
+    route3Data = pd.read_csv('../static/route3.csv', header=None)
+    if not tableExists(db, route1Name):
+        createTable(db, route1Name, routeSetting)
+        for _, row in tqdm(route1Data.iterrows()):
             pid = row[0]
             for idx in range(1, row.shape[0]):
                 sqlInsert = "INSERT INTO {}(PID, POSITION, TIME) VALUES ({},{},{})".format(
-                    routeName, pid, row[idx], idx)
+                    route1Name, pid, row[idx], idx)
+                insert(db, sqlInsert)
+    if not tableExists(db, route2Name):
+        createTable(db, route2Name, routeSetting)
+        for _, row in tqdm(route2Data.iterrows()):
+            pid = row[0]
+            for idx in range(1, row.shape[0]):
+                sqlInsert = "INSERT INTO {}(PID, POSITION, TIME) VALUES ({},{},{})".format(
+                    route2Name, pid, row[idx], idx)
+                insert(db, sqlInsert)
+    if not tableExists(db, route3Name):
+        createTable(db, route3Name, routeSetting)
+        for _, row in tqdm(route3Data.iterrows()):
+            pid = row[0]
+            for idx in range(1, row.shape[0]):
+                sqlInsert = "INSERT INTO {}(PID, POSITION, TIME) VALUES ({},{},{})".format(
+                    route3Name, pid, row[idx], idx)
                 insert(db, sqlInsert)
 
 
