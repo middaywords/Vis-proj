@@ -4,8 +4,8 @@ const IP = '127.0.0.1'
 
 const db = mysql.createPool({   //本地
   host     : IP,  
-  user     : 'root',    
-  password : 'yangpeihao2016' ,  // 数据库密码 改成自己的密码
+  user     : 'sjtu',    
+  password : 'sjtu' ,  // 数据库密码 改成自己的密码
   database : 'chinavis'  // 选中数据库
 })
 
