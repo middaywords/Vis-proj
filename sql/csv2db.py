@@ -13,21 +13,21 @@ def storeRaw(db):
                     """
     # PID person id， SID sensor id
     if not tableExists(db, day1name):
-        day1data = pd.read_csv('../static/day1.csv')
+        day1data = pd.read_csv('../frontend/static/day1.csv')
         createTable(db, day1name, rawSetting)
         for _, row in tqdm(day1data.iterrows()):
             sqlInsert = "INSERT INTO {}(PID, SID, TIME) VALUES ({},{},{})".format(
                 day1name, row['id'], row['sid'], row['time'])
             insert(db, sqlInsert)
     if not tableExists(db, day2name):
-        day2data = pd.read_csv('../static/day2.csv')
+        day2data = pd.read_csv('../frontend/static/day2.csv')
         createTable(db, day2name, rawSetting)
         for _, row in tqdm(day2data.iterrows()):
             sqlInsert = "INSERT INTO {}(PID, SID, TIME) VALUES ({},{},{})".format(
                 day2name, row['id'], row['sid'], row['time'])
             insert(db, sqlInsert)
     if not tableExists(db, day3name):
-        day3data = pd.read_csv('../static/day3.csv')
+        day3data = pd.read_csv('../frontend/static/day3.csv')
         createTable(db, day3name, rawSetting)
         for _, row in tqdm(day3data.iterrows()):
             sqlInsert = "INSERT INTO {}(PID, SID, TIME) VALUES ({},{},{})".format(
@@ -43,9 +43,9 @@ def storeRoute(db):
     route1Name = 'route1'
     route2Name = 'route2'
     route3Name = 'route3'
-    route1Data = pd.read_csv('../static/route1.csv', header=None)
-    route2Data = pd.read_csv('../static/route2.csv', header=None)
-    route3Data = pd.read_csv('../static/route3.csv', header=None)
+    route1Data = pd.read_csv('../frontend/static/route1.csv', header=None)
+    route2Data = pd.read_csv('../frontend/static/route2.csv', header=None)
+    route3Data = pd.read_csv('../frontend/static/route3.csv', header=None)
     if not tableExists(db, route1Name):
         createTable(db, route1Name, routeSetting)
         for _, row in tqdm(route1Data.iterrows()):

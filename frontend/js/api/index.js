@@ -1,1 +1,2 @@
 let apiRoute = (pid, day = 0) => request({ url: '/api/route', data: { pid, day }, method: 'POST' })
+let apiDistrict = (sid=[], day = 0) => request({url:'/api/district',data: { sid, day }, method: 'POST'})
