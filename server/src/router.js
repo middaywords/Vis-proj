@@ -5,6 +5,7 @@ export default router => {
   router.prefix("/api")
   router
     .post("/route",routeController.getRoute)
-    .post("/district",districtController.getCount)
+    .post("/district/count",districtController.getCount)
+    .post("/district/people",districtController.getPeople)
 }
 

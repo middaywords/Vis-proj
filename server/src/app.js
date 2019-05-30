@@ -18,12 +18,12 @@ const port = process.env.PORT || 3033
 RouterConfig(router)
 
 app
+  .use(cors()) // cors中间件必须放在router前面
   .use(bodyParser())
   .use(helmet())
   .use(respond())
   .use(compress())
   .use(logger())
-  .use(cors()) // cors中间件必须放在router前面
   .use(router.routes())
   .use(router.allowedMethods({
       throw: true,

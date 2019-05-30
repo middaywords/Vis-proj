@@ -1,7 +1,7 @@
-const mysql      = require('mysql')
+import mysql from 'mysql'
 
 let IP = '127.0.0.1'
-IP = '10.162.80.235'
+// IP = '10.162.80.235'
 
 const db = mysql.createPool({   //本地
   host     : IP,  

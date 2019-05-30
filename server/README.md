@@ -5,8 +5,17 @@ Use `npm run server` to run the server
 
 
 
-### api
+### api（使用示例见api.html）
 
-`apiRoute()`   `/api/route` {pid, day} POST [route] (length:720+,当天内所有时间点)
+- 返回某个人的路径。输入人员id和当天序号。
 
-`apiDistrict()`     `/api/district` ([sid], day) POST  [count] (length:720+,当天内所有时间点)
+`apiRoute(pid, day)`   `/api/route` {pid, day} POST [route] (length:782,当天内所有时间点)
+
+- 返回某个区域的当天的人数。输入区域内sid的列表和当天序号。
+
+`apiDistrictCount([sid], day)`     `/api/district/count` ([sid], day) POST  [count] (length:782,当天内所有时间点)
+
+- 返回某个区域在某个时刻的人员pid。输入区域内sid的列表，当天序号，时间。
+
+`apiDistrictPeople([sid], day,time)`    `api/district/people` ([sid], day,time) POST  [pid]  
+
