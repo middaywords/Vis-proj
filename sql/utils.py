@@ -2,6 +2,7 @@ import pymysql as ps
 import re
 
 IP = '127.0.0.1'
+# IP = '10.162.149.227'
 TABLE_DEFAULT_SETTING = "ID INT NOT NULL, PRIMARY KEY (ID)"
 
 
