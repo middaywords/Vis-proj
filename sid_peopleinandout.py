@@ -32,7 +32,7 @@ def getWhere(num):
             return 'poster'
 
         if 4 <= x < 6 and 10 <= y < 12:
-            return 'toilet'
+            return 'toilet1'
 
         if 6 <= x < 10 and 10 <= y < 12:
             return 'room1'
@@ -62,7 +62,7 @@ def getWhere(num):
 
         if 14 <= x < 16 and 27 <= y < 29:
             # return 'other'
-            return 'toilet'
+            return 'toilet2'
 
         if x == 1 and 10 <= y < 12:
             # return 'Up'
@@ -87,11 +87,11 @@ def getWhere(num):
             # return 'other'
             return 'recreationArea'
 
-        if 10 <= x < 12 and 4 <= y < 6:
+        if 10 <= y < 12 and 4 <= x < 6:
             # return 'other'
-            return 'toilet'
+            return 'toilet3'
 
-        if 10 <= x < 12 and 6 <= y < 8:
+        if 10 <= y < 12 and 6 <= x < 8:
             # return 'other'
             return 'room6'
 
@@ -139,7 +139,9 @@ if __name__ == "__main__":
                         'hallC' : 0,
                         'hallD' : 0,
                         'poster' : 0,
-                        'toilet' : 0,
+                        'toilet1' : 0,
+                        'toilet2' : 0,
+                        'toilet3' : 0,
                         'room1' : 0,
                         'room2' : 0,
                         'exhibition' : 0,
@@ -162,7 +164,9 @@ if __name__ == "__main__":
                         'hallC' : 0,
                         'hallD' : 0,
                         'poster' : 0,
-                        'toilet' : 0,
+                        'toilet1' : 0,
+                        'toilet2' : 0,
+                        'toilet3' : 0,
                         'room1' : 0,
                         'room2' : 0,
                         'exhibition' : 0,

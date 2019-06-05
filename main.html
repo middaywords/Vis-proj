@@ -11,6 +11,8 @@
     <script src="js/lineChart.js"></script>
     <script src="js/heatMap.js"></script>
     <script src="js/stackBarChart.js"></script>
+    <script src="js/feature.js"></script>
+    <script src="js/bubbleGraph.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
 </head>
@@ -35,7 +37,7 @@
         border-radius: 0px;
     }
 
-    #container_heatmap {
+    #container_bubble {
         border: 1px solid #000;
         border-radius: 0px;
     }
@@ -79,6 +81,72 @@
         padding-left: 0px;
         padding-right: 0px;
     }
+
+    [class ^="col-md-6"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    path.domain {
+        stroke: white;
+    }
+
+    .tick text {
+        fill: white;
+    }
+
+    .tick line {
+        stroke: white;
+    }
+
+    #choiceWindow {
+        display: none;
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
+        padding: 20px;
+        border: 3px solid #ccc;
+        z-index: 10;
+        overflow: auto;
+    }
+
+    #backGround {
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 1100px;
+        background-color: black;
+        z-index: 9;
+        -moz-opacity: 0.8;
+        opacity: 1.0;
+        filter: alpha(opacity=100);
+    }
+
+    #x:hover {
+        cursor: pointer;
+        color: rgb(55, 198, 192);
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .tooltip {
+        color: rgb(0, 0, 0);
+        background: #fff;
+        padding: .5em;
+        text-shadow: #f5f5f5 0 1px 0;
+        border-radius: 2px;
+        box-shadow: 0px 0px 2px 0px #a6a6a6;
+        opacity: 0.9;
+        position: absolute;
+    }
 </style>
 
 
@@ -89,9 +157,14 @@
                 <div class="row clearfix">
                     <div class="col-md-7 column">
                         <div class="row clearfix">
-                            <div class="col-md-12 column">
+                            <div class="col-md-6 column">
                                 <div id="container_map">
                                     <h4>container_map</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-6 column">
+                                <div id="container_bubble">
+                                    <h4>container_bubble</h4>
                                 </div>
                             </div>
                         </div>
@@ -116,13 +189,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row clearfix">
-                            <div class="col-md-12 column">
-                                <div id="container_heatmap">
-                                    <h4>container_heatmap</h4>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="row clearfix">
                             <div class="col-md-12 column">
                                 <div id="container_stacked">
@@ -135,37 +202,65 @@
             </div>
         </div>
     </div>
+
+
+    <div id="choiceWindow">
+        <label id="x" style="position: absolute;top:0px;left: 95%;font-size: 25px;">x</label>
+        <div class="row clearfix">
+            <div class="col-md-6 column">
+                <div id="container_personalMap">
+                    <h4>container_personalMap</h4>
+                </div>
+            </div>
+            <div class="col-md-6 column">
+                <div class="row clearfix">
+                    <div class="col-md-6 column">
+                        <div id="container_feature">
+                            <h4>container_feature</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 column">
+                        <div id="container_timeScheduler">
+                            <h4>container_timeScheduler</h4>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <div id="container_personalBubble">
+                            <h4>container_personalBubble</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="backGround"></div>
+
 </body>
-<style>
-    path.domain {
-        stroke: white;
-    }
 
-    .tick text {
-        fill: white;
-    }
-
-    .tick line {
-        stroke: white;
-    }
-</style>
 <script>
 
     d3.select(window).on("resize", throttle);
     var width4 = document.getElementById('container_map').offsetWidth;
-    var height1 = width4 / 2.05;
+    var height1 = width4 / 1.03;
     var width2 = document.getElementById('container_stacked').offsetWidth;
     var height2 = width2 / 2.88;
     var width3 = document.getElementById('container_line').offsetWidth;
     var height3 = width3 / 2.7;
     var width4 = document.getElementById('container_sankey').offsetWidth;
-    var height4 = width4 / 3.2;
-    var width5 = document.getElementById('container_heatmap').offsetWidth;
-    var height5 = width5 / 3.19;
+    var height4 = width4 / 1.46;
+    var width5 = document.getElementById('container_bubble').offsetWidth;
+    var height5 = width5 / 1.03;
     var width6 = document.getElementById('container_circular').offsetWidth;
     var height6 = width6 / 1.35;
+    var width7 = document.getElementById('container_feature').offsetWidth;
+    var height7 = width7 / 2.5;
 
-    var svg1, svg2, svg3, svg4, svg5, svg6;
+    var svg1, svg2, svg3, svg4, svg5, svg6, svg7;
 
     var throttleTimer;
 
@@ -247,8 +342,9 @@
         }
     }
     draw_line(mainHall);
-    draw_stack(["hallD"]);
-    // draw_heatmap();
+    draw_stack(["toilet1", "toilet2", "toilet3"]);
+    draw_bubble();
+    data_prepare();
 
     function setup() {
         margin1 = { top: 10, right: 10, bottom: 10, left: 10 },
@@ -295,16 +391,16 @@
             .attr("transform",
                 "translate(" + margin4.left + "," + margin4.top + ")");
 
-        margin5 = { top: 10, right: 10, bottom: 30, left: 35 },
+        margin5 = { top: 210, right: 10, bottom: 30, left: 10 },
             width5 = width5 - margin5.left - margin5.right,
             height5 = height5 - margin5.top - margin5.bottom;
 
-        svg5 = d3.select("#container_heatmap").append("svg")
+        svg5 = d3.select("#container_bubble").append("svg")
             .attr("width", width5 + margin5.left + margin5.right)
             .attr("height", height5 + margin5.top + margin5.bottom)
             .append("g")
             .attr("transform",
-                "translate(" + margin5.left + "," + margin5.top + ")");
+                "translate(" + (width5 / 2 + margin5.left) + "," + margin5.top + ")");
 
         margin6 = { top: 10, right: 10, bottom: 10, left: 10 },
             width6 = width6 - margin6.left - margin6.right,
@@ -318,26 +414,50 @@
                 "translate(" + margin6.left + "," + margin6.top + ")");
     }
 
+    function windowSetup() {
+        margin7 = { top: 50, right: 100, bottom: 30, left: 10 },
+            width7 = width7 - margin7.left - margin7.right,
+            height7 = height7 - margin7.top - margin7.bottom;
+
+        svg7 = d3.select("#container_feature").append("svg")
+            .attr("width", width7 + margin7.left + margin7.right)
+            .attr("height", height7 + margin7.top + margin7.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin7.left + "," + margin7.top + ")");
+    }
+
     function redraw() {
         width4 = document.getElementById('container_map').offsetWidth;
-        height1 = width4 / 2.05;
+        height1 = width4 / 1.03;
         width2 = document.getElementById('container_stacked').offsetWidth;
         height2 = width2 / 2.88;
         width3 = document.getElementById('container_line').offsetWidth;
         height3 = width3 / 2.7;
         width4 = document.getElementById('container_sankey').offsetWidth;
-        height4 = width4 / 3.2;
-        width5 = document.getElementById('container_heatmap').offsetWidth;
-        height5 = width5 / 3.19;
+        height4 = width4 / 1.46;
+        width5 = document.getElementById('container_bubble').offsetWidth;
+        height5 = width5 / 1.03;
         width6 = document.getElementById('container_circular').offsetWidth;
         height6 = width6 / 1.35;
+        width7 = document.getElementById('container_feature').offsetWidth;
+        height7 = width7 / 2.5;
 
         d3.selectAll('svg').remove();
         setup();
         draw_line(mainHall);
-        draw_stack(["hallA"]);
-        //draw_heatmap();
+        draw_stack(["toilet1"]);
+        draw_bubble();
     }
+
+
+    $(document).ready(function () {
+        $("#x").click(function () {
+            $("#choiceWindow").slideUp(300);
+            $("#backGround").hide();
+            d3.select("#choiceWindow").selectAll('svg').remove();
+        })
+    });
 
     function throttle() {
         window.clearTimeout(throttleTimer);

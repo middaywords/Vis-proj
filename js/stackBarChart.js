@@ -1,10 +1,10 @@
 function draw_stack(thisarea) {
     var sid_peopleout;
-    d3.json("data/sid_people_out3.json", function (error, sid_people_out) {
+    d3.json("data/sid_people_out.json", function (error, sid_people_out) {
         sid_peopleout = sid_people_out;
     });
 
-    d3.json("data/sid_people_in3.json", function (error, sid_peoplein) {
+    d3.json("data/sid_people_in.json", function (error, sid_peoplein) {
         //////////
         // GENERAL //
         //////////
