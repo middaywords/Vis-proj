@@ -37,12 +37,13 @@ function draw_bubble() {
                 if (focus !== d) zoom(d), d3.event.stopPropagation();
                 if (d.children == undefined) {
                     tooltip.classed("hidden", true);
+                    console.log(d.data.name);
                     $("#choiceWindow").slideDown(500);
                     $("#backGround").show();
                     width7 = document.getElementById('container_feature').offsetWidth;
                     height7 = width7 / 1.5;
                     windowSetup();
-                    draw_feature();
+                    draw_feature(d.data.name);
                 }
             })
             .on("mousemove", function (d) {
