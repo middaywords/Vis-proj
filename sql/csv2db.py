@@ -82,13 +82,13 @@ def storeFeatureTotal(db):
                 ROMES_COUNT FLOAT NOT NULL,
                 NO_REGISTER BOOLEAN NOT NULL
                 """
-    if not tableExists(db, table1):
+    if not tableExists(db, table):
         day1data = pd.read_csv('../frontend/static/feature.csv')
         day1data.drop(columns=['Unnamed: 0'],inplace=True)
-        createTable(db, table1, setting)
+        createTable(db, table, setting)
         for _, row in tqdm(day1data.iterrows()):
-            sqlInsert = "INSERT INTO {}(PID, ROOM, STAY_TIME, ROOM4, ROOM5, ROOM6, ROMES_COUNT, NO_REGISTER) VALUES ({},{},{},{},'{}',{},{},{},{},{},{})".format(
-                table1, row['id'], row['Room'], row['Stay Time'], row['Been Room4'], row['Been Room5'], row['Been Room6'], row['Rooms Count'], row['No Register'])
+            sqlInsert = "INSERT INTO {}(PID, ROOM, STAY_TIME, ROOM4, ROOM5, ROOM6, ROMES_COUNT, NO_REGISTER) VALUES ({},'{}',{},{},{},{},{},{})".format(
+                table, row['id'], row['Room'], row['Stay Time'], row['Been Room4'], row['Been Room5'], row['Been Room6'], row['Rooms Count'], row['No Register'])
             insert(db, sqlInsert)
 
 def storeFeature(db):

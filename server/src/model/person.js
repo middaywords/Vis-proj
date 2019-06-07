@@ -13,16 +13,22 @@ class PersonModel {
     }
 
     async getFeature(pid,feature){
-        let sids = sid.join(',')
-        sids = `(${sids})`
-        const sql = `SELECT * FROM route${day} 
-            WHERE POSITION in ${sids} and TIME = ${time}`
-        let rows = await query(sql)
-        let res = new Array()
-        rows.forEach(row => {
-            res.push(row['PID'])
-        })
-        return res
+        let sql
+        console.log(feature)
+        if(feature.length===0){
+            sql = `SELECT * FROM feature 
+                WHERE PID = ${pid}`
+        }else{
+            sql = `SELECT ${feature.join(',')} FROM feature 
+            WHERE PID = ${pid}`
+        }      
+        let row = await query(sql)
+        if(row.length!==0){
+            row = row[0]
+        }else{
+            throw ReferenceError("Wrong getFeature! Can't find the person with pid!")
+        }
+        return row
     }
 }
 

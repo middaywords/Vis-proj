@@ -24,9 +24,10 @@
         console.log("<------------------>")
     }
 
-    // api用例
+    // api usage examples, refer to ../server/README.md for more details
     apiRoute(10001,1).then(res=>{
-        // 在then回调中使用api的返回值
+        // in the then() define a callback with parameter "res" 
+        // to get the return of the api function
         show(res,apiRoute)
     })
 
@@ -42,7 +43,7 @@
         show(res,apiIsStaff)
     })
 
-    apiFeature(10604).then(res=>{
+    apiFeature(10604,['PID','NO_REGISTER']).then(res=>{
         show(res,apiFeature)
     })
 </script>
