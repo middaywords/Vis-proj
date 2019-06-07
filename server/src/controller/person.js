@@ -4,14 +4,16 @@ class PersonController {
     isStaff(ctx){
         const params = ctx.request.body
         const { pid } = params
-        const res = PersonController.isStaff(pid)
+        const res = PersonModel.isStaff(pid)
         ctx.body = res
     }
 
-    async getFeature(pid){
+    async getFeature(ctx){
         const params = ctx.request.body
         const { pid } = params
-        const res = await PersonController.isStaff(pid)
+        const res = await PersonModel.isStaff(pid)
         ctx.body = res
     }
 }
+
+export default new PersonController()

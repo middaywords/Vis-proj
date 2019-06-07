@@ -12,10 +12,9 @@ class PersonModel {
         }
     }
 
-    async getFeature(pid){
+    async getFeature(pid,feature){
         let sids = sid.join(',')
         sids = `(${sids})`
-        // 查询当天各个时间的人数求和
         const sql = `SELECT * FROM route${day} 
             WHERE POSITION in ${sids} and TIME = ${time}`
         let rows = await query(sql)
