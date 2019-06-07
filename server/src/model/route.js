@@ -23,6 +23,9 @@ class RouteModel {
             return res  
         }
     }
+    async getSchedule(pid) {
+        
+    }
 }
 
 export default new RouteModel()
