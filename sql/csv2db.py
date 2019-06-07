@@ -1,4 +1,4 @@
-import pandas as pd
+﻿import pandas as pd
 from utils import connect2DB, createTable, tableExists, insert, select
 from tqdm import tqdm
 
