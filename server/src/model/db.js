@@ -1,6 +1,7 @@
 ﻿import mysql from 'mysql'
 
 let IP = '127.0.0.1'
+
 //IP = '10.162.149.227'
 
 const db = mysql.createPool({   //本地

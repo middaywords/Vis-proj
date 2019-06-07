@@ -1,6 +1,7 @@
 async function request(option) {
   let { url, data, method = "GET" } = option;
-  url = 'http://localhost:3033' + url
+  // url = 'http://10.162.149.227:3033' + url
+  url = 'http://127.0.0.1:3033' + url
   
   return new Promise((resolve, reject) => {
     let fetchItem;

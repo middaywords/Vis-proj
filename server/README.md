@@ -19,3 +19,10 @@ Use `npm run server` to run the server
 
 `apiDistrictPeople([sid], day,time)`    `api/district/people` ([sid], day,time) POST  [pid]  
 
+* 返回某个pid/某些pid是否为工作人员
+
+`apiIsStaff(pid/[pid])`  `api/person/is_staff` (pid/[pid]) POST bool/[boolean]
+
+- 返回某个pid的feature
+
+ `
