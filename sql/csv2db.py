@@ -83,10 +83,10 @@ def storeFeatureTotal(db):
                 NO_REGISTER BOOLEAN NOT NULL
                 """
     if not tableExists(db, table):
-        day1data = pd.read_csv('../frontend/static/feature.csv')
-        day1data.drop(columns=['Unnamed: 0'],inplace=True)
+        data = pd.read_csv('../frontend/static/feature.csv')
+        data.drop(columns=['Unnamed: 0'],inplace=True)
         createTable(db, table, setting)
-        for _, row in tqdm(day1data.iterrows()):
+        for _, row in tqdm(data.iterrows()):
             sqlInsert = "INSERT INTO {}(PID, ROOM, STAY_TIME, ROOM4, ROOM5, ROOM6, ROMES_COUNT, NO_REGISTER) VALUES ({},'{}',{},{},{},{},{},{})".format(
                 table, row['id'], row['Room'], row['Stay Time'], row['Been Room4'], row['Been Room5'], row['Been Room6'], row['Rooms Count'], row['No Register'])
             insert(db, sqlInsert)
@@ -138,8 +138,8 @@ def main():
     db = connect2DB()
     storeRaw(db)
     # storeRoute(db)
-    storeFeature(db)
     storeFeatureTotal(db)
+    storeFeature(db)
     db.close()
 
 
