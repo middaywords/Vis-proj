@@ -13,6 +13,7 @@
     <script src="js/stackBarChart.js"></script>
     <script src="js/feature.js"></script>
     <script src="js/bubbleGraph.js"></script>
+    <script src="js/people_bubble.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
 </head>
@@ -42,8 +43,28 @@
         border-radius: 0px;
     }
 
-    #container_circular {
-        border: 1px solid #000;
+    #container_personalMap {
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 0px;
+    }
+
+    #container_personalBubble {
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 0px;
+    }
+
+    #container_feature {
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 0px;
+    }
+
+    #container_wordCloud {
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 0px;
+    }
+
+    #container_timeScheduler {
+        border: 1px solid rgb(255, 255, 255);
         border-radius: 0px;
     }
 
@@ -104,14 +125,13 @@
     #choiceWindow {
         display: none;
         position: absolute;
-        top: 5%;
-        left: 5%;
-        width: 90%;
-        height: 90%;
-        padding: 20px;
+        top: 2.5%;
+        left: 2.5%;
+        width: 95%;
+        height: 95%;
+        padding: 10px;
         border: 3px solid #ccc;
         z-index: 10;
-        overflow: auto;
     }
 
     #backGround {
@@ -207,22 +227,34 @@
     <div id="choiceWindow">
         <label id="x" style="position: absolute;top:0px;left: 95%;font-size: 25px;">x</label>
         <div class="row clearfix">
-            <div class="col-md-6 column">
-                <div id="container_personalMap">
-                    <h4>container_personalMap</h4>
+            <div class="col-md-7 column">
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <div id="container_personalMap">
+                            <h4 id="personalMap">container_personalMap</h4>
+                        </div>
+                    </div>
                 </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <div id="container_timeScheduler">
+                            <h4>个人日程</h4>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-md-6 column">
+            <div class="col-md-5 column">
                 <div class="row clearfix">
                     <div class="col-md-6 column">
                         <div id="container_feature">
-                            <h4>container_feature</h4>
+                            <h4>身份判明</h4>
                         </div>
                     </div>
 
                     <div class="col-md-6 column">
-                        <div id="container_timeScheduler">
-                            <h4>container_timeScheduler</h4>
+                        <div id="container_wordCloud">
+                            <h4>container_wordCloud</h4>
                         </div>
                     </div>
 
@@ -259,6 +291,14 @@
     var height6 = width6 / 1.35;
     var width7 = document.getElementById('container_feature').offsetWidth;
     var height7 = width7 / 2.5;
+    var width8 = document.getElementById('container_personalBubble').offsetWidth;
+    var height8 = width8 / 2.5;
+    var width9 = document.getElementById('container_personalMap').offsetWidth;
+    var height9 = width9 / 2.5;
+    var width10 = document.getElementById('container_wordCloud').offsetWidth;
+    var height10 = width10 / 2.5;
+    var width11 = document.getElementById('container_timeScheduler').offsetWidth;
+    var height11 = width11 / 2.5;
 
     var svg1, svg2, svg3, svg4, svg5, svg6, svg7;
 
@@ -415,14 +455,59 @@
                 "translate(" + margin6.left + "," + margin6.top + ")");
     }
 
-    function windowSetup() {
-        margin7 = { top: 50, right: 100, bottom: 30, left: 10 },
+    function windowSetup(flag) {
+        margin7 = { top: 50, right: 50, bottom: 30, left: 10 },
             width7 = width7 - margin7.left - margin7.right,
             height7 = height7 - margin7.top - margin7.bottom;
 
         svg7 = d3.select("#container_feature").append("svg")
             .attr("width", width7 + margin7.left + margin7.right)
             .attr("height", height7 + margin7.top + margin7.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin7.left + "," + margin7.top + ")");
+        if (flag) {
+            margin8 = { top: 170, right: 120, bottom: 30, left: 120 },
+                width8 = width8 - margin8.left - margin8.right,
+                height8 = height8 - margin8.top - margin8.bottom;
+
+            svg8 = d3.select("#container_personalBubble").append("svg")
+                .attr("width", width8 + margin8.left + margin8.right)
+                .attr("height", height8 + margin8.top + margin8.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + (width8 / 2 + margin8.left) + "," + margin8.top + ")");
+        }
+
+        margin9 = { top: 50, right: 50, bottom: 30, left: 10 },
+            width9 = width9 - margin9.left - margin9.right,
+            height9 = height9 - margin9.top - margin9.bottom;
+
+        svg9 = d3.select("#container_personalMap").append("svg")
+            .attr("width", width9 + margin9.left + margin9.right)
+            .attr("height", height9 + margin9.top + margin9.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin9.left + "," + margin9.top + ")");
+
+        margin10 = { top: 50, right: 50, bottom: 30, left: 10 },
+            width10 = width10 - margin10.left - margin10.right,
+            height10 = height10 - margin10.top - margin10.bottom;
+
+        svg10 = d3.select("#container_wordCloud").append("svg")
+            .attr("width", width10 + margin10.left + margin10.right)
+            .attr("height", height10 + margin10.top + margin10.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin10.left + "," + margin10.top + ")");
+
+        margin11 = { top: 50, right: 50, bottom: 30, left: 10 },
+            width11 = width11 - margin11.left - margin11.right,
+            height11 = height11 - margin11.top - margin11.bottom;
+
+        svg11 = d3.select("#container_timeScheduler").append("svg")
+            .attr("width", width11 + margin11.left + margin11.right)
+            .attr("height", height11 + margin11.top + margin11.bottom)
             .append("g")
             .attr("transform",
                 "translate(" + margin7.left + "," + margin7.top + ")");
@@ -444,6 +529,9 @@
         width7 = document.getElementById('container_feature').offsetWidth;
         height7 = width7 / 2.5;
 
+        $("#choiceWindow").slideUp(300);
+        $("#backGround").hide();
+        d3.select("#choiceWindow").selectAll('svg').remove();
         d3.selectAll('svg').remove();
         setup();
         draw_line(mainHall);

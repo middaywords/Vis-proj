@@ -14,7 +14,7 @@ function draw_bubble() {
         .size([width5 - margin, width5 - margin])
         .padding(2);
 
-
+    var tooltip = d3.select("#container_bubble").append("div").attr("class", "tooltip hidden");
 
     d3.json("data/bubble.json", function (error, root) {
         if (error) throw error;
@@ -33,17 +33,29 @@ function draw_bubble() {
             .attr("class", function (d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
             .style("fill", function (d) { return d.children ? color(d.depth) : null; })
             .style("display", function (d) { return d.parent === root || d === root ? "inline" : "none"; })
+            
+     ////////////////////////////////////////////////////////////////////////////
+     ////////////////////////////////////////////////////////////////////////////       
             .on("click", function (d) {
                 if (focus !== d) zoom(d), d3.event.stopPropagation();
                 if (d.children == undefined) {
                     tooltip.classed("hidden", true);
-                    console.log(d.data.name);
                     $("#choiceWindow").slideDown(500);
                     $("#backGround").show();
+                    document.getElementById('personalMap').innerHTML = "当前查看人员: " + d.data.name;
                     width7 = document.getElementById('container_feature').offsetWidth;
-                    height7 = width7 / 1.5;
-                    windowSetup();
+                    height7 = width7 / 1.2;
+                    width8 = document.getElementById('container_personalBubble').offsetWidth;
+                    height8 = width8 / 1.7;
+                    width9 = document.getElementById('container_personalMap').offsetWidth;
+                    height9 = width9 / 3.1;
+                    width10 = document.getElementById('container_wordCloud').offsetWidth;
+                    height10 = width10 / 1.2;
+                    width11 = document.getElementById('container_timeScheduler').offsetWidth;
+                    height11 = width11 / 2.57;
+                    windowSetup(true);
                     draw_feature(d.data.name);
+                    draw_personal_bubble(d.data.name);
                 }
             })
             .on("mousemove", function (d) {
@@ -63,7 +75,7 @@ function draw_bubble() {
                 tooltip.classed("hidden", true);
             });
 
-        var tooltip = d3.select("#container_bubble").append("div").attr("class", "tooltip hidden");
+        
 
         var text = svg5.selectAll("text")
             .data(nodes)
@@ -73,13 +85,17 @@ function draw_bubble() {
             .style("alignment-baseline", "middle")
             .style("font-size", "small")
             .style("fill-opacity", function (d) { return d.parent === root ? 1 : 0; })
+            .style("font-family","微软正黑体")
             .style("display", function (d) { return d.parent === root ? "inline" : "none"; })
             .text(function (d) {
                 if (d.children != undefined)
                     return d.data.name;
                 else
                     return undefined;
-            });
+            })
+            .on("click", function (d) {
+                if (focus !== d) zoom(d), d3.event.stopPropagation();
+            })
 
         var node = svg5.selectAll("circle,text");
 
