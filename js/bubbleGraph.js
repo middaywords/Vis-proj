@@ -119,7 +119,7 @@ function draw_bubble() {
                     return function (t) { zoomTo(i(t)); };
                 });
 
-            transition.selectAll("circle")
+            transition.select("#container_bubble").selectAll("circle")
                 //.filter(function (d) { return d.parent === focus || this.style.display == "inline"; })
                 //.on("start", function (d) { if (d.parent == focus || d.parent == focus.parent) this.style.display = "inline"; else this.style.display = "none";})
                 .on("start", function (d) {

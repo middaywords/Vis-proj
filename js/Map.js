@@ -34,7 +34,7 @@ function draw_map(){
 					    radius = 7;
 
 					//color
-					//var myColor = d3.scaleLinear().domain([1,10]).range(d3.schemeReds[7]);
+					//var myColor = d3.scaleLinear().domain([1,2]).range(d3.schemeReds[7]);
 
 					var index_domain = [];
 
@@ -45,13 +45,13 @@ function draw_map(){
 
 					var color_range = [];
 
-					for (var i = 0; i <= 5; i++)
+					for (var i = 0; i <= 10; i++)
 					{
 						if (i == 0)
-							color_range.push("white");
+							color_range.push("#424242");
 						else
 						{
-							color_range.push(d3.schemePaired[i]);
+							color_range.push(d3.schemeReds[7][i]);
 						}
 					}
 
@@ -98,6 +98,7 @@ function draw_map(){
 					    })
 					    .attr("d", function(d) { return path(topojson.feature(topology, d)); })
 					    .style("fill", function(d) { return myColor(d.value)} )
+					    .style("stroke", "grey")
 					    //.attr("class", function(d) { return d.fill ? "fill" : null; })
 					    .on("mousedown", mousedown)
 					    .on("mousemove", mousemove)
@@ -153,6 +154,7 @@ function draw_map(){
 					    .attr("d", function(d) { return path(topojson.feature(topology1, d)); })
 					    .style("fill", function(d) { return myColor(d.value)} )
 					    //.attr("class", function(d) { return d.fill ? "fill" : null; })
+					    .style("stroke", "grey")
 					    .on("mousedown", mousedown1)
 					    .on("mousemove", mousemove1)
 					    .on("mouseup", mouseup1);
@@ -285,7 +287,7 @@ function draw_map(){
 				//draw room
 					var path_length = radius * 1.5;
 
-					var path_color = "red";
+					var path_color = "white";
 
 					var room_point_arr = [];
 
@@ -878,6 +880,7 @@ function draw_map(){
 				    var mousing = 0;
 
 					var select_square = [];
+					var select_sid = [];
 
 					var start_value, end_value;
 
@@ -892,6 +895,7 @@ function draw_map(){
 					  var min_j = Math.min(parseInt(start_value.substring(8,10)), parseInt(end_value.substring(8,10)));
 					  var max_j = Math.max(parseInt(start_value.substring(8,10)), parseInt(end_value.substring(8,10)));
 					  select_square = [];
+					  select_sid = [];
 					  for (var i = min_i; i <= max_i; i++)
 					  {
 					  	for (var j = min_j; j <= max_j; j++)
@@ -912,6 +916,15 @@ function draw_map(){
 					    	{
 					    		document.getElementById("Square"+ i + j).__data__.fill = mousing;
 					    	}
+					    	if (j - 1 < 10)
+				                a_string = '10' + (j-1).toString();
+				            else
+				                a_string = '1' + (j-1).toString();
+				            if (i < 10)
+				                b_string = '0' + i.toString();
+				            else
+				                b_string = i.toString();
+				            select_sid.push(a_string + b_string);
 					  		select_square.push([i ,j]);
 					  	}
 					  }
@@ -926,6 +939,7 @@ function draw_map(){
 					    var min_j = Math.min(parseInt(start_value.substring(8,10)), parseInt(end_value.substring(8,10)));
 					    var max_j = Math.max(parseInt(start_value.substring(8,10)), parseInt(end_value.substring(8,10)));
 					    select_square = [];
+					    select_sid = [];
 					    for (var i = min_i; i <= max_i; i++)
 					    {
 					  	  for (var j = min_j; j <= max_j; j++)
@@ -947,6 +961,15 @@ function draw_map(){
 					    		document.getElementById("Square"+ i + j).__data__.fill = mousing;
 					    	}
 					  		select_square.push([i ,j]);
+					  		if (j - 1 < 10)
+				                a_string = '10' + (j-1).toString();
+				            else
+				                a_string = '1' + (j-1).toString();
+				            if (i < 10)
+				                b_string = '0' + i.toString();
+				            else
+				                b_string = i.toString();
+				            select_sid.push(a_string + b_string);
 					  	  }
 					    }
 					    border.call(redraw);
@@ -961,6 +984,7 @@ function draw_map(){
 					  var min_j = Math.min(parseInt(start_value.substring(8,10)), parseInt(end_value.substring(8,10)));
 					  var max_j = Math.max(parseInt(start_value.substring(8,10)), parseInt(end_value.substring(8,10)));
 					  select_square = [];
+					  select_sid = [];
 					  for (var i = min_i; i <= max_i; i++)
 					  {
 					  	for (var j = min_j; j <= max_j; j++)
@@ -982,10 +1006,34 @@ function draw_map(){
 					    		document.getElementById("Square"+ i + j).__data__.fill = mousing;
 					    	}
 					  		select_square.push([i ,j]);
+					  		if (j - 1 < 10)
+				                a_string = '10' + (j-1).toString();
+				            else
+				                a_string = '1' + (j-1).toString();
+				            if (i < 10)
+				                b_string = '0' + i.toString();
+				            else
+				                b_string = i.toString();
+				            select_sid.push(a_string + b_string);
 					  	}
 					  }
 					  border.call(redraw);
 					  console.log(select_square);
+					  console.log(select_sid);
+					  d3.select("#container_line").selectAll('svg').remove();
+					  width3 = document.getElementById('container_line').offsetWidth;
+        height3 = width3 / 2.7;
+					  margin3 = { top: 10, right: 30, bottom: 30, left: 50 },
+            width3 = width3 - margin3.left - margin3.right,
+            height3 = height3 - margin3.top - margin3.bottom;
+
+        svg3 = d3.select("#container_line").append("svg")
+            .attr("width", width3 + margin3.left + margin3.right)
+            .attr("height", height3 + margin3.top + margin3.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin3.left + "," + margin3.top + ")");
+					  draw_line(select_sid);
 					  mousing = 0;
 					}
 
@@ -1338,6 +1386,7 @@ function draw_map(){
 							  .attr("d", function(d) { return path(topojson.feature(topology, d)); })
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
+							  .style("stroke", "grey")
 							  .on("mousedown", mousedown)
 							  .on("mousemove", mousemove)
 							  .on("mouseup", mouseup);
@@ -1526,6 +1575,7 @@ function draw_map(){
 							  .attr("d", function(d) { return path(topojson.feature(topology1, d)); })
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
+							  .style("stroke", "grey")
 							  .on("mousedown", mousedown1)
 							  .on("mousemove", mousemove1)
 							  .on("mouseup", mouseup1);
@@ -1702,6 +1752,7 @@ function draw_map(){
 							  .attr("d", function(d) { return path(topojson.feature(topology, d)); })
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
+							  .style("stroke", "grey")
 							  .on("mousedown", select_room)
 							  .on("mousemove", null_function)
 							  .on("mouseup", null_function);
@@ -1714,6 +1765,7 @@ function draw_map(){
 							  .attr("d", function(d) { return path(topojson.feature(topology1, d)); })
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
+							  .style("stroke", "grey")
 							  .on("mousedown", select_room)
 							  .on("mousemove", null_function)
 							  .on("mouseup", null_function);

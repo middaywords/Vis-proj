@@ -14,8 +14,8 @@ function draw_pie(day, gt, rooms){
     svgPie.append("g")
         .attr("class", "slices");
 
-    var widthPie = 250,
-        heightPie = 150,
+    var widthPie = width6,
+        heightPie = height6,
         radiusPie = Math.min(widthPie, heightPie) / 2;
 
     var pie = d3.pie()
