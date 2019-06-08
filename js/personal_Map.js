@@ -1,4 +1,4 @@
-function draw_map(){
+function draw_personal_map(choose_id){
 	var color_arr = [];
 
 	for (var i = 0; i < 60; i++)
@@ -31,7 +31,7 @@ function draw_map(){
 				  	//map_size
 				  	var width = 500,
 					    height = 300,
-					    radius = 7;
+					    radius = 9;
 
 					//color
 					//var myColor = d3.scaleLinear().domain([1,10]).range(d3.schemeReds[7]);
@@ -67,11 +67,10 @@ function draw_map(){
 					var path = d3.geoPath()
 					    .projection(projection);
 
-					var svg = d3.select("#map").append("svg")
+					var svg = d3.select("#map_1").append("svg")
 					    .attr("id","heatmap")
 					    .attr("width", width)
-					    .attr("height", height)
-					    .attr("transform", "translate(55,0)")
+					    .attr("height", height);
 
 					svg.append("g")
 					    .attr("class", "hexagon")
@@ -121,11 +120,10 @@ function draw_map(){
 					    .projection(projection1);
 
 					//The second svg
-					var svg1 = d3.select("#map1").append("svg")
+					var svg1 = d3.select("#map1_1").append("svg")
 					    .attr("id","heatmap1")
 					    .attr("width", width)
-					    .attr("height", height)
-					    .attr("transform", "translate(55,0)")
+					    .attr("height", height);
 
 					svg1.append("g")
 					    .attr("class", "hexagon1")
@@ -167,9 +165,8 @@ function draw_map(){
 								 .call(redraw1);
 
 					// create a tooltip
-					var tooltip = d3.select("#text-div")
+					var tooltip = d3.select("#text-div_1")
 									.append("div")
-									.attr("transform", "translate(55,0)")
 								    .attr("id","tool")
 								    .style("opacity", 1)
 								    .attr("class", "tooltip")
@@ -177,112 +174,11 @@ function draw_map(){
 								    .style("border", "solid")
 								    .style("border-width", "2px")
 								    .style("border-radius", "5px")
-								    .style("padding", "5px")
+								    .style("padding", "5px");
 
 					tooltip.html("The exact time is: " + "7 : 0");
 
-				//route
-					//Draw line
-					/*var line_data = [];
-					var sid_data = [];
-					var time_data = [];
-
-					var id = "11396";
-
-					for (var i = 0; i < list.length; i++)
-					{
-						if (list[i].id == id)
-						{
-							sid_data.push(list[i].sid);
-							time_data.push(Math.floor(parseInt(list[i].time)/60) - 420);
-						}	
-					}
-
-					for (var i = 0; i < sid_data.length; i++)
-					{
-						for (var j = 0; j < sid.length; j++)
-						{
-							if (sid_data[i] == sid[j].sid)
-							{
-								line_data.push([sid[j].x_axis * radius * 1.5 + radius * 1.5 / 2, sid[j].y_axis * radius * 1.5 - radius * 1.5 / 2]);
-								break;
-							}
-						}
-					}
-
-					var line_data_arr = [];
-
-					var temp = [];
-
-					for (var i = 0; i < line_data.length-1; i++)
-					{
-						temp = [];
-						temp.push(line_data[i]);
-						temp.push(line_data[i+1]);
-						line_data_arr.push(temp);
-					}
-
-					lineGenerator = d3.line()
-			                      //    获取每个节点的x坐标
-			                      .x(function(d) {
-			                            return d[0]
-			                        })
-			                       //   获取每个节点的y坐标
-			                       .y(function(d) {
-			                            return d[1];
-			                       });
-
-			        for (var i = 0; i < line_data_arr.length; i++)
-			        {
-			        	if (i % line_data_arr.length == 0) var opac = '1';
-			        	else opac = '0.1';
-
-			        	svg.append('path')
-			        		.attr("id", "indiv_line" + i.toString())
-					        .attr('stroke', 'red')
-					        .attr('stroke-width', '4')
-					        .attr('fill', 'none')
-					        //    设置路径信息
-					        .attr('d', lineGenerator(line_data_arr[i]))
-					        .attr('opacity', opac)
-					}*/
-
-			    //refresh map
-			    	change();
-
-			    	var refresh_map = setInterval(function(){timecount()},100);
-			    	clearInterval(refresh_map);
-
-			        var temp_time = 0; //temperature time
-
-			        function timecount(){
-			        	temp_time = (temp_time + 1) % 660; //whole time == 660
-
-			        	heatmap(temp_time); //map
-
-			        	document.getElementById("beans").value = temp_time; //range control
-			        }
-
-			    	var map_flag = 1;
-					map_refresh(map_flag, refresh_map);
-
-			        function map_refresh(route_flag, refresh_map){
-						var but_map_refresh = document.getElementById("but_animation");
-						but_map_refresh.onclick = function(){
-							if (map_flag == 1)
-							{
-								clearInterval(refresh_map);
-								map_flag = 0;
-							}
-							else if (map_flag == 0)
-							{
-								refresh_map = setInterval(function(){timecount()},100);
-								map_flag = 1;
-							}
-						}
-					}
-
-				//draw room
+				//Draw room
 					var path_length = radius * 1.5;
 
 					var path_color = "red";
@@ -711,7 +607,7 @@ function draw_map(){
 				        .attr('opacity', "1");
 					
 				//Add text
-					/*//first floor
+					//first floor
 					//hallA
 					svg.append('text')
 						    .text('hallA')
@@ -872,7 +768,254 @@ function draw_map(){
 						    .text('elevator')
 						    .attr("x",10.1*path_length)
 						    .attr('y',14.65*path_length)
-						    .attr("font-size",7)*/
+						    .attr("font-size",7)
+
+				//route
+					Draw_route(choose_id);
+
+					function Draw_route(id){
+						var sid_data = [];
+						var time_data = [];
+						var line_data = [];
+						var line_data1 = [];
+						var time_data_arr = [];
+						var time_data_arr1 = [];
+
+						//choose those whose id = required id
+						//list = day1/2/3
+						for (var i = 0; i < list.length; i++)
+						{
+							if (list[i].id == id)
+							{
+								sid_data.push(list[i].sid);
+								time_data.push(Math.floor(parseInt(list[i].time)/60) - 420);
+							}	
+						}
+
+						for (var i = 0; i < sid_data.length; i++)
+						{
+							for (var j = 0; j < sid.length; j++)
+							{
+								if (sid_data[i] == sid[j].sid)
+								{
+									if (sid[j].x_axis <= 29)
+									{
+										line_data.push([sid[j].x_axis * path_length + path_length / 2, sid[j].y_axis * path_length - path_length / 2]);
+										time_data_arr.push(time_data[i]);
+									}
+									else
+									{
+										line_data1.push([(sid[j].x_axis - 30) * path_length + path_length / 2, sid[j].y_axis * path_length - path_length / 2]);
+										time_data_arr1.push(time_data[i]);
+									}
+									break;
+								}
+							}
+						}
+
+						var line_data_arr = [];
+						var line_data_arr1 = [];
+
+						var temp = [];
+
+						for (var i = 0; i < line_data.length-1; i++)
+						{
+							temp = [];
+							temp.push(line_data[i]);
+							temp.push(line_data[i+1]);
+							line_data_arr.push(temp);
+						}
+						for (var i = 0; i < line_data1.length-1; i++)
+						{
+							temp = [];
+							temp.push(line_data1[i]);
+							temp.push(line_data1[i+1]);
+							line_data_arr1.push(temp);
+						}
+
+						lineGenerator = d3.line()
+				                      //    获取每个节点的x坐标
+				                      .x(function(d) {
+				                            return d[0]
+				                        })
+				                       //   获取每个节点的y坐标
+				                       .y(function(d) {
+				                            return d[1];
+				                       });
+
+				        var route_color = "blue";
+
+				        for (var i = 0; i < line_data_arr.length; i++)
+				        {
+				        	if (i % line_data_arr.length == 0) var opac = '1';
+				        	else opac = '0.1';
+
+				        	svg.append('path')
+				        		.attr("id", "indiv_line" + i.toString())
+						        .attr('stroke', route_color)
+						        .attr('stroke-width', '4')
+						        .attr('fill', 'none')
+						        //    设置路径信息
+						        .attr('d', lineGenerator(line_data_arr[i]))
+						        .attr('opacity', opac)
+						}
+
+						for (var i = 0; i < line_data_arr1.length; i++)
+				        {
+							opac = '0.1';
+
+				        	svg1.append('path')
+				        		.attr("id", "indiv_line1" + i.toString())
+						        .attr('stroke', route_color)
+						        .attr('stroke-width', '4')
+						        .attr('fill', 'none')
+						        //    设置路径信息
+						        .attr('d', lineGenerator(line_data_arr1[i]))
+						        .attr('opacity', opac)
+						}
+					}
+
+					function Refresh_route(id, temp_time){
+						var sid_data = [];
+						var time_data = [];
+						var line_data = [];
+						var line_data1 = [];
+						var time_data_arr = [];
+						var time_data_arr1 = [];
+
+						//choose those whose id = required id
+						//list = day1/2/3
+						for (var i = 0; i < list.length; i++)
+						{
+							if (list[i].id == id)
+							{
+								sid_data.push(list[i].sid);
+								time_data.push(Math.floor(parseInt(list[i].time)/60) - 420);
+							}	
+						}
+
+						for (var i = 0; i < sid_data.length; i++)
+						{
+							for (var j = 0; j < sid.length; j++)
+							{
+								if (sid_data[i] == sid[j].sid)
+								{
+									if (sid[j].x_axis <= 29)
+									{
+										line_data.push([sid[j].x_axis * path_length + path_length / 2, sid[j].y_axis * path_length - path_length / 2]);
+										time_data_arr.push(time_data[i]);
+									}
+									else
+									{
+										line_data1.push([(sid[j].x_axis - 30) * path_length + path_length / 2, sid[j].y_axis * path_length - path_length / 2]);
+										time_data_arr1.push(time_data[i]);
+									}
+									break;
+								}
+							}
+						}
+
+						var line_data_arr = [];
+						var line_data_arr1 = [];
+
+						var temp = [];
+
+						for (var i = 0; i < line_data.length-1; i++)
+						{
+							temp = [];
+							temp.push(line_data[i]);
+							temp.push(line_data[i+1]);
+							line_data_arr.push(temp);
+						}
+						for (var i = 0; i < line_data1.length-1; i++)
+						{
+							temp = [];
+							temp.push(line_data1[i]);
+							temp.push(line_data1[i+1]);
+							line_data_arr1.push(temp);
+						}
+
+						lineGenerator = d3.line()
+				                      //    获取每个节点的x坐标
+				                      .x(function(d) {
+				                            return d[0]
+				                        })
+				                       //   获取每个节点的y坐标
+				                       .y(function(d) {
+				                            return d[1];
+				                       });
+
+				        var route_color = "blue";
+
+				        //route refresh
+				        for (var i = 0; i < line_data_arr.length; i++)
+				        {
+				        	if (time_data_arr[i] == temp_time) {var opac = '1';}
+				        	else opac = '0.1';
+
+				        	d3.select("#indiv_line" + i.toString())
+						        .attr('stroke', route_color)
+						        .attr('stroke-width', '4')
+						        .attr('fill', 'none')
+						        //    设置路径信息
+						        .attr('d', lineGenerator(line_data_arr[i]))
+						        .attr('opacity', opac)
+						}
+
+						for (var i = 0; i < line_data_arr1.length; i++)
+				        {
+				        	if (time_data_arr1[i] == temp_time) {var opac = '1';}
+				        	else opac = '0.1';
+
+				        	d3.select("#indiv_line1" + i.toString())
+						        .attr('stroke', route_color)
+						        .attr('stroke-width', '4')
+						        .attr('fill', 'none')
+						        //    设置路径信息
+						        .attr('d', lineGenerator(line_data_arr1[i]))
+						        .attr('opacity', opac)
+						}
+					}
+
+				//Refresh map and route
+			    	change();
+
+			    	var refresh_map = setInterval(function(){timecount()},100);
+			    	clearInterval(refresh_map);
+
+			        var temp_time = 0; //temperature time
+
+			        function timecount(){
+			        	temp_time = (temp_time + 1) % 660; //whole time == 660
+
+			        	//heatmap(temp_time); //map
+
+			        	//document.getElementById("beans").value = temp_time; //range control
+
+			        	tooltip.html("The exact time is: " + (Math.floor(temp_time / 60) + 7) + " : " + Math.floor(temp_time % 60));
+
+			        	//route refresh
+			        	Refresh_route(choose_id, temp_time);
+			        }
+
+			    	var map_flag = 1;
+					map_refresh(map_flag, refresh_map);
+
+			        function map_refresh(route_flag, refresh_map){
+						var but_map_refresh = document.getElementById("but_animation_1");
+						but_map_refresh.onclick = function(){
+							if (map_flag == 1)
+							{
+								clearInterval(refresh_map);
+								map_flag = 0;
+							}
+							else if (map_flag == 0)
+							{
+								refresh_map = setInterval(function(){timecount()},100);
+								map_flag = 1;
+							}
+						}
+					}
 
 			    //Draw frame
 				    var mousing = 0;
@@ -1221,7 +1364,7 @@ function draw_map(){
 
 				//map function
 					function change(){
-						var bean = document.getElementById("beans");
+						var bean = document.getElementById("beans_1");
 						bean.onmousemove = function(){
 							var value = bean.value;
 							heatmap(value);
@@ -1726,7 +1869,7 @@ function draw_map(){
 					choice();
 
 					function choice(){
-						var but_choice = document.getElementById("but_choice");
+						var but_choice = document.getElementById("but_choice_1");
 						but_choice.onclick = function(){
 							if (choice_flag == "frame")
 							{
@@ -1860,5 +2003,4 @@ function draw_map(){
 			})
 		})
 	})
-
 }
