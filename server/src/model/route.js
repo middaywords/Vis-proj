@@ -25,7 +25,7 @@ class RouteModel {
         }
     }
     async getSchedule(pid) {
-        let res = fs.readFileSync(`../../localJosn/schedule/${pid}.json`)
+        let res = fs.readFileSync(`localJson/schedule/${pid}.json`)
         return res
     }
 }

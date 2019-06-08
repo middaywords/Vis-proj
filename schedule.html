@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.v4.js"></script>
+    <script src="js/d3-scale-chromatic.v1.min.js"></script>
+    <script src="js/api/request.js"></script>
+    <script src="js/api/index.js"></script>
+    <script src="js/psnSdl.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<style>
+    .tooltip {
+        position: absolute;
+        text-align: left;
+        height: auto;
+        font-family: simsun;
+        font-size: 14px;
+        border-style: solid;
+        border-width: 2px;
+        background-color: white;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    #container_psnsdl{
+    }
+
+    [class ^="col-md-12"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        background-color: #eee;
+        border: 1px solid #ddd;
+        background-color: rgba(86, 61, 124, .15);
+        border: 1px solid rgba(86, 61, 124, .2);
+    }
+
+    [class ^="col-md-7"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 30px;
+        padding-right: 13px;
+        background-color: #eee;
+        border: 1px solid #ddd;
+        background-color: rgba(86, 61, 124, .15);
+        border: 1px solid rgba(86, 61, 124, .2);
+    }
+
+    [class ^="col-md-5"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 13px;
+        padding-right: 30px;
+        background-color: #eee;
+        border: 1px solid #ddd;
+        background-color: rgba(86, 61, 124, .15);
+        border: 1px solid rgba(86, 61, 124, .2);
+    }
+
+    [class ^="col-md-4"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        background-color: #eee;
+        border: 1px solid #ddd;
+        background-color: rgba(86, 61, 124, .15);
+        border: 1px solid rgba(86, 61, 124, .2);
+    }
+
+    [class ^="col-md-8"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        background-color: #eee;
+        border: 1px solid #ddd;
+        background-color: rgba(86, 61, 124, .15);
+        border: 1px solid rgba(86, 61, 124, .2);
+    }
+
+
+</style>
+
+
+<body class="bg-dark text-black">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div id="container_psnsdl">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script>
+    function setup() {
+        margin2 = { top: 10, right: 10, bottom: 10, left: 10 },
+            width2 = width2 - margin2.left - margin2.right,
+            height2 = height2 - margin2.top - margin2.bottom;
+
+        svg11 = d3.select("#container_psnsdl").append("svg")
+            .attr("width", width2 + margin2.left + margin2.right)
+            .attr("height", height2 + margin2.top + margin2.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin2.left + "," + margin2.top + ")");
+    }
+
+    function redraw() {
+        width2 = document.getElementById('container_psnsdl').offsetWidth;
+        height2 = width2 / 2;
+
+        d3.selectAll('svg').remove();
+        setup();
+    }
+
+    function throttle() {
+        window.clearTimeout(throttleTimer);
+        throttleTimer = window.setTimeout(function () {
+            redraw();
+        }, 200);
+    }
+</script>
+
+<script>
+    d3.select(window).on("resize", throttle);
+
+    var width2 = document.getElementById('container_psnsdl').offsetWidth;
+    var height2 = width2 / 2;
+
+    var svg11;
+
+    var throttleTimer;
+
+    setup();
+
+    // draw forceSvg and heat map for person
+    let pid=10078
+    drawPersonalSchedule(pid);
+
+</script>
+
+
+</html>
