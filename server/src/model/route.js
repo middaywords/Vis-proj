@@ -4,7 +4,7 @@ import judgeRegion from '../utils/region.js'
 const [M, A, B, C, D, R] = ['main', 'A', 'B', 'C', 'D', 'REST']
 
 function checkRoom(pos, targetRoom) {
-    pos = pos.POSTION
+    pos = pos.POSITION
     if(pos!==undefined){
         let room = judgeRegion.getWhere(pos)
         //console.log(pos,room)
@@ -46,7 +46,7 @@ class RouteModel {
         let d1 = await query(sql1)
         if(d1.length!==0){
             d1 = d1.filter(ele => ele.TIME >= 90 && ele.TIME < 615)
-            d1 = d1.map(ele => ({ TIME: ele.TIME - 90, POSTION: ele.POSITION }))
+            d1 = d1.map(ele => ({ TIME: ele.TIME - 90, POSITION: ele.POSITION }))
             // 人工遍历时间轴
             for (let t = 0; t < 120; t++) { // 主
                 if (checkRoom(d1[t], M)) {
@@ -129,7 +129,7 @@ class RouteModel {
         let d2 = await query(sql2)
         if(d2.length!==0){
             d2 = d2.filter(ele => ele.TIME >= 90 && ele.TIME < 615)
-            d2 = d2.map(ele => ({ TIME: ele.TIME - 90, POSTION: ele.POSTION }))
+            d2 = d2.map(ele => ({ TIME: ele.TIME - 90, POSITION: ele.POSITION }))
             for (let t = 30; t < 120; t++) { // 主
                 if (checkRoom(d2[t], M)) {
                     res.add(12)
@@ -210,7 +210,7 @@ class RouteModel {
         let d3 = await query(sql3)
         if(d3.length!==0){
             d3 = d3.filter(ele => ele.TIME >= 90 && ele.TIME < 615)
-            d3 = d3.map(ele => ({ TIME: ele.TIME - 90, POSTION: ele.POSTION }))
+            d3 = d3.map(ele => ({ TIME: ele.TIME - 90, POSITION: ele.POSITION }))
             for (let t = 30; t < 45; t++) { // 主
                 if (checkRoom(d3[t], M)) {
                     res.add(24)
