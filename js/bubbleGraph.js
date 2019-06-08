@@ -57,6 +57,7 @@ function draw_bubble() {
                     draw_feature(d.data.name);
                     draw_personal_bubble(d.data.name);
                     draw_personal_map(d.data.name);
+                    draw_wordcloud(d.data.name);
                     console.log("d.data.name " + d.data.name);
                 }
             })
