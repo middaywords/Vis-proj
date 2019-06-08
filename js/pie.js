@@ -145,21 +145,21 @@ function draw_pie(day, gt, rooms){
                 stroke_color_rec = this.style.stroke;
                 this.style.fill = "white";
                 this.style.stroke = "black";
+                var but_day_choice = document.getElementById("but_day").value.substring(3,4);
                 if(this.__data__.data.label == "Business Man"){
-                    draw_sankey("node_dict1_businessman");
-                    console.log("businessman");
+                    draw_sankey("node_dict" + but_day_choice + "_businessman");
                 }
                 else if(this.__data__.data.label == "Newsman"){
-                    draw_sankey("node_dict1_newsman");
+                    draw_sankey("node_dict" + but_day_choice + "_newsman");
                 }
                 else if(this.__data__.data.label == "Ordinary People"){
-                    draw_sankey("node_dict1_normal");
+                    draw_sankey("node_dict" + but_day_choice + "_normal");
                 }
                 else if(this.__data__.data.label == "Specialist"){
-                    draw_sankey("node_dict1_specialist");
+                    draw_sankey("node_dict" + but_day_choice + "_specialist");
                 }
                 else if(this.__data__.data.label == "Staff"){
-                    draw_sankey("node_dict1_staff");
+                    draw_sankey("node_dict" + but_day_choice + "_staff");
                 }
 
                 //return tooltip_pie.style("visibility", "visible");
@@ -174,8 +174,9 @@ function draw_pie(day, gt, rooms){
                 this.style.fill = fill_color_rec;
                 this.style.stroke = stroke_color_rec;
 
-                draw_sankey("data_sankey");
-                console.log("data_sankey");
+                var but_day_choice = document.getElementById("but_day").value.substring(3,4);
+
+                draw_sankey("data_sankey" + but_day_choice);
                 //return tooltip_pie.style("visibility", "hidden");
 
             });

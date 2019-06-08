@@ -1,7 +1,7 @@
-function draw_line(thisarea) {
+function draw_line(read_file, thisarea) {
     //Read the data
     data = [];
-    d3.json("data/sid_peoplecount.json", function (error, sid_peoplecount) {
+    d3.json("data/sid_peoplecount" + read_file + ".json", function (error, sid_peoplecount) {
         dm = d3.keys(sid_peoplecount[0]).filter(function (d) { return d != "time" })
         if (thisarea == undefined)
             thisarea = dm;

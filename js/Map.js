@@ -1,4 +1,4 @@
-function draw_map(){
+function draw_map(read_file){
 	var color_arr = [];
 
 	for (var i = 0; i < 60; i++)
@@ -9,13 +9,15 @@ function draw_map(){
 		}
 	}
 
-	d3.csv("data/sid2.csv", function(sid) {
-		d3.json("data/sid_peoplecount.json", function(count){
-			d3.csv("data/day1.csv", function(list){
+	var but_day_choice;
+
+	d3.csv("data/sid.csv", function(sid) {
+		d3.json("data/sid_peoplecount" + read_file + ".json", function(count){
+			d3.csv("data/day" + read_file + ".csv", function(list){
 				//initial
 				  	var num = 0;
 
-				  	var time = 0;
+				  	var time = parseInt(document.getElementById("beans").value);
 
 				  	var line_length = 17;
 
@@ -275,8 +277,8 @@ function draw_map(){
 			        	document.getElementById("beans").value = temp_time; //range control
 
 			        	if (temp_time % 15 == 0){
-
-							change_pie(1, Math.floor(temp_time / 15) * 15, select_room_sid);
+			        		but_day_choice = document.getElementById("but_day").value.substring(3,4);
+							change_pie(parseInt(but_day_choice), Math.floor(temp_time / 15) * 15, select_room_sid);
 						}
 
 						document.getElementById("circular_arr").innerHTML = "";
@@ -1104,7 +1106,8 @@ function draw_map(){
 				            .attr("height", height3 + margin3.top + margin3.bottom)
 				            .append("g")
 				            .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
-					  draw_line(select_sid);
+				      but_day_choice = document.getElementById("but_day").value.substring(3,4);
+					  draw_line(but_day_choice, select_sid);
 					  document.getElementById("line_sid_number").innerHTML = "The size is: " + select_sid.length;
 					  mousing = 0;
 					}
@@ -1315,7 +1318,8 @@ function draw_map(){
 				            .attr("height", height3 + margin3.top + margin3.bottom)
 				            .append("g")
 				            .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
-					  draw_line(select_sid);
+				      but_day_choice = document.getElementById("but_day").value.substring(3,4);
+					  draw_line(but_day_choice, select_sid);
 					  document.getElementById("line_sid_number").innerHTML = "The size is: " + select_sid.length;
 					  mousing1 = 0;
 					}
@@ -1442,7 +1446,8 @@ function draw_map(){
 						var bean = document.getElementById("beans");
 						bean.onmousemove = function(){
 							var value = bean.value;
-							change_pie(1, Math.floor(value / 15) * 15, select_room_sid);	
+							but_day_choice = document.getElementById("but_day").value.substring(3,4);
+							change_pie(parseInt(but_day_choice), Math.floor(value / 15) * 15, select_room_sid);	
 
 							document.getElementById("circular_arr").innerHTML = "";
 						    for (var i = 0; i < select_room_sid.length; i++)
@@ -1782,7 +1787,8 @@ function draw_map(){
 					            .attr("height", height3 + margin3.top + margin3.bottom)
 					            .append("g")
 					            .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
-						  draw_line(select_sid);
+					      but_day_choice = document.getElementById("but_day").value.substring(3,4);
+						  draw_line(but_day_choice, select_sid);
 						  document.getElementById("line_sid_number").innerHTML = "The size is: " + select_sid.length;
 						  mousing = 0;
 						}
@@ -2067,7 +2073,8 @@ function draw_map(){
 					            .attr("height", height3 + margin3.top + margin3.bottom)
 					            .append("g")
 					            .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
-						  draw_line(select_sid);
+					      but_day_choice = document.getElementById("but_day").value.substring(3,4);
+						  draw_line(but_day_choice, select_sid);
 						  document.getElementById("line_sid_number").innerHTML = "The size is: " + select_sid.length;
 						  mousing1 = 0;
 						}
@@ -2704,7 +2711,8 @@ function draw_map(){
             				select_room_sid.push("room6");
             			}
 
-						draw_stack(select_room_sid);
+            			but_day_choice = document.getElementById("but_day").value.substring(3,4);
+						draw_stack(but_day_choice, select_room_sid);
 
 						// d3.select("#container_circular").selectAll('svg').remove();
 
@@ -2721,7 +2729,8 @@ function draw_map(){
 					 //            .attr("transform", "translate(" + margin6.left + "," + margin6.top + ")");
 
 					    var temp_time = document.getElementById("beans").value;
-					    change_pie(1, temp_time, select_room_sid);
+					    but_day_choice = document.getElementById("but_day").value.substring(3,4);
+					    change_pie(parseInt(but_day_choice), temp_time, select_room_sid);
 
 					    document.getElementById("circular_arr").innerHTML = "";
 					    for (var i = 0; i < select_room_sid.length; i++)

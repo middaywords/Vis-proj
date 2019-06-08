@@ -277,7 +277,7 @@
 		position: absolute;
 		top: 20%;
 		width: 100%;
-		height: 80%;
+		height: 70%;
 		text-align: center;
 	}
 
@@ -383,6 +383,12 @@
 										<input type="range" name="beans" id="beans" min="0" max="659" step="1" value="0">
 										<input type="submit" value="Play animation" id="but_animation">
 										<input type="submit" value="Frame" id="but_choice">
+                                        <select id="but_day" name="day_select">
+                                          <option>Day1</option>
+                                          <option>Day2</option>
+                                          <option>Day3</option>
+                                        </select>
+                                        <input type="submit" value="Submit" id="but_day_submit">
 									</div>
 									<div id="map-div">
 										<div id="map"></div>
@@ -449,7 +455,7 @@
                             <div id="but_div_1">
 								<input type="range" name="beans_1" id="beans_1" min="0" max="659" step="1" value="0">
 								<input type="submit" value="Play animation" id="but_animation_1">
-								<input type="submit" value="Frame/Room" id="but_choice_1">
+								<input type="submit" value="Frame/Room" id="but_choice_1">                                
 							</div>
 							<div id="map-div_1">
 								<div id="map_1"></div>
@@ -607,15 +613,16 @@
             HallD.push(a_string + b_string);
         }
     }
-    var rooms = [];
-    rooms.push("mainHall")
-    draw_map();
-    draw_sankey("data_sankey");
-    draw_line(mainHall);
-    draw_stack(["toilet1", "toilet2", "toilet3"]);
+
+    var but_day_choice = document.getElementById("but_day").value.substring(3,4);
+
+    draw_map(but_day_choice);
+    draw_sankey("data_sankey" + but_day_choice);
+    draw_line(but_day_choice, mainHall);
+    draw_stack(but_day_choice, ["toilet1", "toilet2", "toilet3"]);
     draw_bubble();
     var gt = document.getElementById("beans").value;
-    draw_pie(1, gt, rooms); 
+    draw_pie(parseInt(but_day_choice), gt, ["mainHall"]);
     //data_prepare();
 
     function setup() {
@@ -765,13 +772,15 @@
         d3.select("#choiceWindow").selectAll('svg').remove();
         d3.selectAll('svg').remove();
         setup();
-        draw_map();
-    	draw_sankey("data_sankey");
-        draw_line(mainHall);
-        draw_stack(["toilet1"]);
+        var but_day_choice = document.getElementById("but_day").value.substring(3,4);
+
+        draw_map(but_day_choice);
+        draw_sankey("data_sankey" + but_day_choice);
+        draw_line(but_day_choice, mainHall);
+        draw_stack(but_day_choice, ["toilet1", "toilet2", "toilet3"]);
         draw_bubble();
-        gt = document.getElementById("beans").value;
-        draw_pie(1, gt, ["mainHall"]);
+        var gt = document.getElementById("beans").value;
+        draw_pie(parseInt(but_day_choice), gt, ["mainHall"]);
     }
 
 
@@ -788,6 +797,15 @@
         throttleTimer = window.setTimeout(function () {
             redraw();
         }, 200);
+    }
+
+    day_refresh();
+
+    function day_refresh(){
+        var button_day = document.getElementById("but_day_submit");
+        button_day.onclick = function(){
+            redraw();
+        }
     }
 </script>
 
