@@ -1,11 +1,6 @@
 function draw_wordcloud(choose_id){
     // interface:
     // string id : "19145"
-    var person_room_data;
-    d3.json('data/person_room_count.json', function (error, data) {
-        person_room_data = data;
-    });
-
     // List of words
     var myWords = [];
 
@@ -21,31 +16,25 @@ function draw_wordcloud(choose_id){
         .append("g")
         .attr("transform",
             "translate(" + WCmargin.left + "," + WCmargin.top + ")");
-    layout = d3.layout.cloud()
-        .size([WCwidth, WCheight])
-        .words(myWords.map(function(d) { return {text: d.word, size:d.size}; }))
-        .padding(5)        //space between words
-        .rotate(function() { return (Math.random() * 2) * 90 - 90; })
-        .fontSize(function(d) { return d.size; })      // font size of words
-        .on("end", draw);
-    layout.start();
+    d3.json('data/person_room_count.json', function (error, data) {
+        layout = d3.layout.cloud()
+            .size([WCwidth, WCheight])
+            .words(myWords.map(function(d) { return {text: d.word, size:d.size}; }))
+            .padding(5)        //space between words
+            .rotate(function() { return (Math.random() * 2) * 90 - 90; })
+            .fontSize(function(d) { return d.size; })      // font size of words
+            .on("end", draw);
+        layout.start();
 
-    //wordCloudPlot(choose_id);
-    //wordCloudPlot('19145');
+        wordCloudPlot(choose_id,data);
+    });
 
-    refresh_wordcloud();
-
-    function refresh_wordcloud(){
-        var but_wordcloud_plot = document.getElementById("wordcloudplot");
-        but_wordcloud_plot.onclick = function(){
-            wordCloudPlot(choose_id);
-        }
-    }
+    
 
     // ----------------------------------
-    function wordCloudPlot(id) {
+    function wordCloudPlot(id,data) {
         var person = id.toString();
-        var words = person_room_data[person];
+        var words = data[person];
         var curWords = [];
         var rec = [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER];
         for (var wr in words) {

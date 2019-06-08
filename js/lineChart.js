@@ -1,6 +1,9 @@
 function draw_line(thisarea) {
     //Read the data
     data = [];
+    //apiDistrictCount(thisarea).then(res=>{
+    //    data = res.map((ele,idx)=>({date:d3.timeParse("%H:%M:%S")(second2hour(idx)),value:ele}))
+    
     d3.json("data/sid_peoplecount.json", function (error, sid_peoplecount) {
         dm = d3.keys(sid_peoplecount[0]).filter(function (d) { return d != "time" })
         if (thisarea == undefined)
@@ -17,6 +20,7 @@ function draw_line(thisarea) {
             row1.value = num;
             data.push(row1);
         });
+        
         //console.log(data);
         var x = d3.scaleTime()
             .domain(d3.extent(data, function (d) { return d.date; }))
