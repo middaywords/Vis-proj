@@ -4,7 +4,7 @@ function drawPersonalSchedule(pid) {
 
     let psnSdlSvg = d3.select("#container_psnsdl").select("svg")
     const WIDTH = psnSdlSvg.attr("width")
-    const HEIGHT = psnSdlSvg.attr("height")
+    const HEIGHT = psnSdlSvg.attr("height")-10
     const ORIGINAL_OPACITY = 0.1
     const [A, B, C, D, M, R] = [0, 1, 2, 3, 4, 5]
     const TEXTS = ["分会场A", "分会场B", "分会场C", "分会场D", "主会场", "休息时间"]
@@ -17,11 +17,6 @@ function drawPersonalSchedule(pid) {
         .domain(Array.from({ length: 35 }).map((_, idx) => idx))
         .padding(0)
     const dx = xs.bandwidth()
-    psnSdlSvg.append("g")
-        .style("font-size", 15)
-        .attr("transform", "translate(0," + HEIGHT + ")")
-        .call(d3.axisBottom(xs).tickSize(0))
-        .select(".domain").remove()
 
     // Build Y scales and axis:
     let ys = d3.scaleBand()
@@ -29,10 +24,6 @@ function drawPersonalSchedule(pid) {
         .domain(Array.from({ length: 12 }).map((_, idx) => idx))
         .padding(0) // 避免缝隙出现
     const dy = ys.bandwidth()
-    psnSdlSvg.append("g")
-        .style("font-size", 15)
-        .call(d3.axisLeft(ys).tickSize(0))
-        .select(".domain").remove()
 
     let lastOpacity = 0 // 记录之前的透明度
     let lastColor = "black"
