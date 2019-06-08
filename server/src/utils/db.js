@@ -13,7 +13,7 @@ const db = mysql.createPool({   //本地
 
 let query = function(sql, params) {
   return new Promise((resolve, reject) => {
-    db.getConnection(function(err, connection) {
+    db.getConnection((err, connection) => {
       if (err) {
         reject(err)
       } else {

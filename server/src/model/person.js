@@ -1,4 +1,4 @@
-import query from './db.js'
+import query from '../utils/db.js'
 import * as staffList from '../localJson/staff/staff_count_all.json'
 
 class PersonModel {

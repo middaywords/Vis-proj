@@ -34,8 +34,11 @@ function drawPersonalSchedule(pid) {
         .call(d3.axisLeft(ys).tickSize(0))
         .select(".domain").remove()
 
+    let lastOpacity = 0 // 记录之前的透明度
     let mouseover = function (d) {
         console.log(d)
+        lastOpacity = d3.select(this)
+            .style("opacity")
         d3.select(this)
             .style("opacity", 1)
         texts[d.order].style("fill", "black")
@@ -46,7 +49,7 @@ function drawPersonalSchedule(pid) {
     let mouseleave = function (d) {
         console.log(d)
         d3.select(this)
-            .style("opacity", ORIGINAL_OPACITY)
+            .style("opacity", lastOpacity)
         texts[d.order].style("fill", "white")
     }
 
@@ -127,6 +130,11 @@ function drawPersonalSchedule(pid) {
 
     // add the specific squares
     COORDINATES.forEach(crd => addRect(...crd))
-    
+    apiSchedule(pid).then(res=>{
+        console.log(res)
+        for(let idx of res){
+            rects[idx].style("opacity",1)
+        }
+    })
 
 }
