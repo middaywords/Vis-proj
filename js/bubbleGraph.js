@@ -51,14 +51,13 @@ function draw_bubble() {
                     height9 = width9 / 3.1;
                     width10 = document.getElementById('container_wordCloud').offsetWidth;
                     height10 = width10 / 1.2;
-                    width11 = document.getElementById('container_psnsdl').offsetWidth;
+                    width11 = document.getElementById('container_timeScheduler').offsetWidth;
                     height11 = width11 / 2.57;
                     windowSetup(true);
                     draw_feature(d.data.name);
                     draw_personal_bubble(d.data.name);
                     draw_personal_map(d.data.name);
-                    draw_wordcloud(d.data.name);           
-                    drawPersonalSchedule(parseInt(d.data.name));
+                    draw_wordcloud(d.data.name);
                     console.log("d.data.name " + d.data.name);
                 }
             })

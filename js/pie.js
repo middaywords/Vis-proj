@@ -13,7 +13,6 @@ function draw_pie(day, gt, rooms){
     //  3. day: : 1 - 3
     //  Usage:
     //     change_pie(new_data(t, rooms, day);
-    console.log(rooms);
     svgPie = d3.select("#pie")
         .append("svg")
         .append("g");
@@ -71,11 +70,8 @@ function draw_pie(day, gt, rooms){
         // -----------------------------------
         d3.json('data/room_minute_count.json', function (error, data) {
             room_minute_data = data;
-            console.log('pie!!');
-            console.log(day, t, rooms);
             var time_point = parseInt(t) + 2;
             var data_tpoint = room_minute_data[day - 1][time_point];
-            console.log(rooms);
             var name_list = ["Specialist", "Newsman", "Staff", "Business Man", "Ordinary People"];
             var rdata = name_list.map(function (label) {
                 return {label: label, value: 0}
@@ -149,20 +145,38 @@ function draw_pie(day, gt, rooms){
                 stroke_color_rec = this.style.stroke;
                 this.style.fill = "white";
                 this.style.stroke = "black";
+                if(this.__data__.data.label == "Business Man"){
+                    draw_sankey("node_dict1_businessman");
+                    console.log("businessman");
+                }
+                else if(this.__data__.data.label == "Newsman"){
+                    draw_sankey("node_dict1_newsman");
+                }
+                else if(this.__data__.data.label == "Ordinary People"){
+                    draw_sankey("node_dict1_normal");
+                }
+                else if(this.__data__.data.label == "Specialist"){
+                    draw_sankey("node_dict1_specialist");
+                }
+                else if(this.__data__.data.label == "Staff"){
+                    draw_sankey("node_dict1_staff");
+                }
 
-
-                return tooltip_pie.style("visibility", "visible");
+                //return tooltip_pie.style("visibility", "visible");
             })
             .on("mousemove", function(ele){
-                return tooltip_pie.html(rdata[ele.index].label + ":" + rdata[ele.index].value)
+                /*return tooltip_pie.html(rdata[ele.index].label + ":" + rdata[ele.index].value)
                     .style("left", (d3.event.pageX + 20) + "px")
-                    .style("top", (d3.event.pageY + 20) + "px");
+                    .style("top", (d3.event.pageY + 20) + "px");*/
             })
             .on("mouseout", function(){
 
                 this.style.fill = fill_color_rec;
                 this.style.stroke = stroke_color_rec;
-                return tooltip_pie.style("visibility", "hidden");
+
+                draw_sankey("data_sankey");
+                console.log("data_sankey");
+                //return tooltip_pie.style("visibility", "hidden");
 
             });
         d3.selectAll(".legend").remove();

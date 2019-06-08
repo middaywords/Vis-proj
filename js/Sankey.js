@@ -1,4 +1,4 @@
-function draw_sankey(){
+function draw_sankey(read_file){
     // Color scale used
     var color = d3.scaleOrdinal(d3.schemeCategory20);
     
@@ -9,7 +9,7 @@ function draw_sankey(){
         .size([width4, height4]);
 
     // load the data
-    d3.json("data/data_sankey3.json", function(error, graph) {
+    d3.json("data/" + read_file + ".json", function(error, graph) {
 
         // Constructs a new Sankey generator with the default settings.
         sankey

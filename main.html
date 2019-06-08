@@ -7,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/d3.v4.js"></script>
-    <script src="js/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="js/d3.layout.cloud.js"></script>
@@ -24,9 +23,6 @@
     <script src="js/personal_Map.js"></script>
     <script src="js/pie.js"></script>
     <script src="js/wordCloud.js"></script>
-    <script src="js/psnSdl.js"></script>
-    <script src="js/api/request.js"></script>
-    <script src="js/api/index.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
 </head>
@@ -76,7 +72,7 @@
         border-radius: 0px;
     }
 
-    #container_psnsdl {
+    #container_timeScheduler {
         border: 1px solid rgb(255, 255, 255);
         border-radius: 0px;
     }
@@ -273,7 +269,7 @@
 	{
 		position: absolute;
 		width: 100%;
-		height: 15%;
+		height: 20%;
 	}
 
 	#map-div
@@ -302,21 +298,12 @@
         text-align: center;
     }
 
-    #text-div
-    {
-        position: absolute;
-        top: 90%;
-        width: 100%;
-        height: 10%;
-    }
-
 	#but-div_1
 	{
 		border: 2px solid;
 		position: absolute;
-        top:10%;
 		width: 100%;
-		height: 20%;
+		height: 30%;
 	}
 
 	#map-div_1
@@ -346,15 +333,6 @@
 		width: 50%;
 		height: 100%;
 		text-align: center;
-	}
-
-	#text-div_1
-	{
-		border: 2px solid;
-		position: absolute;
-		top: 90%;
-		width: 100%;
-		height: 10%;
 	}
 
 	.link {
@@ -404,7 +382,7 @@
                                     <div id="but_div">
 										<input type="range" name="beans" id="beans" min="0" max="659" step="1" value="0">
 										<input type="submit" value="Play animation" id="but_animation">
-										<input type="submit" value="Frame/Room" id="but_choice">
+										<input type="submit" value="Frame" id="but_choice">
 									</div>
 									<div id="map-div">
 										<div id="map"></div>
@@ -423,7 +401,7 @@
                             <div class="col-md-4 column">
                                 <div id="container_circular">
                                     <!--<h4>container_circular</h4>-->
-                                    <div id="circular_arr">room1</div>
+                                    <div id="circular_arr">mainHall</div>
                                     <div id="pie">
                                         <div id="fortip"></div>
                                     </div>
@@ -466,7 +444,8 @@
                 <div class="row clearfix">
                     <div class="col-md-12 column">
                         <div id="container_personalMap">
-                            <h4 id="personalMap">container_personalMap</h4>
+                            <h4 id="personalMap">PersonalMap</h4>
+                            <h5 id="personal_map_time">The exact time is: 7 : 0</h5>
                             <div id="but_div_1">
 								<input type="range" name="beans_1" id="beans_1" min="0" max="659" step="1" value="0">
 								<input type="submit" value="Play animation" id="but_animation_1">
@@ -476,13 +455,12 @@
 								<div id="map_1"></div>
 								<div id="map1_1"></div>
 							</div>
-							<div id="text-div_1"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row clearfix">
                     <div class="col-md-12 column">
-                        <div id="container_psnsdl">
+                        <div id="container_timeScheduler">
                             <h4>个人日程</h4>
                         </div>
                     </div>
@@ -544,7 +522,7 @@
     var height9 = width9 / 2.5;
     var width10 = document.getElementById('container_wordCloud').offsetWidth;
     var height10 = width10 / 2.5;
-    var width11 = document.getElementById('container_psnsdl').offsetWidth;
+    var width11 = document.getElementById('container_timeScheduler').offsetWidth;
     var height11 = width11 / 2.5;
 
     var svg1, svg2, svg3, svg4, svg5, svg6, svg7;
@@ -632,7 +610,7 @@
     var rooms = [];
     rooms.push("mainHall")
     draw_map();
-    draw_sankey();
+    draw_sankey("data_sankey");
     draw_line(mainHall);
     draw_stack(["toilet1", "toilet2", "toilet3"]);
     draw_bubble();
@@ -758,7 +736,7 @@
             width11 = width11 - margin11.left - margin11.right,
             height11 = height11 - margin11.top - margin11.bottom;
 
-        svg11 = d3.select("#container_psnsdl").append("svg")
+        svg11 = d3.select("#container_timeScheduler").append("svg")
             .attr("width", width11 + margin11.left + margin11.right)
             .attr("height", height11 + margin11.top + margin11.bottom)
             .append("g")
@@ -788,7 +766,7 @@
         d3.selectAll('svg').remove();
         setup();
         draw_map();
-    	draw_sankey();
+    	draw_sankey("data_sankey");
         draw_line(mainHall);
         draw_stack(["toilet1"]);
         draw_bubble();

@@ -610,36 +610,42 @@ function draw_personal_map(choose_id){
 				        .attr('opacity', "1");
 					
 				//Add text
+					var text_color = "white";
 					//first floor
 					//hallA
 					svg.append('text')
 						    .text('hallA')
 						    .attr("x",2.25*path_length)
 						    .attr('y',3.5*path_length)
+						    .style("fill", text_color)
 
 					//hallB
 					svg.append('text')
 						    .text('hallB')
 						    .attr("x",2.25*path_length)
 						    .attr('y',5.5*path_length)
+						    .style("fill", text_color)
 
 					//hallC
 					svg.append('text')
 						    .text('hallC')
 						    .attr("x",2.25*path_length)
 						    .attr('y',7.5*path_length)
+						    .style("fill", text_color)
 
 					//hallD
 					svg.append('text')
 						    .text('hallD')
 						    .attr("x",2.25*path_length)
 						    .attr('y',9.5*path_length)
+						    .style("fill", text_color)
 
 					//register
 					svg.append('text')
 						    .text('register')
 						    .attr("x",2.1*path_length)
 						    .attr('y',13.3*path_length)
+						    .style("fill", text_color)
 
 					//poster
 					svg.append('text')
@@ -647,6 +653,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",-8.25*path_length)
 						    .attr('y',8.25*path_length)
 						    .attr("transform", "rotate(-90,0,0)")
+						    .style("fill", text_color)
 
 					//toilet1
 					svg.append('text')
@@ -654,6 +661,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",10.1*path_length)
 						    .attr('y',5.25*path_length)
 						    .attr("font-size",9)
+						    .style("fill", text_color)
 
 					//room1
 					svg.append('text')
@@ -661,6 +669,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",10.1*path_length)
 						    .attr('y',8.25*path_length)
 						    .attr("font-size",9)
+						    .style("fill", text_color)
 
 					//room2
 					svg.append('text')
@@ -668,6 +677,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",10.1*path_length)
 						    .attr('y',11.25*path_length)
 						    .attr("font-size",9)
+						    .style("fill", text_color)
 
 					//elevator_up_floor1
 					svg.append('text')
@@ -675,6 +685,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",10.1*path_length)
 						    .attr('y',1.65*path_length)
 						    .attr("font-size",7)
+						    .style("fill", text_color)
 
 					//elevator_down_floor1
 					svg.append('text')
@@ -682,6 +693,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",10.1*path_length)
 						    .attr('y',14.65*path_length)
 						    .attr("font-size",7)
+						    .style("fill", text_color)
 
 					//exhibition
 					svg.append('text')
@@ -689,12 +701,14 @@ function draw_personal_map(choose_id){
 						    .attr("x",15.5*path_length)
 						    .attr('y',7.25*path_length)
 						    .attr("font-size",10)
+						    .style("fill", text_color)
 
 					//mainHall
 					svg.append('text')
 						    .text('mainHall')
 						    .attr("x",21.75*path_length)
 						    .attr('y',7.3*path_length)
+						    .style("fill", text_color)
 
 					//service
 					svg.append('text')
@@ -702,12 +716,14 @@ function draw_personal_map(choose_id){
 						    .attr("x",19.1*path_length)
 						    .attr('y',15.125*path_length)
 						    .attr("font-size",8)
+						    .style("fill", text_color)
 
 					//room3
 					svg.append('text')
 					    .text('room3')
 					    .attr("x",21.3*path_length)
 					    .attr('y',15.3*path_length)
+					    .style("fill", text_color)
 
 					//room4
 					svg.append('text')
@@ -715,6 +731,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",25.2*path_length)
 						    .attr('y',15.125*path_length)
 						    .attr("font-size",8)
+						    .style("fill", text_color)
 
 					//toilet2
 					svg.append('text')
@@ -722,6 +739,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",27.2*path_length)
 						    .attr('y',15.125*path_length)
 						    .attr("font-size",8)
+						    .style("fill", text_color)
 
 
 					//second floor
@@ -731,12 +749,14 @@ function draw_personal_map(choose_id){
 						    .attr("x",1.05*path_length)
 						    .attr('y',6.5*path_length)
 						    .attr("font-size",15)
+						    .style("fill", text_color)
 
 					//room5
 					svg1.append('text')
 						    .text('room5')
 						    .attr("x",1.75*path_length)
 						    .attr('y',11.25*path_length)
+						    .style("fill", text_color)
 
 					//recreationArea
 					svg1.append('text')
@@ -744,6 +764,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",0.2*path_length)
 						    .attr('y',14.75*path_length)
 						    .attr("font-size",12)
+						    .style("fill", text_color)
 
 					//toilet3
 					svg1.append('text')
@@ -751,6 +772,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",10.1*path_length)
 						    .attr('y',5.25*path_length)
 						    .attr("font-size",9)
+						    .style("fill", text_color)
 
 					//room6
 					svg1.append('text')
@@ -758,6 +780,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",10.1*path_length)
 						    .attr('y',7.25*path_length)
 						    .attr("font-size",9)
+						    .style("fill", text_color)
 
 					//elevator_up_floor2
 					svg1.append('text')
@@ -765,6 +788,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",10.1*path_length)
 						    .attr('y',1.65*path_length)
 						    .attr("font-size",7)
+						    .style("fill", text_color)
 
 					//elevator_down_floor2
 					svg1.append('text')
@@ -772,6 +796,7 @@ function draw_personal_map(choose_id){
 						    .attr("x",10.1*path_length)
 						    .attr('y',14.65*path_length)
 						    .attr("font-size",7)
+						    .style("fill", text_color)
 
 				//route
 					Draw_route(choose_id);
@@ -846,12 +871,12 @@ function draw_personal_map(choose_id){
 				                            return d[1];
 				                       });
 
-				        var route_color = "blue";
+				        var route_color = "red";
 
 				        for (var i = 0; i < line_data_arr.length; i++)
 				        {
 				        	if (i % line_data_arr.length == 0) var opac = '1';
-				        	else opac = '0.1';
+				        	else opac = '0.2';
 
 				        	svg.append('path')
 				        		.attr("id", "indiv_line" + i.toString())
@@ -865,7 +890,7 @@ function draw_personal_map(choose_id){
 
 						for (var i = 0; i < line_data_arr1.length; i++)
 				        {
-							opac = '0.1';
+							opac = '0.2';
 
 				        	svg1.append('path')
 				        		.attr("id", "indiv_line1" + i.toString())
@@ -878,7 +903,7 @@ function draw_personal_map(choose_id){
 						}
 					}
 
-					function Refresh_route(id, temp_time){
+					/*function Refresh_route(id, temp_time){
 						var sid_data = [];
 						var time_data = [];
 						var line_data = [];
@@ -948,47 +973,70 @@ function draw_personal_map(choose_id){
 				                            return d[1];
 				                       });
 
-				        var route_color = "blue";
+				        var route_color = "red";
 
-				        //route refresh
-				        for (var i = 0; i < line_data_arr.length; i++)
+				        var time_flag = 1;
+
+				        while(time_flag)
 				        {
-				        	if (time_data_arr[i] == temp_time) {var opac = '1';}
-				        	else opac = '0.1';
+				        	console.log(temp_time);
 
-				        	d3.select("#indiv_line" + i.toString())
-						        .attr('stroke', route_color)
-						        .attr('stroke-width', '4')
-						        .attr('fill', 'none')
-						        //    设置路径信息
-						        .attr('d', lineGenerator(line_data_arr[i]))
-						        .attr('opacity', opac)
-						}
+				        	//route refresh
+					        for (var i = 0; i < line_data_arr.length; i++)
+					        {
+					        	if (time_data_arr[i] == temp_time) {
+					        		var opac = '1'; 
+					        		time_flag = 0;
+					        		console.log("right");
+					        	}
+					        	else opac = '0.2';
 
-						for (var i = 0; i < line_data_arr1.length; i++)
-				        {
-				        	if (time_data_arr1[i] == temp_time) {var opac = '1';}
-				        	else opac = '0.1';
+					        	d3.select("#indiv_line" + i.toString())
+							        .attr('stroke', route_color)
+							        .attr('stroke-width', '4')
+							        .attr('fill', 'none')
+							        //    设置路径信息
+							        .attr('d', lineGenerator(line_data_arr[i]))
+							        .attr('opacity', opac)
+							}
 
-				        	d3.select("#indiv_line1" + i.toString())
-						        .attr('stroke', route_color)
-						        .attr('stroke-width', '4')
-						        .attr('fill', 'none')
-						        //    设置路径信息
-						        .attr('d', lineGenerator(line_data_arr1[i]))
-						        .attr('opacity', opac)
-						}
-					}
+							for (var i = 0; i < line_data_arr1.length; i++)
+					        {
+					        	if (time_data_arr1[i] == temp_time) {
+					        		var opac = '1'; 
+					        		time_flag = 0;
+					        		console.log("right");
+					        	}
+					        	else opac = '0.2';
+
+					        	d3.select("#indiv_line1" + i.toString())
+							        .attr('stroke', route_color)
+							        .attr('stroke-width', '4')
+							        .attr('fill', 'none')
+							        //    设置路径信息
+							        .attr('d', lineGenerator(line_data_arr1[i]))
+							        .attr('opacity', opac)
+							}
+
+							document.getElementById("personal_map_time").innerHTML = "The exact time is: " + (7 + Math.floor(temp_time / 60)) + " : " + temp_time % 60;
+
+							if (time_flag == 1)
+							{
+								temp_time++;
+							}
+				        }
+					}*/
 
 				//Refresh map and route
 			    	change();
 
-			    	var refresh_map = setInterval(function(){timecount()},100);
+			    	//var refresh_map = setInterval(function(){timecount()},100);
+			    	var refresh_map = setInterval(function(){timecount()},1000);
 			    	clearInterval(refresh_map);
 
 			        var temp_time = 0; //temperature time
 
-			        function timecount(){
+			        /*function timecount(){
 			        	temp_time = (temp_time + 1) % 660; //whole time == 660
 
 			        	//heatmap(temp_time); //map
@@ -999,9 +1047,149 @@ function draw_personal_map(choose_id){
 
 			        	//route refresh
 			        	Refresh_route(choose_id, temp_time);
+			        }*/
+			        function timecount(){
+			        	temp_time = (temp_time + 1) % 660; //whole time == 660
+
+			        	//heatmap(temp_time); //map
+
+			        	//document.getElementById("beans").value = temp_time; //range control
+
+			        	//tooltip.html("The exact time is: " + (Math.floor(temp_time / 60) + 7) + " : " + Math.floor(temp_time % 60));
+
+			        	//route refresh
+			        	//Refresh_route(choose_id, temp_time);
+			        	var sid_data = [];
+						var time_data = [];
+						var line_data = [];
+						var line_data1 = [];
+						var time_data_arr = [];
+						var time_data_arr1 = [];
+
+						//choose those whose id = required id
+						//list = day1/2/3
+						for (var i = 0; i < list.length; i++)
+						{
+							if (list[i].id == choose_id)
+							{
+								sid_data.push(list[i].sid);
+								time_data.push(Math.floor(parseInt(list[i].time)/60) - 420);
+							}	
+						}
+
+						for (var i = 0; i < sid_data.length; i++)
+						{
+							for (var j = 0; j < sid.length; j++)
+							{
+								if (sid_data[i] == sid[j].sid)
+								{
+									if (sid[j].x_axis <= 29)
+									{
+										line_data.push([sid[j].x_axis * path_length + path_length / 2, sid[j].y_axis * path_length - path_length / 2]);
+										time_data_arr.push(time_data[i]);
+									}
+									else
+									{
+										line_data1.push([(sid[j].x_axis - 30) * path_length + path_length / 2, sid[j].y_axis * path_length - path_length / 2]);
+										time_data_arr1.push(time_data[i]);
+									}
+									break;
+								}
+							}
+						}
+
+						var line_data_arr = [];
+						var line_data_arr1 = [];
+
+						var temp = [];
+
+						for (var i = 0; i < line_data.length-1; i++)
+						{
+							temp = [];
+							temp.push(line_data[i]);
+							temp.push(line_data[i+1]);
+							line_data_arr.push(temp);
+						}
+						for (var i = 0; i < line_data1.length-1; i++)
+						{
+							temp = [];
+							temp.push(line_data1[i]);
+							temp.push(line_data1[i+1]);
+							line_data_arr1.push(temp);
+						}
+
+						lineGenerator = d3.line()
+				                      //    获取每个节点的x坐标
+				                      .x(function(d) {
+				                            return d[0]
+				                        })
+				                       //   获取每个节点的y坐标
+				                       .y(function(d) {
+				                            return d[1];
+				                       });
+
+				        var route_color = "red";
+
+				        var time_flag = 1;
+
+				        while(time_flag)
+				        {
+				        	//console.log(temp_time);
+
+				        	//route refresh
+					        for (var i = 0; i < line_data_arr.length; i++)
+					        {
+					        	if (time_data_arr[i] == temp_time) {
+					        		var opac = '1'; 
+					        		time_flag = 0;
+					        		//console.log("right");
+					        	}
+					        	else opac = '0.2';
+
+					        	d3.select("#indiv_line" + i.toString())
+							        .attr('stroke', route_color)
+							        .attr('stroke-width', '4')
+							        .attr('fill', 'none')
+							        //    设置路径信息
+							        .attr('d', lineGenerator(line_data_arr[i]))
+							        .attr('opacity', opac)
+							}
+
+							for (var i = 0; i < line_data_arr1.length; i++)
+					        {
+					        	if (time_data_arr1[i] == temp_time) {
+					        		var opac = '1'; 
+					        		time_flag = 0;
+					        		//console.log("right");
+					        	}
+					        	else opac = '0.2';
+
+					        	d3.select("#indiv_line1" + i.toString())
+							        .attr('stroke', route_color)
+							        .attr('stroke-width', '4')
+							        .attr('fill', 'none')
+							        //    设置路径信息
+							        .attr('d', lineGenerator(line_data_arr1[i]))
+							        .attr('opacity', opac)
+							}
+
+							document.getElementById("personal_map_time").innerHTML = "The exact time is: " + (7 + Math.floor(temp_time / 60)) + " : " + temp_time % 60;
+
+							if (time_flag == 1)
+							{
+								if (temp_time >= 660)
+								{
+									temp_time = 0;
+								}
+								else
+								{
+									temp_time++;
+								}
+							}
+				        }
 			        }
 
-			    	var map_flag = 1;
+			    	var map_flag = 0;
 					map_refresh(map_flag, refresh_map);
 
 			        function map_refresh(route_flag, refresh_map){
@@ -1010,11 +1198,13 @@ function draw_personal_map(choose_id){
 							if (map_flag == 1)
 							{
 								clearInterval(refresh_map);
+								//console.log("Stop");
 								map_flag = 0;
 							}
 							else if (map_flag == 0)
 							{
 								refresh_map = setInterval(function(){timecount()},100);
+								//console.log("Start");
 								map_flag = 1;
 							}
 						}

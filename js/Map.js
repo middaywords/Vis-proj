@@ -286,7 +286,7 @@ function draw_map(){
 					    }
 			        }
 
-			    	var map_flag = 1;
+			    	var map_flag = 0;
 					map_refresh(map_flag, refresh_map);
 
 			        function map_refresh(route_flag, refresh_map){
@@ -1442,7 +1442,6 @@ function draw_map(){
 						var bean = document.getElementById("beans");
 						bean.onmousemove = function(){
 							var value = bean.value;
-							console.log(value);
 							change_pie(1, Math.floor(value / 15) * 15, select_room_sid);	
 
 							document.getElementById("circular_arr").innerHTML = "";
@@ -2113,6 +2112,71 @@ function draw_map(){
 					}
 
 					function heatmap_noframe(value){
+						var fill_arr = [];
+
+						for (var i = 0; i < 60; i++)
+						{
+							for (var j = 0; j <= 16; j++)
+							{
+								fill_arr.push(0);
+							}
+						}
+
+						//read fill feature
+						for (var i = 0; i < 30; i++)
+						{
+							for (var j = 1; j <= 16; j++)
+							{
+								if (i < 10 && j < 10)
+							    {
+							    	if(document.getElementById("Square0"+ i + "0" + j).__data__.fill == 1)
+							    		fill_arr[i * line_length + j] = 1;
+							    }
+						    	else if (i < 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square0" + i + j).__data__.fill == 1)
+							    		fill_arr[i * line_length + j] = 1;
+						    	}
+						    	else if (i >= 10 && j < 10)
+						    	{
+						    		if(document.getElementById("Square" + i + "0" + j).__data__.fill == 1)
+							    		fill_arr[i * line_length + j] = 1;
+						    	}
+						    	else if (i >= 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square" + i + j).__data__.fill == 1)
+							    		fill_arr[i * line_length + j] = 1;
+						    	}
+							}
+						}
+
+						for (var i = 0; i < 30; i++)
+						{
+							for (var j = 1; j <= 16; j++)
+							{
+								if (i < 10 && j < 10)
+							    {
+							    	if(document.getElementById("Square10"+ i + "0" + j).__data__.fill == 1)
+							    		fill_arr[(i+30) * line_length + j] = 1;
+							    }
+						    	else if (i < 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square10" + i + j).__data__.fill == 1)
+							    		fill_arr[(i+30) * line_length + j] = 1;
+						    	}
+						    	else if (i >= 10 && j < 10)
+						    	{
+						    		if(document.getElementById("Square1" + i + "0" + j).__data__.fill == 1)
+							    		fill_arr[(i+30) * line_length + j] = 1;
+						    	}
+						    	else if (i >= 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square1" + i + j).__data__.fill == 1)
+							    		fill_arr[(i+30) * line_length + j] = 1;
+						    	}
+							}
+						}
+
 						var num = 0;
 
 					  	var time = 0;
@@ -2139,6 +2203,40 @@ function draw_map(){
 							  .on("mousemove", null_function)
 							  .on("mouseup", null_function);
 
+						function redraw(border) {
+						  border.attr("d", path(topojson.mesh(topology, topology.objects.hexagons, function(a, b) { return a.fill ^ b.fill; })));
+						}
+
+						//write fill feature
+						for (var i = 0; i < 30; i++)
+						{
+							for (var j = 1; j <= 16; j++)
+							{
+								if (i < 10 && j < 10)
+							    {
+							    	if (fill_arr[i * line_length + j] == 1)
+										document.getElementById("Square0"+ i + "0" + j).__data__.fill = 1;
+							    }
+						    	else if (i < 10 && j >= 10)
+						    	{
+						    		if (fill_arr[i * line_length + j] == 1)
+										document.getElementById("Square0" + i + j).__data__.fill = 1;
+						    	}
+						    	else if (i >= 10 && j < 10)
+						    	{
+						    		if (fill_arr[i * line_length + j] == 1)
+										document.getElementById("Square" + i + "0" + j).__data__.fill = 1;
+						    	}
+						    	else if (i >= 10 && j >= 10)
+						    	{
+						    		if (fill_arr[i * line_length + j] == 1)
+										document.getElementById("Square" + i + j).__data__.fill = 1;
+						    	}
+							}
+						}
+
+						border.call(redraw);
+
 						var topology1 = hexTopology1(radius, width, height);
 
 						d3.select(".hexagon1")//#heatmap")
@@ -2152,9 +2250,44 @@ function draw_map(){
 							  .on("mousemove", null_function)
 							  .on("mouseup", null_function);
 
+						function redraw1(border1) {
+						  border1.attr("d", path(topojson.mesh(topology1, topology1.objects.hexagons, function(a, b) { return a.fill ^ b.fill; })));
+						}
+
+						//write fill feature
+						for (var i = 0; i < 30; i++)
+						{
+							for (var j = 1; j <= 16; j++)
+							{
+								if (i < 10 && j < 10)
+							    {
+							    	if (fill_arr[(i+30) * line_length + j] == 1)
+										document.getElementById("Square10"+ i + "0" + j).__data__.fill = 1;
+							    }
+						    	else if (i < 10 && j >= 10)
+						    	{
+						    		if (fill_arr[(i+30) * line_length + j] == 1)
+										document.getElementById("Square10" + i + j).__data__.fill = 1;
+						    	}
+						    	else if (i >= 10 && j < 10)
+						    	{
+						    		if (fill_arr[(i+30) * line_length + j] == 1)
+										document.getElementById("Square1" + i + "0" + j).__data__.fill = 1;
+						    	}
+						    	else if (i >= 10 && j >= 10)
+						    	{
+						    		if (fill_arr[(i+30) * line_length + j] == 1)
+										document.getElementById("Square1" + i + j).__data__.fill = 1;
+						    	}
+							}
+						}
+
+						border1.call(redraw1);
+
 						document.getElementById("map_time").innerHTML = "The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60);
 
 						//tooltip.html("The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60));
+
 					}
 			
 				//Choice
@@ -2168,11 +2301,13 @@ function draw_map(){
 							{
 								heatmap_noframe(value);
 								choice_flag = "noframe";
+								but_choice.value = "Room";
 							}
 							else if (choice_flag == "noframe")
 							{
 								heatmap(value);
 								choice_flag = "frame";
+								but_choice.value = "Frame";
 							}
 							
 						}
