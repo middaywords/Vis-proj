@@ -3,8 +3,8 @@ function drawPersonalSchedule(pid) {
     // para: pid(integer)  selected person
     console.log("in psnsdl1")
     let psnSdlSvg = svg11
-    const WIDTH = psnSdlSvg.attr("width")
-    const HEIGHT = psnSdlSvg.attr("height")-10
+    const WIDTH = width11
+    const HEIGHT = height11
     const ORIGINAL_OPACITY = 0.1
     const [A, B, C, D, M, R] = [0, 1, 2, 3, 4, 5]
     const TEXTS = ["分会场A", "分会场B", "分会场C", "分会场D", "主会场", "休息时间"]
