@@ -169,7 +169,7 @@ function draw_map(){
 								 .call(redraw1);
 
 					// create a tooltip
-					var tooltip = d3.select("#text-div")
+					/*var tooltip = d3.select("#text-div")
 									.append("div")
 									.attr("transform", "translate(55,0)")
 								    .attr("id","tool")
@@ -181,7 +181,7 @@ function draw_map(){
 								    .style("border-radius", "5px")
 								    .style("padding", "5px")
 
-					tooltip.html("The exact time is: " + "7 : 0");
+					tooltip.html("The exact time is: " + "7 : 0");*/
 
 				//route
 					//Draw line
@@ -250,6 +250,8 @@ function draw_map(){
 					}*/
 
 			    //refresh map
+			    	var choice_flag = "frame";
+
 			    	change();
 
 			    	var refresh_map = setInterval(function(){timecount()},100);
@@ -260,9 +262,28 @@ function draw_map(){
 			        function timecount(){
 			        	temp_time = (temp_time + 1) % 660; //whole time == 660
 
-			        	heatmap(temp_time); //map
+			        	if (choice_flag == "frame")
+			        	{
+			        		heatmap(temp_time); //map
+			        	}
+			        	else if (choice_flag == "noframe")
+			        	{
+			        		heatmap_noframe(temp_time);
+			        	}
+			        	
 
 			        	document.getElementById("beans").value = temp_time; //range control
+
+			        	if (temp_time % 15 == 0){
+
+							change_pie(1, Math.floor(temp_time / 15) * 15, select_room_sid);
+						}
+
+						document.getElementById("circular_arr").innerHTML = "";
+					    for (var i = 0; i < select_room_sid.length; i++)
+					    {
+					    	document.getElementById("circular_arr").innerHTML += select_room_sid[i] + " ";
+					    }
 			        }
 
 			    	var map_flag = 1;
@@ -877,10 +898,11 @@ function draw_map(){
 						    .attr("font-size",7)*/
 
 			    //Draw frame
+			    	var select_sid = [];
+
 				    var mousing = 0;
 
 					var select_square = [];
-					var select_sid = [];
 
 					var start_value, end_value;
 
@@ -916,16 +938,6 @@ function draw_map(){
 					    	{
 					    		document.getElementById("Square"+ i + j).__data__.fill = mousing;
 					    	}
-					    	if (j - 1 < 10)
-				                a_string = '10' + (j-1).toString();
-				            else
-				                a_string = '1' + (j-1).toString();
-				            if (i < 10)
-				                b_string = '0' + i.toString();
-				            else
-				                b_string = i.toString();
-				            select_sid.push(a_string + b_string);
-					  		select_square.push([i ,j]);
 					  	}
 					  }
 					  border.call(redraw);
@@ -938,8 +950,6 @@ function draw_map(){
 					    var max_i = Math.max(parseInt(start_value.substring(6,8)), parseInt(end_value.substring(6,8)));
 					    var min_j = Math.min(parseInt(start_value.substring(8,10)), parseInt(end_value.substring(8,10)));
 					    var max_j = Math.max(parseInt(start_value.substring(8,10)), parseInt(end_value.substring(8,10)));
-					    select_square = [];
-					    select_sid = [];
 					    for (var i = min_i; i <= max_i; i++)
 					    {
 					  	  for (var j = min_j; j <= max_j; j++)
@@ -960,16 +970,6 @@ function draw_map(){
 					    	{
 					    		document.getElementById("Square"+ i + j).__data__.fill = mousing;
 					    	}
-					  		select_square.push([i ,j]);
-					  		if (j - 1 < 10)
-				                a_string = '10' + (j-1).toString();
-				            else
-				                a_string = '1' + (j-1).toString();
-				            if (i < 10)
-				                b_string = '0' + i.toString();
-				            else
-				                b_string = i.toString();
-				            select_sid.push(a_string + b_string);
 					  	  }
 					    }
 					    border.call(redraw);
@@ -1006,34 +1006,106 @@ function draw_map(){
 					    		document.getElementById("Square"+ i + j).__data__.fill = mousing;
 					    	}
 					  		select_square.push([i ,j]);
-					  		if (j - 1 < 10)
-				                a_string = '10' + (j-1).toString();
-				            else
-				                a_string = '1' + (j-1).toString();
-				            if (i < 10)
-				                b_string = '0' + i.toString();
-				            else
-				                b_string = i.toString();
-				            select_sid.push(a_string + b_string);
 					  	}
 					  }
 					  border.call(redraw);
 					  console.log(select_square);
+
+					  for (var i = 0; i < 30; i++)
+					  {
+					  	for (var j = 1; j <= 16; j++)
+					  	{
+					  		var push_flag = 0;
+					  		if (i < 10 && j < 10)
+					    	{
+					    		if(document.getElementById("Square0"+ i + "0" + j).__data__.fill == 1)
+					    			push_flag = 1;
+					    	}
+					    	else if (i < 10 && j >= 10)
+					    	{
+					    		if(document.getElementById("Square0"+ i + j).__data__.fill == 1)
+					    			push_flag = 1;
+					    	}
+					    	else if (i >= 10 && j < 10)
+					    	{
+					    		if (document.getElementById("Square"+ i + "0" + j).__data__.fill == 1)
+					    			push_flag = 1;
+					    	}
+					    	else if (i >= 10 && j >= 10)
+					    	{
+					    		if(document.getElementById("Square"+ i + j).__data__.fill == 1)
+					    			push_flag = 1;
+					    	}
+
+					    	if (push_flag == 1)
+					    	{
+					    		if (j - 1 < 10)
+					                a_string = '10' + (j-1).toString();
+					            else
+					                a_string = '1' + (j-1).toString();
+					            if (i < 10)
+					                b_string = '0' + i.toString();
+					            else
+					                b_string = i.toString();
+					            select_sid.push(a_string + b_string);
+					    	}
+					  	}
+					  }
+					  for (var i = 0; i < 30; i++)
+					  {
+					  	for (var j = 1; j <= 16; j++)
+					  	{
+					  		var push_flag1 = 0;
+					  		if (i < 10 && j < 10)
+					    	{
+					    		if(document.getElementById("Square10"+ i + "0" + j).__data__.fill == 1)
+					    			push_flag1 = 1;
+					    	}
+					    	else if (i < 10 && j >= 10)
+					    	{
+					    		if(document.getElementById("Square10"+ i + j).__data__.fill == 1)
+					    			push_flag1 = 1;
+					    	}
+					    	else if (i >= 10 && j < 10)
+					    	{
+					    		if (document.getElementById("Square1"+ i + "0" + j).__data__.fill == 1)
+					    			push_flag1 = 1;
+					    	}
+					    	else if (i >= 10 && j >= 10)
+					    	{
+					    		if(document.getElementById("Square1"+ i + j).__data__.fill == 1)
+					    			push_flag1 = 1;
+					    	}
+
+					    	if (push_flag1 == 1)
+					    	{
+					    		if (j - 1 < 10)
+					                a_string = '20' + (j-1).toString();
+					            else
+					                a_string = '2' + (j-1).toString();
+					            if (i < 10)
+					                b_string = '0' + i.toString();
+					            else
+					                b_string = i.toString();
+					            select_sid.push(a_string + b_string);
+					    	}
+					  	}
+					  }
 					  console.log(select_sid);
 					  d3.select("#container_line").selectAll('svg').remove();
 					  width3 = document.getElementById('container_line').offsetWidth;
-        height3 = width3 / 2.7;
+				      height3 = width3 / 2.7;
 					  margin3 = { top: 10, right: 30, bottom: 30, left: 50 },
-            width3 = width3 - margin3.left - margin3.right,
-            height3 = height3 - margin3.top - margin3.bottom;
+				        width3 = width3 - margin3.left - margin3.right,
+				        height3 = height3 - margin3.top - margin3.bottom;
 
-        svg3 = d3.select("#container_line").append("svg")
-            .attr("width", width3 + margin3.left + margin3.right)
-            .attr("height", height3 + margin3.top + margin3.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin3.left + "," + margin3.top + ")");
+				      svg3 = d3.select("#container_line").append("svg")
+				            .attr("width", width3 + margin3.left + margin3.right)
+				            .attr("height", height3 + margin3.top + margin3.bottom)
+				            .append("g")
+				            .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
 					  draw_line(select_sid);
+					  document.getElementById("line_sid_number").innerHTML = "The size is: " + select_sid.length;
 					  mousing = 0;
 					}
 
@@ -1077,7 +1149,6 @@ function draw_map(){
 					    	{
 					    		document.getElementById("Square1"+ i + j).__data__.fill = mousing1;
 					    	}
-					  		select_square1.push([i ,j]);
 					  	}
 					  }
 					  border1.call(redraw1);
@@ -1090,7 +1161,6 @@ function draw_map(){
 					    var max_i = Math.max(parseInt(start_value1.substring(7,9)), parseInt(end_value1.substring(7,9)));
 					    var min_j = Math.min(parseInt(start_value1.substring(9,11)), parseInt(end_value1.substring(9,11)));
 					    var max_j = Math.max(parseInt(start_value1.substring(9,11)), parseInt(end_value1.substring(9,11)));
-					    select_square1 = [];
 					    for (var i = min_i; i <= max_i; i++)
 					    {
 					  	  for (var j = min_j; j <= max_j; j++)
@@ -1111,7 +1181,6 @@ function draw_map(){
 					    	{
 					    		document.getElementById("Square1"+ i + j).__data__.fill = mousing1;
 					    	}
-					  		select_square1.push([i ,j]);
 					  	  }
 					    }
 					    border1.call(redraw1);
@@ -1126,6 +1195,7 @@ function draw_map(){
 					  var min_j = Math.min(parseInt(start_value1.substring(9,11)), parseInt(end_value1.substring(9,11)));
 					  var max_j = Math.max(parseInt(start_value1.substring(9,11)), parseInt(end_value1.substring(9,11)));
 					  select_square1 = [];
+					  select_sid = [];
 					  for (var i = min_i; i <= max_i; i++)
 					  {
 					  	for (var j = min_j; j <= max_j; j++)
@@ -1151,6 +1221,102 @@ function draw_map(){
 					  }
 					  border1.call(redraw1);
 					  console.log(select_square1);
+
+					  for (var i = 0; i < 30; i++)
+					  {
+					  	for (var j = 1; j <= 16; j++)
+					  	{
+					  		var push_flag = 0;
+					  		if (i < 10 && j < 10)
+					    	{
+					    		if(document.getElementById("Square0"+ i + "0" + j).__data__.fill == 1)
+					    			push_flag = 1;
+					    	}
+					    	else if (i < 10 && j >= 10)
+					    	{
+					    		if(document.getElementById("Square0"+ i + j).__data__.fill == 1)
+					    			push_flag = 1;
+					    	}
+					    	else if (i >= 10 && j < 10)
+					    	{
+					    		if (document.getElementById("Square"+ i + "0" + j).__data__.fill == 1)
+					    			push_flag = 1;
+					    	}
+					    	else if (i >= 10 && j >= 10)
+					    	{
+					    		if(document.getElementById("Square"+ i + j).__data__.fill == 1)
+					    			push_flag = 1;
+					    	}
+
+					    	if (push_flag == 1)
+					    	{
+					    		if (j - 1 < 10)
+					                a_string = '10' + (j-1).toString();
+					            else
+					                a_string = '1' + (j-1).toString();
+					            if (i < 10)
+					                b_string = '0' + i.toString();
+					            else
+					                b_string = i.toString();
+					            select_sid.push(a_string + b_string);
+					    	}
+					  	}
+					  }
+					  for (var i = 0; i < 30; i++)
+					  {
+					  	for (var j = 1; j <= 16; j++)
+					  	{
+					  		var push_flag1 = 0;
+					  		if (i < 10 && j < 10)
+					    	{
+					    		if(document.getElementById("Square10"+ i + "0" + j).__data__.fill == 1)
+					    			push_flag1 = 1;
+					    	}
+					    	else if (i < 10 && j >= 10)
+					    	{
+					    		if(document.getElementById("Square10"+ i + j).__data__.fill == 1)
+					    			push_flag1 = 1;
+					    	}
+					    	else if (i >= 10 && j < 10)
+					    	{
+					    		if (document.getElementById("Square1"+ i + "0" + j).__data__.fill == 1)
+					    			push_flag1 = 1;
+					    	}
+					    	else if (i >= 10 && j >= 10)
+					    	{
+					    		if(document.getElementById("Square1"+ i + j).__data__.fill == 1)
+					    			push_flag1 = 1;
+					    	}
+
+					    	if (push_flag1 == 1)
+					    	{
+					    		if (j - 1 < 10)
+					                a_string = '20' + (j-1).toString();
+					            else
+					                a_string = '2' + (j-1).toString();
+					            if (i < 10)
+					                b_string = '0' + i.toString();
+					            else
+					                b_string = i.toString();
+					            select_sid.push(a_string + b_string);
+					    	}
+					  	}
+					  }
+					  console.log(select_sid);
+					  d3.select("#container_line").selectAll('svg').remove();
+					  width3 = document.getElementById('container_line').offsetWidth;
+				      height3 = width3 / 2.7;
+					  margin3 = { top: 10, right: 30, bottom: 30, left: 50 },
+				        width3 = width3 - margin3.left - margin3.right,
+				        height3 = height3 - margin3.top - margin3.bottom;
+
+				      svg3 = d3.select("#container_line").append("svg")
+				            .attr("width", width3 + margin3.left + margin3.right)
+				            .attr("height", height3 + margin3.top + margin3.bottom)
+				            .append("g")
+				            .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
+					  draw_line(select_sid);
+					  document.getElementById("line_sid_number").innerHTML = "The size is: " + select_sid.length;
 					  mousing1 = 0;
 					}
 
@@ -1268,11 +1434,31 @@ function draw_map(){
 					}
 
 				//map function
+					var select_room_sid = [];
+					select_room_sid.push("mainHall");
+
 					function change(){
+
 						var bean = document.getElementById("beans");
 						bean.onmousemove = function(){
 							var value = bean.value;
-							heatmap(value);
+							console.log(value);
+							change_pie(1, Math.floor(value / 15) * 15, select_room_sid);	
+
+							document.getElementById("circular_arr").innerHTML = "";
+						    for (var i = 0; i < select_room_sid.length; i++)
+						    {
+						    	document.getElementById("circular_arr").innerHTML += select_room_sid[i] + " ";
+						    }
+
+						    if (choice_flag == "frame")
+						    {
+						    	heatmap(value);
+						    }
+						    else if (choice_flag == "noframe")
+						    {
+						    	heatmap_noframe(value);
+						    }
 						}
 					}
 
@@ -1502,6 +1688,103 @@ function draw_map(){
 						  }
 						  border.call(redraw);
 						  console.log(select_square);
+
+						  select_sid = [];
+						  for (var i = 0; i < 30; i++)
+						  {
+						  	for (var j = 1; j <= 16; j++)
+						  	{
+						  		var push_flag = 0;
+						  		if (i < 10 && j < 10)
+						    	{
+						    		if(document.getElementById("Square0"+ i + "0" + j).__data__.fill == 1)
+						    			push_flag = 1;
+						    	}
+						    	else if (i < 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square0"+ i + j).__data__.fill == 1)
+						    			push_flag = 1;
+						    	}
+						    	else if (i >= 10 && j < 10)
+						    	{
+						    		if (document.getElementById("Square"+ i + "0" + j).__data__.fill == 1)
+						    			push_flag = 1;
+						    	}
+						    	else if (i >= 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square"+ i + j).__data__.fill == 1)
+						    			push_flag = 1;
+						    	}
+
+						    	if (push_flag == 1)
+						    	{
+						    		if (j - 1 < 10)
+						                a_string = '10' + (j-1).toString();
+						            else
+						                a_string = '1' + (j-1).toString();
+						            if (i < 10)
+						                b_string = '0' + i.toString();
+						            else
+						                b_string = i.toString();
+						            select_sid.push(a_string + b_string);
+						    	}
+						  	}
+						  }
+						  for (var i = 0; i < 30; i++)
+						  {
+						  	for (var j = 1; j <= 16; j++)
+						  	{
+						  		var push_flag1 = 0;
+						  		if (i < 10 && j < 10)
+						    	{
+						    		if(document.getElementById("Square10"+ i + "0" + j).__data__.fill == 1)
+						    			push_flag1 = 1;
+						    	}
+						    	else if (i < 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square10"+ i + j).__data__.fill == 1)
+						    			push_flag1 = 1;
+						    	}
+						    	else if (i >= 10 && j < 10)
+						    	{
+						    		if (document.getElementById("Square1"+ i + "0" + j).__data__.fill == 1)
+						    			push_flag1 = 1;
+						    	}
+						    	else if (i >= 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square1"+ i + j).__data__.fill == 1)
+						    			push_flag1 = 1;
+						    	}
+
+						    	if (push_flag1 == 1)
+						    	{
+						    		if (j - 1 < 10)
+						                a_string = '20' + (j-1).toString();
+						            else
+						                a_string = '2' + (j-1).toString();
+						            if (i < 10)
+						                b_string = '0' + i.toString();
+						            else
+						                b_string = i.toString();
+						            select_sid.push(a_string + b_string);
+						    	}
+						  	}
+						  }
+						  console.log(select_sid);
+						  d3.select("#container_line").selectAll('svg').remove();
+						  width3 = document.getElementById('container_line').offsetWidth;
+					      height3 = width3 / 2.7;
+						  margin3 = { top: 10, right: 30, bottom: 30, left: 50 },
+					        width3 = width3 - margin3.left - margin3.right,
+					        height3 = height3 - margin3.top - margin3.bottom;
+
+					      svg3 = d3.select("#container_line").append("svg")
+					            .attr("width", width3 + margin3.left + margin3.right)
+					            .attr("height", height3 + margin3.top + margin3.bottom)
+					            .append("g")
+					            .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
+						  draw_line(select_sid);
+						  document.getElementById("line_sid_number").innerHTML = "The size is: " + select_sid.length;
 						  mousing = 0;
 						}
 
@@ -1690,6 +1973,103 @@ function draw_map(){
 						  }
 						  border1.call(redraw1);
 						  console.log(select_square1);
+
+						  select_sid = [];
+						  for (var i = 0; i < 30; i++)
+						  {
+						  	for (var j = 1; j <= 16; j++)
+						  	{
+						  		var push_flag = 0;
+						  		if (i < 10 && j < 10)
+						    	{
+						    		if(document.getElementById("Square0"+ i + "0" + j).__data__.fill == 1)
+						    			push_flag = 1;
+						    	}
+						    	else if (i < 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square0"+ i + j).__data__.fill == 1)
+						    			push_flag = 1;
+						    	}
+						    	else if (i >= 10 && j < 10)
+						    	{
+						    		if (document.getElementById("Square"+ i + "0" + j).__data__.fill == 1)
+						    			push_flag = 1;
+						    	}
+						    	else if (i >= 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square"+ i + j).__data__.fill == 1)
+						    			push_flag = 1;
+						    	}
+
+						    	if (push_flag == 1)
+						    	{
+						    		if (j - 1 < 10)
+						                a_string = '10' + (j-1).toString();
+						            else
+						                a_string = '1' + (j-1).toString();
+						            if (i < 10)
+						                b_string = '0' + i.toString();
+						            else
+						                b_string = i.toString();
+						            select_sid.push(a_string + b_string);
+						    	}
+						  	}
+						  }
+						  for (var i = 0; i < 30; i++)
+						  {
+						  	for (var j = 1; j <= 16; j++)
+						  	{
+						  		var push_flag1 = 0;
+						  		if (i < 10 && j < 10)
+						    	{
+						    		if(document.getElementById("Square10"+ i + "0" + j).__data__.fill == 1)
+						    			push_flag1 = 1;
+						    	}
+						    	else if (i < 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square10"+ i + j).__data__.fill == 1)
+						    			push_flag1 = 1;
+						    	}
+						    	else if (i >= 10 && j < 10)
+						    	{
+						    		if (document.getElementById("Square1"+ i + "0" + j).__data__.fill == 1)
+						    			push_flag1 = 1;
+						    	}
+						    	else if (i >= 10 && j >= 10)
+						    	{
+						    		if(document.getElementById("Square1"+ i + j).__data__.fill == 1)
+						    			push_flag1 = 1;
+						    	}
+
+						    	if (push_flag1 == 1)
+						    	{
+						    		if (j - 1 < 10)
+						                a_string = '20' + (j-1).toString();
+						            else
+						                a_string = '2' + (j-1).toString();
+						            if (i < 10)
+						                b_string = '0' + i.toString();
+						            else
+						                b_string = i.toString();
+						            select_sid.push(a_string + b_string);
+						    	}
+						  	}
+						  }
+						  console.log(select_sid);
+						  d3.select("#container_line").selectAll('svg').remove();
+						  width3 = document.getElementById('container_line').offsetWidth;
+					      height3 = width3 / 2.7;
+						  margin3 = { top: 10, right: 30, bottom: 30, left: 50 },
+					        width3 = width3 - margin3.left - margin3.right,
+					        height3 = height3 - margin3.top - margin3.bottom;
+
+					      svg3 = d3.select("#container_line").append("svg")
+					            .attr("width", width3 + margin3.left + margin3.right)
+					            .attr("height", height3 + margin3.top + margin3.bottom)
+					            .append("g")
+					            .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
+						  draw_line(select_sid);
+						  document.getElementById("line_sid_number").innerHTML = "The size is: " + select_sid.length;
 						  mousing1 = 0;
 						}
 
@@ -1727,7 +2107,9 @@ function draw_map(){
 
 						border1.call(redraw1);
 
-						tooltip.html("The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60));
+						document.getElementById("map_time").innerHTML = "The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60);
+
+						//tooltip.html("The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60));
 					}
 
 					function heatmap_noframe(value){
@@ -1770,28 +2152,36 @@ function draw_map(){
 							  .on("mousemove", null_function)
 							  .on("mouseup", null_function);
 
-						tooltip.html("The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60));
+						document.getElementById("map_time").innerHTML = "The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60);
+
+						//tooltip.html("The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60));
 					}
 			
 				//Choice
-					var choice_flag = "frame";
 					choice();
 
 					function choice(){
 						var but_choice = document.getElementById("but_choice");
 						but_choice.onclick = function(){
+							var value = document.getElementById("beans").value;
 							if (choice_flag == "frame")
 							{
-								heatmap_noframe(0);
+								heatmap_noframe(value);
 								choice_flag = "noframe";
 							}
 							else if (choice_flag == "noframe")
 							{
-								heatmap(0);
+								heatmap(value);
 								choice_flag = "frame";
 							}
 							
 						}
+					}
+
+					var select_room_arr = [];
+					for (var i = 0; i <= 21; i++)
+					{
+						select_room_arr.push(0);
 					}
 
 					function select_room(){
@@ -1802,70 +2192,206 @@ function draw_map(){
 							var room_row = parseInt(room_id.substring(8,10));
 							if (room_column >= 1 && room_column <= 5 && room_row >= 3 && room_row <= 4)
 							{
+								if (select_room_arr[0] == 0)
+								{
+									select_room_arr[0] = 1;
+								}
+								else if (select_room_arr[0] == 1)
+								{
+									select_room_arr[0] = 0;
+								}
 								console.log("hallA");
 							}
 							else if (room_column >= 1 && room_column <= 5 && room_row >= 5 && room_row <= 6)
 							{
+								if (select_room_arr[1] == 0)
+								{
+									select_room_arr[1] = 1;
+								}
+								else if (select_room_arr[1] == 1)
+								{
+									select_room_arr[1] = 0;
+								}
 								console.log("hallB");
 							}
 							else if (room_column >= 1 && room_column <= 5 && room_row >= 7 && room_row <= 8)
 							{
+								if (select_room_arr[2] == 0)
+								{
+									select_room_arr[2] = 1;
+								}
+								else if (select_room_arr[2] == 1)
+								{
+									select_room_arr[2] = 0;
+								}
 								console.log("hallC");
 							}
 							else if (room_column >= 1 && room_column <= 5 && room_row >= 8 && room_row <= 10)
 							{
+								if (select_room_arr[3] == 0)
+								{
+									select_room_arr[3] = 1;
+								}
+								else if (select_room_arr[3] == 1)
+								{
+									select_room_arr[3] = 0;
+								}
 								console.log("hallD");
 							}
 							else if (room_column >= 7 && room_column <= 8 && room_row >= 4 && room_row <= 10)
 							{
+								if (select_room_arr[4] == 0)
+								{
+									select_room_arr[4] = 1;
+								}
+								else if (select_room_arr[4] == 1)
+								{
+									select_room_arr[4] = 0;
+								}
 								console.log("poster");
 							}
 							else if (room_column >= 10 && room_column <= 11 && room_row >= 5 && room_row <= 6)
 							{
+								if (select_room_arr[5] == 0)
+								{
+									select_room_arr[5] = 1;
+								}
+								else if (select_room_arr[5] == 1)
+								{
+									select_room_arr[5] = 0;
+								}
 								console.log("toilet1");
 							}
 							else if (room_column >= 10 && room_column <= 11 && room_row >= 7 && room_row <= 10)
 							{
+								if (select_room_arr[6] == 0)
+								{
+									select_room_arr[6] = 1;
+								}
+								else if (select_room_arr[6] == 1)
+								{
+									select_room_arr[6] = 0;
+								}
 								console.log("room1");
 							}
 							else if (room_column >= 10 && room_column <= 11 && room_row >= 11 && room_row <= 12)
 							{
+								if (select_room_arr[7] == 0)
+								{
+									select_room_arr[7] = 1;
+								}
+								else if (select_room_arr[7] == 1)
+								{
+									select_room_arr[7] = 0;
+								}
 								console.log("room2");
 							}
 							else if (room_column >= 15 && room_column <= 18 && room_row >= 3 && room_row <= 12)
 							{
+								if (select_room_arr[8] == 0)
+								{
+									select_room_arr[8] = 1;
+								}
+								else if (select_room_arr[8] == 1)
+								{
+									select_room_arr[8] = 0;
+								}
 								console.log("exhibition");
 							}
 							else if (room_column >= 19 && room_column <= 28 && room_row >= 3 && room_row <= 12)
 							{
+								if (select_room_arr[9] == 0)
+								{
+									select_room_arr[9] = 1;
+								}
+								else if (select_room_arr[9] == 1)
+								{
+									select_room_arr[9] = 0;
+								}
 								console.log("mainHall");
 							}
 							else if (room_column >= 2 && room_column <= 5 && room_row >= 13 && room_row <= 14)
 							{
+								if (select_room_arr[10] == 0)
+								{
+									select_room_arr[10] = 1;
+								}
+								else if (select_room_arr[10] == 1)
+								{
+									select_room_arr[10] = 0;
+								}
 								console.log("register");
 							}
 							else if (room_column >= 19 && room_column <= 20 && room_row >= 15 && room_row <= 16)
 							{
+								if (select_room_arr[11] == 0)
+								{
+									select_room_arr[11] = 1;
+								}
+								else if (select_room_arr[11] == 1)
+								{
+									select_room_arr[11] = 0;
+								}
 								console.log("service");
 							}
 							else if (room_column >= 21 && room_column <= 24 && room_row >= 15 && room_row <= 16)
 							{
+								if (select_room_arr[12] == 0)
+								{
+									select_room_arr[12] = 1;
+								}
+								else if (select_room_arr[12] == 1)
+								{
+									select_room_arr[12] = 0;
+								}
 								console.log("room3");
 							}
 							else if (room_column >= 25 && room_column <= 26 && room_row >= 15 && room_row <= 16)
 							{
+								if (select_room_arr[13] == 0)
+								{
+									select_room_arr[13] = 1;
+								}
+								else if (select_room_arr[13] == 1)
+								{
+									select_room_arr[13] = 0;
+								}
 								console.log("room4");
 							}
 							else if (room_column >= 27 && room_column <= 28 && room_row >= 15 && room_row <= 16)
 							{
+								if (select_room_arr[14] == 0)
+								{
+									select_room_arr[14] = 1;
+								}
+								else if (select_room_arr[14] == 1)
+								{
+									select_room_arr[14] = 0;
+								}
 								console.log("toilet2");
 							}
 							else if (room_column >= 10 && room_column <= 11 && room_row == 2)
 							{
+								if (select_room_arr[15] == 0)
+								{
+									select_room_arr[15] = 1;
+								}
+								else if (select_room_arr[15] == 1)
+								{
+									select_room_arr[15] = 0;
+								}
 								console.log("elevator_up_floor1");
 							}
 							else if (room_column >= 10 && room_column <= 11 && room_row == 15)
 							{
+								if (select_room_arr[16] == 0)
+								{
+									select_room_arr[16] = 1;
+								}
+								else if (select_room_arr[16] == 1)
+								{
+									select_room_arr[16] = 0;
+								}
 								console.log("elevator_down_floor1");
 							}
 						}
@@ -1876,34 +2402,198 @@ function draw_map(){
 							var room_row = parseInt(room_id.substring(9,11));
 							if (room_column >= 1 && room_column <= 5 && room_row >= 3 && room_row <= 10)
 							{
+								if (select_room_arr[17] == 0)
+								{
+									select_room_arr[17] = 1;
+								}
+								else if (select_room_arr[17] == 1)
+								{
+									select_room_arr[17] = 0;
+								}
 								console.log("diningHall");
 							}
 							else if (room_column >= 1 && room_column <= 5 && room_row >= 11 && room_row <= 12)
 							{
+								if (select_room_arr[18] == 0)
+								{
+									select_room_arr[18] = 1;
+								}
+								else if (select_room_arr[18] == 1)
+								{
+									select_room_arr[18] = 0;
+								}
 								console.log("room5");
 							}
 							else if (room_column >= 0 && room_column <= 5 && room_row >= 14 && room_row <= 16)
 							{
+								if (select_room_arr[19] == 0)
+								{
+									select_room_arr[19] = 1;
+								}
+								else if (select_room_arr[19] == 1)
+								{
+									select_room_arr[19] = 0;
+								}
 								console.log("recreationArea");
 							}
 							else if (room_column >= 10 && room_column <= 11 && room_row >= 5 && room_row <= 6)
 							{
+								if (select_room_arr[20] == 0)
+								{
+									select_room_arr[20] = 1;
+								}
+								else if (select_room_arr[20] == 1)
+								{
+									select_room_arr[20] = 0;
+								}
 								console.log("toilet3");
 							}
 							else if (room_column >= 10 && room_column <= 11 && room_row >= 7 && room_row <= 8)
 							{
+								if (select_room_arr[21] == 0)
+								{
+									select_room_arr[21] = 1;
+								}
+								else if (select_room_arr[21] == 1)
+								{
+									select_room_arr[21] = 0;
+								}
 								console.log("room6");
 							}
 							else if (room_column >= 10 && room_column <= 11 && room_row == 2)
 							{
+								if (select_room_arr[15] == 0)
+								{
+									select_room_arr[15] = 1;
+								}
+								else if (select_room_arr[15] == 1)
+								{
+									select_room_arr[15] = 0;
+								}
 								console.log("elevator_up_floor2");
 							}
 							else if (room_column >= 10 && room_column <= 11 && room_row == 15)
 							{
+								if (select_room_arr[16] == 0)
+								{
+									select_room_arr[16] = 1;
+								}
+								else if (select_room_arr[16] == 1)
+								{
+									select_room_arr[16] = 0;
+								}
 								console.log("elevator_down_floor2");
 							}
 						}
-						
+
+						d3.select("#container_stacked").selectAll('svg').remove();
+
+						width2 = document.getElementById('container_stacked').offsetWidth;
+        				height2 = width2 / 2.88;
+        				margin2 = { top: 40, right: 120, bottom: 50, left: 60 },
+				            width2 = width2 - margin2.left - margin2.right,
+				            height2 = height2 - margin2.top - margin2.bottom;
+
+					    svg2 = d3.select("#container_stacked").append("svg")
+            					.attr("width", width2 + margin2.left + margin2.right)
+            					.attr("height", height2 + margin2.top + margin2.bottom)
+            					.append("g")
+            					.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+            			select_room_sid = [];
+
+            			if (select_room_arr[0] == 1){
+            				select_room_sid.push("hallA");
+            			}
+            			if (select_room_arr[1] == 1){
+            				select_room_sid.push("hallB");
+            			}
+            			if (select_room_arr[2] == 1){
+            				select_room_sid.push("hallC");
+            			}
+            			if (select_room_arr[3] == 1){
+            				select_room_sid.push("hallD");
+            			}
+            			if (select_room_arr[4] == 1){
+            				select_room_sid.push("poster");
+            			}
+            			if (select_room_arr[5] == 1){
+            				select_room_sid.push("toilet1");
+            			}
+            			if (select_room_arr[6] == 1){
+            				select_room_sid.push("room1");
+            			}
+            			if (select_room_arr[7] == 1){
+            				select_room_sid.push("room2");
+            			}
+            			if (select_room_arr[8] == 1){
+            				select_room_sid.push("exhibition");
+            			}
+            			if (select_room_arr[9] == 1){
+            				select_room_sid.push("mainHall");
+            			}
+            			if (select_room_arr[10] == 1){
+            				select_room_sid.push("register");
+            			}
+            			if (select_room_arr[11] == 1){
+            				select_room_sid.push("service");
+            			}
+            			if (select_room_arr[12] == 1){
+            				select_room_sid.push("room3");
+            			}
+            			if (select_room_arr[13] == 1){
+            				select_room_sid.push("room4");
+            			}
+            			if (select_room_arr[14] == 1){
+            				select_room_sid.push("toilet2");
+            			}
+            			if (select_room_arr[15] == 1){
+            				select_room_sid.push("elevatorUp");
+            			}
+            			if (select_room_arr[16] == 1){
+            				select_room_sid.push("elevator");
+            			}
+            			if (select_room_arr[17] == 1){
+            				select_room_sid.push("diningHall");
+            			}
+            			if (select_room_arr[18] == 1){
+            				select_room_sid.push("room5");
+            			}
+            			if (select_room_arr[19] == 1){
+            				select_room_sid.push("recreationArea");
+            			}
+            			if (select_room_arr[20] == 1){
+            				select_room_sid.push("toilet3");
+            			}
+            			if (select_room_arr[21] == 1){
+            				select_room_sid.push("room6");
+            			}
+
+						draw_stack(select_room_sid);
+
+						// d3.select("#container_circular").selectAll('svg').remove();
+
+				  //       width6 = document.getElementById('container_circular').offsetWidth;
+      //   				height6 = width6 / 1.35;
+      //   				margin6 = { top: 10, right: 10, bottom: 10, left: 10 },
+				  //           width6 = width6 - margin6.left - margin6.right,
+				  //           height6 = height6 - margin6.top - margin6.bottom;
+
+						// svg6 = d3.select("#container_circular").append("svg")
+					 //            .attr("width", width6 + margin6.left + margin6.right)
+					 //            .attr("height", height6 + margin6.top + margin6.bottom)
+					 //            .append("g")
+					 //            .attr("transform", "translate(" + margin6.left + "," + margin6.top + ")");
+
+					    var temp_time = document.getElementById("beans").value;
+					    change_pie(1, temp_time, select_room_sid);
+
+					    document.getElementById("circular_arr").innerHTML = "";
+					    for (var i = 0; i < select_room_sid.length; i++)
+					    {
+					    	document.getElementById("circular_arr").innerHTML += select_room_sid[i] + " ";
+					    }   
+
 					}
 
 					function null_function(){

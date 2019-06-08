@@ -279,9 +279,9 @@
 	#map-div
 	{
 		position: absolute;
-		top: 15%;
+		top: 20%;
 		width: 100%;
-		height: 75%;
+		height: 80%;
 		text-align: center;
 	}
 
@@ -293,6 +293,15 @@
 		text-align: center;
 	}
 
+    #map1
+    {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        height: 50%;
+        text-align: center;
+    }
+
     #text-div
     {
         position: absolute;
@@ -300,15 +309,6 @@
         width: 100%;
         height: 10%;
     }
-
-	#map1
-	{
-		position: absolute;
-		top: 50%;
-		width: 100%;
-		height: 50%;
-		text-align: center;
-	}
 
 	#but-div_1
 	{
@@ -400,7 +400,7 @@
                         <div class="row clearfix">
                             <div class="col-md-6 column">
                                 <div id="container_map">
-                                    <!--<h4>container_map</h4>-->
+                                    <h4 id="map_time">The exact time is: 7 : 0</h4>
                                     <div id="but_div">
 										<input type="range" name="beans" id="beans" min="0" max="659" step="1" value="0">
 										<input type="submit" value="Play animation" id="but_animation">
@@ -410,7 +410,7 @@
 										<div id="map"></div>
 										<div id="map1"></div>
 									</div>
-                                    <div id="text-div"></div>
+                                    <!--<div id="text-div"></div>-->
                                 </div>
                             </div>
                             <div class="col-md-6 column">
@@ -422,17 +422,16 @@
                         <div class="row clearfix">
                             <div class="col-md-4 column">
                                 <div id="container_circular">
-                                    <h4>container_circular</h4>
+                                    <!--<h4>container_circular</h4>-->
+                                    <div id="circular_arr">room1</div>
                                     <div id="pie">
-                                        <font size="1">Duration: 0<input type="range" id="duration" min="0" max="5000">5000</font>
-                                        <button class="randomize">randomize</button>
                                         <div id="fortip"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-8 column">
                                 <div id="container_line">
-                                    <h4>container_line</h4>
+                                    <h4 id="line_sid_number">container_line</h4>
                                 </div>
                             </div>
                         </div>
@@ -637,7 +636,7 @@
     draw_stack(["toilet1", "toilet2", "toilet3"]);
     draw_bubble();
     var gt = document.getElementById("beans").value;
-    draw_pie(1, gt, rooms);
+    draw_pie(1, gt, rooms); 
     //data_prepare();
 
     function setup() {
@@ -787,12 +786,13 @@
         d3.select("#choiceWindow").selectAll('svg').remove();
         d3.selectAll('svg').remove();
         setup();
-        //draw_map();
+        draw_map();
     	draw_sankey();
         draw_line(mainHall);
         draw_stack(["toilet1"]);
         draw_bubble();
-        draw_pie(1, 0, ['other']);
+        gt = document.getElementById("beans").value;
+        draw_pie(1, gt, ["mainHall"]);
     }
 
 

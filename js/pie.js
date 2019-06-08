@@ -1,3 +1,10 @@
+
+var room_minute_data;
+var pie;
+var key_pie;
+var color_pie, arc_pie, outerArc_pie, svgPie;
+//var rooms = ['other'];
+//var day = 1;
 function draw_pie(day, gt, rooms){
         // -----------------------------
     // Parameters:
@@ -5,83 +12,44 @@ function draw_pie(day, gt, rooms){
     //  2. t:   : int 0 - 782
     //  3. day: : 1 - 3
     //  Usage:
-    //     change(new_data(t, rooms, day);
+    //     change_pie(new_data(t, rooms, day);
     console.log(rooms);
-    var svgPie = d3.select("#pie")
+    svgPie = d3.select("#pie")
         .append("svg")
         .append("g");
 
     svgPie.append("g")
         .attr("class", "slices");
 
-    var widthPie = width6,
-        heightPie = height6,
+    widthPie = 250,
+        heightPie = 150,
         radiusPie = Math.min(widthPie, heightPie) / 2;
 
-    var pie = d3.pie()
+    pie = d3.pie()
         .sort(null)
         .value(function(d) {
             return d.value;
         });
 
-    var arc = d3.arc()
+    arc_pie = d3.arc()
         .outerRadius(radiusPie * 0.8)
         .innerRadius(radiusPie * 0.6);
 
-    var outerArc = d3.arc()
+    outerArc_pie = d3.arc()
         .innerRadius(radiusPie * 0.9)
         .outerRadius(radiusPie * 0.9);
 
     svgPie.attr("transform", "translate(" + widthPie / 3 + "," + heightPie / 2 + ")");
 
-    var key = function(d){ return d.data.label; };
-    var room_minute_data;
-    //var rooms = ['other'];
-    //var day = 1;
-    //var gt = 0;
+    key_pie = function(d){ return d.data.label; };
+
+    
+    change_pie(day, gt, rooms);
 
     // -----------------------------------
-    d3.json('data/room_minute_count.json', function (error, data) {
-        room_minute_data = data;
-        change_pie(new_data(day, gt, rooms));
-    });
-
-    // -----------------------------------
-    var color = d3.scaleOrdinal(d3.schemeCategory20)
+    color_pie = d3.scaleOrdinal(d3.schemeCategory20)
         .domain(["Staff", "Business Man", "Newsman", "Ordinary People", "Specialist"]);
-
-    function new_data (day, t, rooms){
-        gt = (gt + 100) % 780;
-        var time_point = gt + 2;
-        var data_tpoint = room_minute_data[day - 1][time_point];
-
-        var name_list = ["Specialist", "Newsman", "Staff", "Business Man", "Ordinary People"];
-        var rdata = name_list.map(function (label) {
-            return {label: label, value: 0}
-        });
-
-        for (item in data_tpoint) {
-            rooms.forEach(function (room) {
-                if (room == item){
-                    for (let i = 0; i < 5; i++) {
-                        rdata[i].value += data_tpoint[item][i]
-                    }
-                }
-            })
-        }
-
-        rdata.sort(function(a,b) {
-            return d3.ascending(a.label, b.label);
-        });
-
-        return rdata;
-    }
-
-
-    d3.select(".randomize")
-        .on("click", function(){
-            change_pie(new_data(day, gt, rooms));
-        });
+}
 
     function mergeWithFirstEqualZero(first, second){
         var secondSet = d3.set(); second.forEach(function(d) { secondSet.add(d.label); });
@@ -95,29 +63,60 @@ function draw_pie(day, gt, rooms){
             });
     }
 
-    function change_pie(data) {
-        var duration = +document.getElementById("duration").value;
+
+    
+
+    function change_pie (day, t, rooms){
+
+        // -----------------------------------
+        d3.json('data/room_minute_count.json', function (error, data) {
+            room_minute_data = data;
+            console.log('pie!!');
+            console.log(day, t, rooms);
+            var time_point = parseInt(t) + 2;
+            var data_tpoint = room_minute_data[day - 1][time_point];
+            console.log(rooms);
+            var name_list = ["Specialist", "Newsman", "Staff", "Business Man", "Ordinary People"];
+            var rdata = name_list.map(function (label) {
+                return {label: label, value: 0}
+            });
+
+            for (item in data_tpoint) {
+                rooms.forEach(function (room) {
+                    if (room == item){
+                        for (let i = 0; i < 5; i++) {
+                            rdata[i].value += data_tpoint[item][i]
+                        }
+                    }
+                })
+            }
+
+            rdata.sort(function(a,b) {
+                return d3.ascending(a.label, b.label);
+            });
+
+                    var duration = 500;
         var data0 = svgPie.select(".slices").selectAll("path.slice")
             .data().map(function(d) { return d.data });
-        if (data0.length == 0) data0 = data;
-        var was = mergeWithFirstEqualZero(data, data0);
-        var is = mergeWithFirstEqualZero(data0, data);
+        if (data0.length == 0) data0 = rdata;
+        var was = mergeWithFirstEqualZero(rdata, data0);
+        var is = mergeWithFirstEqualZero(data0, rdata);
 
         /* ------- SLICE ARCS -------*/
 
         var slice = svgPie.select(".slices").selectAll("path.slice")
-            .data(pie(was), key);
+            .data(pie(was), key_pie);
 
         slice.enter()
             .insert("path")
             .attr("class", "slice")
-            .style("fill", function(d) { return color(d.data.label); })
+            .style("fill", function(d) { return color_pie(d.data.label); })
             .each(function(d) {
                 this._current = d;
             });
 
         slice = svgPie.select(".slices").selectAll("path.slice")
-            .data(pie(is), key);
+            .data(pie(is), key_pie);
 
         slice
             .transition().duration(duration)
@@ -126,7 +125,7 @@ function draw_pie(day, gt, rooms){
                 var _this = this;
                 return function(t) {
                     _this._current = interpolate(t);
-                    return arc(_this._current);
+                    return arc_pie(_this._current);
                 };
             });
 
@@ -155,7 +154,7 @@ function draw_pie(day, gt, rooms){
                 return tooltip_pie.style("visibility", "visible");
             })
             .on("mousemove", function(ele){
-                return tooltip_pie.html(data[ele.index].label + ":" + data[ele.index].value)
+                return tooltip_pie.html(rdata[ele.index].label + ":" + rdata[ele.index].value)
                     .style("left", (d3.event.pageX + 20) + "px")
                     .style("top", (d3.event.pageY + 20) + "px");
             })
@@ -167,10 +166,10 @@ function draw_pie(day, gt, rooms){
 
             });
         d3.selectAll(".legend").remove();
-        for (let i = 0; i < data.length; i++) {
-            svgPie.append("circle").attr("class", "legend").attr("cx",70).attr("cy",-50 + 30*i).attr("r", 6).style("fill", color(data[i].label));
-            svgPie.append("text").attr("class", "legend").attr("x", 80).attr("y", -50 + 30*i).text(data[i].label).style("font-size", "15px").attr("alignment-baseline","middle")
+        for (let i = 0; i < rdata.length; i++) {
+            svgPie.append("circle").attr("class", "legend").attr("cx",70).attr("cy",-50 + 30*i).attr("r", 6).style("fill", color_pie(rdata[i].label));
+            svgPie.append("text").attr("class", "legend").attr("x", 80).attr("y", -50 + 30*i).text(rdata[i].label).style("font-size", "15px").attr("alignment-baseline","middle")
         }
-    };
 
-}
+        });
+};
