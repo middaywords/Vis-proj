@@ -13,7 +13,6 @@
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="js/d3.layout.cloud.js"></script>
     <script src="js/lineChart.js"></script>
-    <script src="js/heatMap.js"></script>
     <script src="js/stackBarChart.js"></script>
     <script src="js/feature.js"></script>
     <script src="js/bubbleGraph.js"></script>
@@ -729,7 +728,6 @@
                 .append("g")
                 .attr("transform",
                     "translate(" + (width8 / 2 + margin8.left) + "," + margin8.top + ")");
-        }
 
         margin9 = { top: 50, right: 50, bottom: 30, left: 10 },
             width9 = width9 - margin9.left - margin9.right,
@@ -741,6 +739,7 @@
             .append("g")
             .attr("transform",
                 "translate(" + margin9.left + "," + margin9.top + ")");
+        }
 
         margin10 = { top: 50, right: 50, bottom: 30, left: 10 },
             width10 = width10 - margin10.left - margin10.right,

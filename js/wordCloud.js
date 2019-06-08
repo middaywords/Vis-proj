@@ -5,17 +5,11 @@ function draw_wordcloud(choose_id){
     var myWords = [];
 
     // set the dimensions and margins of the graph
-    var WCmargin = {top: 10, right: 10, bottom: 10, left: 10},
-        WCwidth = width10 - WCmargin.left - WCmargin.right,
-        WCheight = height10 - WCmargin.top - WCmargin.bottom;
+    var WCwidth = width10,
+        WCheight = height10;
 
     // append the svg object to the body of the page
-    var svg = d3.select("#wordcloud").append("svg")
-        .attr("width", WCwidth + WCmargin.left + WCmargin.right)
-        .attr("height", WCheight + WCmargin.top + WCmargin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + WCmargin.left + "," + WCmargin.top + ")");
+    var svg = svg10
     d3.json('data/person_room_count.json', function (error, data) {
         layout = d3.layout.cloud()
             .size([WCwidth, WCheight])
@@ -58,12 +52,7 @@ function draw_wordcloud(choose_id){
         d3.select("#wordcloud").html("");
 
         // append the svg object to the body of the page
-        svg = d3.select("#wordcloud").append("svg")
-            .attr("width", WCwidth + WCmargin.left + WCmargin.right)
-            .attr("height", WCheight + WCmargin.top + WCmargin.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + WCmargin.left + "," + WCmargin.top + ")");
+        svg = svg10;
 
         layout = d3.layout.cloud()
             .size([WCwidth, WCheight])
