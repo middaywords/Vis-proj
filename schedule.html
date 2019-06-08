@@ -6,28 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="js/lib/bootstrap.min.js"></script>
-    <script src="js/lib/d3.v4.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.v4.js"></script>
+    <script src="js/d3-scale-chromatic.v1.min.js"></script>
     <script src="js/api/request.js"></script>
     <script src="js/api/index.js"></script>
-    <script src="js/src/force.js"></script>
-    <script src="js/src/psnSdl.js"></script>
+    <script src="js/psnSdl.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
 </head>
 <style>
-    #container_map {
-        border: 2px solid #000;
-        border-radius: 0px;
-        background: #F0F8FF;
-    }
-
-    #container_stacked {
-        border: 2px solid #000;
-        border-radius: 0px;
-        background: #F0F8FF;
-    }
-
     .tooltip {
         position: absolute;
         text-align: left;
@@ -39,6 +27,9 @@
         background-color: white;
         border-radius: 5px;
         padding: 5px;
+    }
+
+    #container_psnsdl{
     }
 
     [class ^="col-md-12"] {
@@ -104,12 +95,6 @@
     <div class="container-fluid">
         <div class="row clearfix">
             <div class="col-md-12 column">
-                <div id="container_force">
-                </div>
-            </div>
-        </div>
-        <div class="row clearfix">
-            <div class="col-md-12 column">
                 <div id="container_psnsdl">
                 </div>
             </div>
@@ -117,42 +102,14 @@
     </div>
 </body>
 
+
 <script>
-    d3.select(window).on("resize", throttle);
-    var width1 = document.getElementById('container_force').offsetWidth;
-    var height1 = width1 / 2;
-
-    var width2 = document.getElementById('container_psnsdl').offsetWidth;
-    var height2 = width2 / 2;
-
-    var svg1, svg2;
-
-    var throttleTimer;
-
-    setup();
-
-    // draw forceSvg and heat map for person
-    let day = 1,pid=1;
-    drawForceSvg(day);
-    drawPersonalSchedule(pid);
-
     function setup() {
-        margin1 = { top: 10, right: 10, bottom: 10, left: 10 },
-            width1 = width1 - margin1.left - margin1.right,
-            height1 = height1 - margin1.top - margin1.bottom;
-
-        svg1 = d3.select("#container_force").append("svg")
-            .attr("width", width1 + margin1.left + margin1.right)
-            .attr("height", height1 + margin1.top + margin1.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin1.left + "," + margin1.top + ")");
-
         margin2 = { top: 10, right: 10, bottom: 10, left: 10 },
             width2 = width2 - margin2.left - margin2.right,
             height2 = height2 - margin2.top - margin2.bottom;
 
-        svg2 = d3.select("#container_psnsdl").append("svg")
+        svg11 = d3.select("#container_psnsdl").append("svg")
             .attr("width", width2 + margin2.left + margin2.right)
             .attr("height", height2 + margin2.top + margin2.bottom)
             .append("g")
@@ -161,8 +118,6 @@
     }
 
     function redraw() {
-        width1 = document.getElementById('container_force').offsetWidth;
-        height1 = width1 / 2;
         width2 = document.getElementById('container_psnsdl').offsetWidth;
         height2 = width2 / 2;
 
@@ -176,6 +131,24 @@
             redraw();
         }, 200);
     }
+</script>
+
+<script>
+    d3.select(window).on("resize", throttle);
+
+    var width2 = document.getElementById('container_psnsdl').offsetWidth;
+    var height2 = width2 / 2;
+
+    var svg11;
+
+    var throttleTimer;
+
+    setup();
+
+    // draw forceSvg and heat map for person
+    let pid=10078
+    drawPersonalSchedule(pid);
+
 </script>
 
 

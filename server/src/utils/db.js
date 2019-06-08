@@ -1,7 +1,8 @@
-import mysql from 'mysql'
+﻿import mysql from 'mysql'
 
 let IP = '127.0.0.1'
-// IP = '10.162.149.227'
+
+//IP = '10.162.149.227'
 
 const db = mysql.createPool({   //本地
   host     : IP,  
@@ -12,7 +13,7 @@ const db = mysql.createPool({   //本地
 
 let query = function(sql, params) {
   return new Promise((resolve, reject) => {
-    db.getConnection(function(err, connection) {
+    db.getConnection((err, connection) => {
       if (err) {
         reject(err)
       } else {

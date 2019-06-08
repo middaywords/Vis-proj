@@ -1,5 +1,5 @@
-import query from './db.js'
-import * as staffList from '../localJson/staff/staff_count_all.json'
+import query from '../utils/db.js'
+import * as staffList from '../../localJson/staff/staff_count_all.json'
 
 class PersonModel {
     isStaff(pid){
@@ -12,18 +12,23 @@ class PersonModel {
         }
     }
 
-    async getFeature(pid){
-        let sids = sid.join(',')
-        sids = `(${sids})`
-        // 查询当天各个时间的人数求和
-        const sql = `SELECT * FROM route${day} 
-            WHERE POSITION in ${sids} and TIME = ${time}`
-        let rows = await query(sql)
-        let res = new Array()
-        rows.forEach(row => {
-            res.push(row['PID'])
-        })
-        return res
+    async getFeature(pid,feature){
+        let sql
+        console.log(feature)
+        if(feature.length===0){
+            sql = `SELECT * FROM feature 
+                WHERE PID = ${pid}`
+        }else{
+            sql = `SELECT ${feature.join(',')} FROM feature 
+            WHERE PID = ${pid}`
+        }      
+        let row = await query(sql)
+        if(row.length!==0){
+            row = row[0]
+        }else{
+            throw ReferenceError("Wrong getFeature! Can't find the person with pid!")
+        }
+        return row
     }
 }
 

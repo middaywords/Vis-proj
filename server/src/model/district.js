@@ -1,4 +1,4 @@
-import query from './db.js'
+import query from '../utils/db.js'
 
 const ALL_DAYS = 0
 const DAY_LENGTH = 782 // 一天被分成了782段

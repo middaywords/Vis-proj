@@ -1,0 +1,6 @@
+let apiDistrictCount = (sid = [], day = 0) => request({ url: '/api/district/count', data: { sid, day }, method: 'POST' })
+let apiDistrictPeople = (sid = [], day, time) => request({ url: '/api/district/people', data: { sid, day, time }, method: 'POST' })
+let apiIsStaff = (pid) => requestSync({ url: '/api/person/is_staff', data: { pid }, method: 'POST' })
+let apiFeature = (pid, feature = []) => request({ url: '/api/person/feature', data: { pid, feature }, method: 'POST' })
+let apiSchedule = (pid) => request({ url: '/api/person/schedule', data: { pid }, method: 'POST' })
+let apiRoute = (pid, day = 0) => request({ url: '/api/person/route', data: { pid, day }, method: 'POST' })

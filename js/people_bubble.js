@@ -61,7 +61,7 @@ function draw_personal_bubble(id) {
                     d3.select("#container_feature").selectAll('svg').remove();
                     d3.select("#container_personalMap").selectAll('svg').remove();
                     d3.select("#container_wordCloud").selectAll('svg').remove();
-                    d3.select("#container_timeScheduler").selectAll('svg').remove();
+                    d3.select("#container_psnsdl").selectAll('svg').remove();
                     document.getElementById('personalMap').innerHTML = "当前查看人员: " + d.data.name;
                     width7 = document.getElementById('container_feature').offsetWidth;
                     height7 = width7 / 1.2;
@@ -71,13 +71,14 @@ function draw_personal_bubble(id) {
                     height9 = width9 / 3.1;
                     width10 = document.getElementById('container_wordCloud').offsetWidth;
                     height10 = width10 / 1.2;
-                    width11 = document.getElementById('container_timeScheduler').offsetWidth;
+                    width11 = document.getElementById('container_psnsdl').offsetWidth;
                     height11 = width11 / 2.57;
                     highlight.style.fill = "black";
                     this.style.fill = "yellow";
                     highlight = this;
                     windowSetup(false);
                     draw_feature(d.data.name);
+                    drawPersonalSchedule(parseInt(d.data.name));
                 }
             })
             .on("mousemove", function (d) {

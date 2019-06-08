@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="js/d3.v4.js"></script>
+    <script src="js/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="js/d3.layout.cloud.js"></script>
@@ -23,6 +24,9 @@
     <script src="js/personal_Map.js"></script>
     <script src="js/pie.js"></script>
     <script src="js/wordCloud.js"></script>
+    <script src="js/psnSdl.js"></script>
+    <script src="js/api/request.js"></script>
+    <script src="js/api/index.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
 </head>
@@ -72,7 +76,7 @@
         border-radius: 0px;
     }
 
-    #container_timeScheduler {
+    #container_psnsdl {
         border: 1px solid rgb(255, 255, 255);
         border-radius: 0px;
     }
@@ -478,7 +482,7 @@
                 </div>
                 <div class="row clearfix">
                     <div class="col-md-12 column">
-                        <div id="container_timeScheduler">
+                        <div id="container_psnsdl">
                             <h4>个人日程</h4>
                         </div>
                     </div>
@@ -540,7 +544,7 @@
     var height9 = width9 / 2.5;
     var width10 = document.getElementById('container_wordCloud').offsetWidth;
     var height10 = width10 / 2.5;
-    var width11 = document.getElementById('container_timeScheduler').offsetWidth;
+    var width11 = document.getElementById('container_psnsdl').offsetWidth;
     var height11 = width11 / 2.5;
 
     var svg1, svg2, svg3, svg4, svg5, svg6, svg7;
@@ -754,7 +758,7 @@
             width11 = width11 - margin11.left - margin11.right,
             height11 = height11 - margin11.top - margin11.bottom;
 
-        svg11 = d3.select("#container_timeScheduler").append("svg")
+        svg11 = d3.select("#container_psnsdl").append("svg")
             .attr("width", width11 + margin11.left + margin11.right)
             .attr("height", height11 + margin11.top + margin11.bottom)
             .append("g")
