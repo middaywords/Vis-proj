@@ -1,7 +1,7 @@
 function draw_sankey(){
     // Color scale used
     var color = d3.scaleOrdinal(d3.schemeCategory20);
-
+    
     // Set the sankey diagram properties
     var sankey = d3.sankey()
         .nodeWidth(20)

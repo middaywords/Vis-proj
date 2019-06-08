@@ -45,13 +45,14 @@ function draw_personal_map(choose_id){
 
 					var color_range = [];
 
-					for (var i = 0; i <= 5; i++)
+					for (var i = 0; i <= 10; i++)
 					{
 						if (i == 0)
-							color_range.push("white");
+							color_range.push("#424242");
 						else
 						{
-							color_range.push(d3.schemePaired[i]);
+							color_range.push(d3.schemeReds[7][i]);
+							//schemePaired[i]
 						}
 					}
 
@@ -98,6 +99,7 @@ function draw_personal_map(choose_id){
 					    .attr("d", function(d) { return path(topojson.feature(topology, d)); })
 					    .style("fill", function(d) { return myColor(d.value)} )
 					    //.attr("class", function(d) { return d.fill ? "fill" : null; })
+					   	.style("stroke", "grey")
 					    .on("mousedown", mousedown)
 					    .on("mousemove", mousemove)
 					    .on("mouseup", mouseup);
@@ -151,6 +153,7 @@ function draw_personal_map(choose_id){
 					    .attr("d", function(d) { return path(topojson.feature(topology1, d)); })
 					    .style("fill", function(d) { return myColor(d.value)} )
 					    //.attr("class", function(d) { return d.fill ? "fill" : null; })
+					    .style("stroke", "grey")
 					    .on("mousedown", mousedown1)
 					    .on("mousemove", mousemove1)
 					    .on("mouseup", mouseup1);
@@ -181,7 +184,7 @@ function draw_personal_map(choose_id){
 				//Draw room
 					var path_length = radius * 1.5;
 
-					var path_color = "red";
+					var path_color = "white";
 
 					var room_point_arr = [];
 
@@ -1481,6 +1484,7 @@ function draw_personal_map(choose_id){
 							  .attr("d", function(d) { return path(topojson.feature(topology, d)); })
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
+							  .style("stroke", "grey")
 							  .on("mousedown", mousedown)
 							  .on("mousemove", mousemove)
 							  .on("mouseup", mouseup);
@@ -1669,6 +1673,7 @@ function draw_personal_map(choose_id){
 							  .attr("d", function(d) { return path(topojson.feature(topology1, d)); })
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
+							  .style("stroke", "grey")
 							  .on("mousedown", mousedown1)
 							  .on("mousemove", mousemove1)
 							  .on("mouseup", mouseup1);
@@ -1845,6 +1850,7 @@ function draw_personal_map(choose_id){
 							  .attr("d", function(d) { return path(topojson.feature(topology, d)); })
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
+							  .style("stroke", "grey")
 							  .on("mousedown", select_room)
 							  .on("mousemove", null_function)
 							  .on("mouseup", null_function);
@@ -1857,6 +1863,7 @@ function draw_personal_map(choose_id){
 							  .attr("d", function(d) { return path(topojson.feature(topology1, d)); })
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
+							  .style("stroke", "grey")
 							  .on("mousedown", select_room)
 							  .on("mousemove", null_function)
 							  .on("mouseup", null_function);
