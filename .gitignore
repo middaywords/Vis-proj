@@ -1,4 +1,5 @@
 .vscode/*
 */static/
 server/node_modules
+server/scheduleJson
 sql/__pycache__

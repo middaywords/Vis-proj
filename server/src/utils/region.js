@@ -15,7 +15,6 @@ class JudgeRegion {
         }
 
         let [x, y, floor] = this.getPara(num)
-        console.log(x, y, floor)
         if (floor == 1) {
             if (x == 15 && (y == 5 || y == 15 || y == 17) || x == 0 && y == 19) {
                 return 'out'

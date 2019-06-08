@@ -35,22 +35,24 @@ function drawPersonalSchedule(pid) {
         .select(".domain").remove()
 
     let lastOpacity = 0 // 记录之前的透明度
+    let lastColor = "black"
     let mouseover = function (d) {
-        console.log(d)
+        // console.log(d)
         lastOpacity = d3.select(this)
             .style("opacity")
         d3.select(this)
             .style("opacity", 1)
+        lastColor = texts[d.order].style("fill")
         texts[d.order].style("fill", "black")
     }
 
     let mousemove = function (d) { }
 
     let mouseleave = function (d) {
-        console.log(d)
+        // console.log(d)
         d3.select(this)
             .style("opacity", lastOpacity)
-        texts[d.order].style("fill", "white")
+        texts[d.order].style("fill", lastColor)
     }
 
     let counter = 0
@@ -116,24 +118,14 @@ function drawPersonalSchedule(pid) {
         , [3, 9, 6, 1, B]
         , [3, 10, 6, 1, C]
         , [10, 8, 4, 3, M]
-        , [8, 11, 3, 1, A]
-        , [16, 8, 5, 4, R]
-        , [22, 8, 4, 1, A]
-        , [22, 9, 6, 1, B]
-        , [22, 10, 6, 1, C]
-        , [22, 11, 6, 1, D]
-        , [27, 8, 3, 1, A]
-        , [32, 8, 3, 1, A]
-        , [32, 9, 3, 1, B]
-        , [32, 10, 3, 1, C]
-        , [32, 11, 3, 1, D]]
+        , [8, 11, 3, 1, A]]
 
     // add the specific squares
     COORDINATES.forEach(crd => addRect(...crd))
     apiSchedule(pid).then(res=>{
-        console.log(res)
         for(let idx of res){
             rects[idx].style("opacity",1)
+            texts[idx].style("fill","black")
         }
     })
 
