@@ -378,7 +378,7 @@
             <h1 class="tith1 fl">ChinaVis 2019</h1>    
             <div class="topbnt_right fl">
                 <div id="but_div_2">
-                    <select id="but_day" class="btn btn-info btn-sm" name="day_select" onchange="day_refresh()">
+                    <select id="but_day" class="btn btn-info btn-sm" name="day_select" onchange="redraw()">
                         <option>Day1</option>
                         <option>Day2</option>
                         <option>Day3</option>
@@ -799,11 +799,6 @@
         }, 200);
     }
 
-    day_refresh();
-
-    function day_refresh(){
-            redraw();
-    }
 </script>
 
 </html>
