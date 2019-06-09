@@ -11,6 +11,11 @@ body {
     color: #fff;
 }
 
+#circular_arr {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
 #but_div,
 #but_div_1 {
     margin-top: 30px;
@@ -42,7 +47,7 @@ body {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: top center;
-    width: 100%;
+    width: 92%;
     height: 220px;
 }
 
@@ -682,7 +687,7 @@ body {
 }
 
 .tith1 {
-    width: 33%;
+    width: 30%;
     text-align: center;
     padding-top: 16px;
     font-weight: bold;

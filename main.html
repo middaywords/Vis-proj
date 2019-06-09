@@ -375,7 +375,7 @@
                     <span id="map_time">Time 7 : 0</span>
                 </div>
             </div>
-            <h1 class="tith1 fl">China Vis 2019</h1>    
+            <h1 class="tith1 fl">ChinaVis 2019</h1>    
             <div class="topbnt_right fl">
                 <div id="but_div_2">
                     <select id="but_day" class="btn btn-info btn-sm" name="day_select">
@@ -514,7 +514,7 @@
     var width4 = document.getElementById('container_sankey').offsetWidth;
     var height4 = width4 / 1.46;
     var width5 = document.getElementById('container_bubble').offsetWidth-40;
-    var height5 = width5 / 1.03;
+    var height5 = width5 / 1;
     var width6 = document.getElementById('container_circular').offsetWidth;
     var height6 = width6 / 1.35;
     var width7 = document.getElementById('container_feature').offsetWidth;
@@ -634,7 +634,7 @@
             .attr("transform",
                 "translate(" + margin1.left + "," + margin1.top + ")");
 
-        margin2 = { top: 60, right: 30, bottom: 40, left: 60 },
+        margin2 = { top: 40, right: 30, bottom: 60, left: 60 },
             width2 = width2 - margin2.left - margin2.right,
             height2 = height2 - margin2.top - margin2.bottom;
 
@@ -667,16 +667,18 @@
             .attr("transform",
                 "translate(" + margin4.left + "," + margin4.top + ")");
 
-        margin5 = { top: 260, right: 10, bottom: 0, left: 40 },
+        margin5 = { top: 250, right: 10, bottom: 0, left: 70 },
             width5 = width5 - margin5.left - margin5.right,
             height5 = height5 - margin5.top - margin5.bottom;
 
         svg5 = d3.select("#container_bubble").append("svg")
             .attr("width", width5 + margin5.left + margin5.right)
             .attr("height", height5 + margin5.top + margin5.bottom)
+            .attr("transform",
+                "translate(" + 20 + "," + 20 + ")")
             .append("g")
             .attr("transform",
-                "translate(" + (width5 / 2 + margin5.left) + "," + margin5.top + ")");
+                "translate(" + (width5 / 2 + margin5.left -30) + "," + (margin5.top - 40) + ")");
 
         margin6 = { top: 10, right: 10, bottom: 10, left: 10 },
             width6 = width6 - margin6.left - margin6.right,
@@ -709,9 +711,11 @@
             svg8 = d3.select("#container_personalBubble").append("svg")
                 .attr("width", width8 + margin8.left + margin8.right)
                 .attr("height", height8 + margin8.top + margin8.bottom)
+                .attr("transform",
+                    "translate(" + 20 + "," + 30 + ")")
                 .append("g")
                 .attr("transform",
-                    "translate(" + (width8 / 2 + margin8.left) + "," + margin8.top + ")");
+                    "translate(" + (width8 / 2 + margin8.left - 20) + "," + (margin8.top - 30) + ")");
 
         margin9 = { top: 50, right: 50, bottom: 30, left: 10 },
             width9 = width9 - margin9.left - margin9.right,
@@ -758,7 +762,7 @@
         width4 = document.getElementById('container_sankey').offsetWidth;
         height4 = width4 / 1.46;
         width5 = document.getElementById('container_bubble').offsetWidth-40;
-        height5 = width5 / 1.03;
+        height5 = width5 / 1;
         width6 = document.getElementById('container_circular').offsetWidth;
         height6 = width6 / 1.35;
         width7 = document.getElementById('container_feature').offsetWidth;

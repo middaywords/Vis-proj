@@ -1026,7 +1026,7 @@ function draw_map(read_file) {
                     d3.select("#container_line").selectAll('svg').remove();
                     width3 = document.getElementById('container_line').offsetWidth;
                     height3 = width3 / 2.7;
-                    margin3 = { top: 10, right: 30, bottom: 30, left: 50 },
+                    margin3 = { top: 10, right: 30, bottom: 50, left: 50 },
                         width3 = width3 - margin3.left - margin3.right,
                         height3 = height3 - margin3.top - margin3.bottom;
 
@@ -1191,7 +1191,7 @@ function draw_map(read_file) {
                     d3.select("#container_line").selectAll('svg').remove();
                     width3 = document.getElementById('container_line').offsetWidth;
                     height3 = width3 / 2.7;
-                    margin3 = { top: 10, right: 30, bottom: 30, left: 50 },
+                    margin3 = { top: 10, right: 30, bottom: 50, left: 50 },
                         width3 = width3 - margin3.left - margin3.right,
                         height3 = height3 - margin3.top - margin3.bottom;
 
@@ -1602,7 +1602,7 @@ function draw_map(read_file) {
                         d3.select("#container_line").selectAll('svg').remove();
                         width3 = document.getElementById('container_line').offsetWidth;
                         height3 = width3 / 2.7;
-                        margin3 = { top: 10, right: 30, bottom: 30, left: 50 },
+                        margin3 = { top: 10, right: 30, bottom: 50, left: 50 },
                             width3 = width3 - margin3.left - margin3.right,
                             height3 = height3 - margin3.top - margin3.bottom;
 
@@ -1825,7 +1825,7 @@ function draw_map(read_file) {
                         d3.select("#container_line").selectAll('svg').remove();
                         width3 = document.getElementById('container_line').offsetWidth;
                         height3 = width3 / 2.7;
-                        margin3 = { top: 10, right: 30, bottom: 30, left: 50 },
+                        margin3 = { top: 10, right: 30, bottom: 50, left: 50 },
                             width3 = width3 - margin3.left - margin3.right,
                             height3 = height3 - margin3.top - margin3.bottom;
 
@@ -1865,7 +1865,7 @@ function draw_map(read_file) {
 
                     border1.call(redraw1);
 
-                    document.getElementById("map_time").innerHTML = "The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60);
+                    document.getElementById("map_time").innerHTML = "Time " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60);
 
                     //tooltip.html("The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60));
                 }
@@ -2003,7 +2003,7 @@ function draw_map(read_file) {
 
                     border1.call(redraw1);
 
-                    document.getElementById("map_time").innerHTML = "The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60);
+                    document.getElementById("map_time").innerHTML = "Time " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60);
 
                     //tooltip.html("The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60));
 
