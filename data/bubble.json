@@ -1240,14 +1240,6 @@
                             "size": 1
                         },
                         {
-                            "name": "11585",
-                            "size": 1
-                        },
-                        {
-                            "name": "13374",
-                            "size": 1
-                        },
-                        {
                             "name": "13460",
                             "size": 1
                         },
@@ -1256,51 +1248,11 @@
                             "size": 1
                         },
                         {
-                            "name": "13939",
-                            "size": 1
-                        },
-                        {
-                            "name": "14349",
-                            "size": 1
-                        },
-                        {
                             "name": "14863",
                             "size": 1
                         },
                         {
-                            "name": "14882",
-                            "size": 1
-                        },
-                        {
-                            "name": "15054",
-                            "size": 1
-                        },
-                        {
-                            "name": "16205",
-                            "size": 1
-                        },
-                        {
                             "name": "16310",
-                            "size": 1
-                        },
-                        {
-                            "name": "16807",
-                            "size": 1
-                        },
-                        {
-                            "name": "17536",
-                            "size": 1
-                        },
-                        {
-                            "name": "17865",
-                            "size": 1
-                        },
-                        {
-                            "name": "18137",
-                            "size": 1
-                        },
-                        {
-                            "name": "18234",
                             "size": 1
                         },
                         {
@@ -2175,7 +2127,6 @@
                     "name": "17822",
                     "size": 1
                 },
-
                 {
                     "name": "17951",
                     "size": 1
@@ -2483,7 +2434,7 @@
             ]
         },
         {
-            "name": "Specialist",
+            "name": "VIP",
             "children": [
                 {
                     "name": "10214",
@@ -2612,7 +2563,7 @@
             ]
         },
         {
-            "name": "Ordinary People",
+            "name": "Audience",
             "children": [
                 {
                     "name": "Day 1 & 2 & 3",
@@ -21212,8 +21163,8 @@
             ]
         },
         {
-            "name": "Business Man",
-            "children":[
+            "name": "Specialist",
+            "children": [
                 {
                     "name": "11662",
                     "size": 1
@@ -21264,6 +21215,59 @@
                 },
                 {
                     "name": "17401",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "Exhibitor",
+            "children": [
+                {
+                    "name": "11585",
+                    "size": 1
+                },
+                {
+                    "name": "13374",
+                    "size": 1
+                },
+                {
+                    "name": "13939",
+                    "size": 1
+                },
+                {
+                    "name": "14349",
+                    "size": 1
+                },
+                {
+                    "name": "14882",
+                    "size": 1
+                },
+                {
+                    "name": "15054",
+                    "size": 1
+                },
+                {
+                    "name": "16205",
+                    "size": 1
+                },
+                {
+                    "name": "16807",
+                    "size": 1
+                },
+                {
+                    "name": "17536",
+                    "size": 1
+                },
+                {
+                    "name": "17865",
+                    "size": 1
+                },
+                {
+                    "name": "18137",
+                    "size": 1
+                },
+                {
+                    "name": "18234",
                     "size": 1
                 }
             ]
