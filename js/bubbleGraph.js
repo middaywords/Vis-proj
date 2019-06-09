@@ -5,33 +5,31 @@ function draw_bubble() {
         width5 = +svg5.attr("width"),
         g = svg5.append("g").attr("transform", "translate(" + width5 / 2 + "," + width5 / 2 + ")");*/
     var margin = 20
-    /*var color = d3.scaleLinear()
-        .domain([-1, 5])
-        .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-        .interpolate(d3.interpolateHcl);*/
+        /*var color = d3.scaleLinear()
+            .domain([-1, 5])
+            .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+            .interpolate(d3.interpolateHcl);*/
 
     var index_domain = [];
 
-    for (var i = 1; i <= 5; i++)
-    {
+    for (var i = 1; i <= 5; i++) {
         index_domain.push(i);
     }
 
     var color_range = [];
 
-    for (var i = -1; i <= 5; i++)
-    {
+    for (var i = -1; i <= 5; i++) {
         //if (i == 0)
-            //color_range.push("#424242");
+        //color_range.push("#424242");
         //else
         //{
-            color_range.push(d3.schemeReds[7][i+2]);
+        color_range.push(d3.schemeReds[7][i + 2]);
         //}
     }
 
     var color = d3.scaleThreshold()
-              .domain(index_domain)
-              .range(color_range);
+        .domain(index_domain)
+        .range(color_range);
 
     var pack = d3.pack()
         .size([width5 - margin, width5 - margin])
@@ -39,12 +37,12 @@ function draw_bubble() {
 
     var tooltip = d3.select("#container_bubble").append("div").attr("class", "tooltip hidden");
 
-    d3.json("data/bubble.json", function (error, root) {
+    d3.json("data/bubble.json", function(error, root) {
         if (error) throw error;
 
         root = d3.hierarchy(root)
-            .sum(function (d) { return d.size; })
-            .sort(function (a, b) { return b.value - a.value; });
+            .sum(function(d) { return d.size; })
+            .sort(function(a, b) { return b.value - a.value; });
 
         var focus = root,
             nodes = pack(root).descendants(),
@@ -53,13 +51,13 @@ function draw_bubble() {
         var circle = svg5.selectAll("circle")
             .data(nodes)
             .enter().append("circle")
-            .attr("class", function (d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-            .style("fill", function (d) { if (d.children == undefined) {return "#FFC1C1";} else return d.children ? color(d.depth) : null; })
-            .style("display", function (d) { return d.parent === root || d === root ? "inline" : "none"; })
-            
-     ////////////////////////////////////////////////////////////////////////////
-     ////////////////////////////////////////////////////////////////////////////       
-            .on("click", function (d) {
+            .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+            .style("fill", function(d) { if (d.children == undefined) { return "#FFC1C1"; } else return d.children ? color(d.depth) : null; })
+            .style("display", function(d) { return d.parent === root || d === root ? "inline" : "none"; })
+
+        ////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////       
+        .on("click", function(d) {
                 if (focus !== d) zoom(d), d3.event.stopPropagation();
                 if (d.children == undefined) {
                     tooltip.classed("hidden", true);
@@ -68,42 +66,42 @@ function draw_bubble() {
                     document.getElementById('personalMap').innerHTML = "当前查看人员: " + d.data.name;
                     width7 = document.getElementById('container_feature').offsetWidth;
                     height7 = width7 / 1.2;
-                    width8 = document.getElementById('container_personalBubble').offsetWidth;
-                    height8 = width8 / 1.7;
+                    width8 = document.getElementById('container_personalBubble').offsetWidth - 40;
+                    height8 = width8 / 2.1;
                     width9 = document.getElementById('container_personalMap').offsetWidth;
-                    height9 = width9 / 3.1;
+                    height9 = width9 / 2.5;
                     width10 = document.getElementById('container_wordCloud').offsetWidth;
                     height10 = width10 / 1.2;
                     width11 = document.getElementById('container_psnsdl').offsetWidth;
-                    height11 = width11 / 2.57;
+                    height11 = width11 / 2.8;
                     windowSetup(true);
                     draw_feature(d.data.name);
                     draw_personal_bubble(d.data.name);
-                    var but_day_choice = document.getElementById("but_day").value.substring(3,4);
+                    var but_day_choice = document.getElementById("but_day").value.substring(3, 4);
                     draw_personal_map(but_day_choice, d.data.name);
                     draw_wordcloud(d.data.name);
                     drawPersonalSchedule(parseInt(d.data.name));
                     console.log("d.data.name " + d.data.name);
                 }
             })
-            .on("mousemove", function (d) {
+            .on("mousemove", function(d) {
                 if (d.children == undefined) {
                     text = d.data.name;
-                    var mouse = d3.mouse(svg5.node()).map(function (d) { return parseInt(d); });
+                    var mouse = d3.mouse(svg5.node()).map(function(d) { return parseInt(d); });
                     tooltip.classed("hidden", false)
-                        .attr("style", function () {
+                        .attr("style", function() {
                             return "left:" + (mouse[0] + width5 / 2) + "px;top:" + (mouse[1] + width5 / 2.2) + "px";
                         })
-                        .html(function () {
+                        .html(function() {
                             return text;
                         });
                 }
             })
-            .on("mouseout", function (d) {
+            .on("mouseout", function(d) {
                 tooltip.classed("hidden", true);
             });
 
-        
+
 
         var text = svg5.selectAll("text")
             .data(nodes)
@@ -112,16 +110,16 @@ function draw_bubble() {
             .attr("text-anchor", "middle")
             .style("alignment-baseline", "middle")
             .style("font-size", "small")
-            .style("fill-opacity", function (d) { return d.parent === root ? 1 : 0; })
-            .style("font-family","微软正黑体")
-            .style("display", function (d) { return d.parent === root ? "inline" : "none"; })
-            .text(function (d) {
+            .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+            .style("font-family", "微软正黑体")
+            .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
+            .text(function(d) {
                 if (d.children != undefined)
                     return d.data.name;
                 else
                     return undefined;
             })
-            .on("click", function (d) {
+            .on("click", function(d) {
                 if (focus !== d) zoom(d), d3.event.stopPropagation();
             })
 
@@ -129,24 +127,25 @@ function draw_bubble() {
 
         svg5
             .style("background", color(-1))
-            .on("click", function () { zoom(root); });
+            .on("click", function() { zoom(root); });
 
         zoomTo([root.x, root.y, root.r * 2 + margin]);
 
         function zoom(d) {
-            var focus0 = focus; focus = d;
+            var focus0 = focus;
+            focus = d;
 
             var transition = d3.transition()
                 .duration(d3.event.altKey ? 7500 : 750)
-                .tween("zoom", function (d) {
+                .tween("zoom", function(d) {
                     var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-                    return function (t) { zoomTo(i(t)); };
+                    return function(t) { zoomTo(i(t)); };
                 });
 
             transition.select("#container_bubble").selectAll("circle")
                 //.filter(function (d) { return d.parent === focus || this.style.display == "inline"; })
                 //.on("start", function (d) { if (d.parent == focus || d.parent == focus.parent) this.style.display = "inline"; else this.style.display = "none";})
-                .on("start", function (d) {
+                .on("start", function(d) {
                     if (focus == root) {
                         if (d != root && d.parent == focus)
                             this.style.display = "inline"
@@ -154,15 +153,12 @@ function draw_bubble() {
                             this.style.display = 'inline';
                         else
                             this.style.display = "none";
-                    }
-                    else if (focus.parent == root) {
+                    } else if (focus.parent == root) {
                         if (d == root || (d != root && d.parent == root) || (d != root && d.parent != root && d.parent == focus))
                             this.style.display = "inline";
                         else
                             this.style.display = "none";
-                    }
-
-                    else if (focus.parent.parent == root) {
+                    } else if (focus.parent.parent == root) {
                         if (d == root || (d != root && d.parent == root) || (d != root && d.parent == focus.parent) || (d != root && d.parent == focus))
                             this.style.display = "inline";
                         else
@@ -170,18 +166,19 @@ function draw_bubble() {
                     }
 
                 })
-            //.on("end", function (d) { if (d.parent === focus) this.style.display = "none"; });
+                //.on("end", function (d) { if (d.parent === focus) this.style.display = "none"; });
             transition.select("#container_bubble").selectAll("text")
-                .filter(function (d) { return d.parent === focus || this.style.display === "inline"; })
-                .style("fill-opacity", function (d) { return d.parent === focus && d.children != undefined ? 1 : 0; })
-                .on("start", function (d) { if (d.parent === focus) this.style.display = "inline"; })
-                .on("end", function (d) { if (d.parent !== focus) this.style.display = "none"; });
+                .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+                .style("fill-opacity", function(d) { return d.parent === focus && d.children != undefined ? 1 : 0; })
+                .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+                .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
         }
 
         function zoomTo(v) {
-            var k = width5 / v[2]; view = v;
-            node.attr("transform", function (d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
-            circle.attr("r", function (d) { return d.r * k; });
+            var k = width5 / v[2];
+            view = v;
+            node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
+            circle.attr("r", function(d) { return d.r * k; });
         }
     });
 }

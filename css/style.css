@@ -11,9 +11,19 @@ body {
     color: #fff;
 }
 
+#but_div,
+#but_div_1 {
+    margin-top: 30px;
+}
+
+#but_div_1,
+#but_div_2 {
+    margin-left: 30px;
+}
+
 #choiceWindow {
     position: fixed;
-    top: 200;
+    top: 200px;
 }
 
 .mainSankey {
@@ -23,7 +33,7 @@ body {
     background-repeat: no-repeat;
     background-position: top center;
     width: 92%;
-    height: 500px;
+    height: 450px;
 }
 
 .mainStack {
@@ -32,8 +42,8 @@ body {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: top center;
-    width: 92%;
-    height: 500px;
+    width: 100%;
+    height: 220px;
 }
 
 .mainTop {
@@ -43,7 +53,7 @@ body {
     background-repeat: no-repeat;
     background-position: top center;
     width: 100%;
-    height: 500px;
+    height: 450px;
 }
 
 .mainBottom {
@@ -53,17 +63,29 @@ body {
     background-repeat: no-repeat;
     background-position: top center;
     width: 100%;
-    height: 250px;
+    height: 220px;
 }
 
 .psnMap {
+    margin-top: 60px;
     overflow: hidden;
     background: url(../img/amiddboxttop.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: top center;
     width: 100%;
-    height: 450px;
+    height: 350px;
+}
+
+.psnBubble {
+    margin-top: 60px;
+    overflow: hidden;
+    background: url(../img/amiddboxttop.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    width: 100%;
+    height: 350px;
 }
 
 .psnSchedule {
@@ -94,16 +116,6 @@ body {
     background-position: top center;
     width: 100%;
     height: 350px;
-}
-
-.psnBubble {
-    overflow: hidden;
-    background: url(../img/amiddboxttop.png);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: top center;
-    width: 100%;
-    height: 450px;
 }
 
 .containers {

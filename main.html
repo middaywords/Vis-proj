@@ -258,7 +258,7 @@
 	#map-div
 	{
 		position: absolute;
-		top: 20%;
+		top: 10%;
 		width: 100%;
 		height: 70%;
 		text-align: center;
@@ -275,7 +275,7 @@
     #map1
     {
         position: absolute;
-        top: 50%;
+        top: 60%;
         width: 100%;
         height: 50%;
         text-align: center;
@@ -292,7 +292,7 @@
 	#map-div_1
 	{
 		position: absolute;
-		top: 30%;
+		top: 40%;
 		width: 100%;
 		height: 70%;
 		text-align: center;
@@ -357,9 +357,25 @@
     
     <div class="container-fluid containers">
         <div class="bnt">
-            <div class="topbnt_left fl"><br></div>
+            <div class="topbnt_left fl">
+                <div id="but_div">
+                    <input type="range" name="beans" id="beans" min="0" max="659" step="1" value="0">
+                    <input type="submit" value="Play animation" id="but_animation">
+                    <input type="submit" value="Frame" id="but_choice">
+                    <span id="map_time">Time 7 : 0</span>
+                </div>
+            </div>
             <h1 class="tith1 fl">China Vis 2019</h1>    
-            <div class="topbnt_right fl"><br></div>
+            <div class="topbnt_right fl">
+                <div id="but_div_2">
+                    <select id="but_day" name="day_select">
+                        <option>Day1</option>
+                        <option>Day2</option>
+                        <option>Day3</option>
+                    </select>
+                    <input type="submit" value="Submit" id="but_day_submit">
+                </div>
+            </div>
         </div>
         <div class="row clearfix">
             <div class="col-md-12 column">
@@ -368,18 +384,6 @@
                         <div class="row clearfix">
                             <div class="col-md-6 column">
                                 <div id="container_map" class="mainTop">
-                                    <h4 id="map_time">The exact time is: 7 : 0</h4>
-                                    <div id="but_div">
-										<input type="range" name="beans" id="beans" min="0" max="659" step="1" value="0">
-										<input type="submit" value="Play animation" id="but_animation">
-										<input type="submit" value="Frame" id="but_choice">
-                                        <select id="but_day" name="day_select">
-                                          <option>Day1</option>
-                                          <option>Day2</option>
-                                          <option>Day3</option>
-                                        </select>
-                                        <input type="submit" value="Submit" id="but_day_submit">
-									</div>
 									<div id="map-div">
 										<div id="map"></div>
 										<div id="map1"></div>
@@ -438,12 +442,12 @@
                     <div class="col-md-12 column">
                         <div id="container_personalMap" class="psnMap">
                             <h4 id="personalMap">PersonalMap</h4>
-                            <h5 id="personal_map_time">The exact time is: 7 : 0</h5>
                             <div id="but_div_1">
 								<input type="range" name="beans_1" id="beans_1" min="0" max="659" step="1" value="0">
 								<input type="submit" value="Play animation" id="but_animation_1">
 								<input type="submit" value="Frame/Room" id="but_choice_1">                                
-							</div>
+                                <span>Time 7 : 0</span>
+                            </div>
 							<div id="map-div_1">
 								<div id="map_1"></div>
 								<div id="map1_1"></div>
@@ -493,28 +497,28 @@
 <script>
 
     d3.select(window).on("resize", throttle);
-    var width4 = document.getElementById('container_map').offsetWidth;
-    var height1 = width4 / 1.03;
+    var width1 = document.getElementById('container_map').offsetWidth;
+    var height1 = width1 / 1.2;
     var width2 = document.getElementById('container_stacked').offsetWidth;
     var height2 = width2 / 2.88;
     var width3 = document.getElementById('container_line').offsetWidth;
     var height3 = width3 / 2.7;
     var width4 = document.getElementById('container_sankey').offsetWidth;
     var height4 = width4 / 1.46;
-    var width5 = document.getElementById('container_bubble').offsetWidth;
+    var width5 = document.getElementById('container_bubble').offsetWidth-40;
     var height5 = width5 / 1.03;
     var width6 = document.getElementById('container_circular').offsetWidth;
     var height6 = width6 / 1.35;
     var width7 = document.getElementById('container_feature').offsetWidth;
-    var height7 = width7 / 2.5;
-    var width8 = document.getElementById('container_personalBubble').offsetWidth;
-    var height8 = width8 / 2.5;
+    var height7 = width7 / 1.2;
+    var width8 = document.getElementById('container_personalBubble').offsetWidth-40;
+    var height8 = width8 / 2.1;
     var width9 = document.getElementById('container_personalMap').offsetWidth;
     var height9 = width9 / 2.5;
     var width10 = document.getElementById('container_wordCloud').offsetWidth;
-    var height10 = width10 / 2.5;
+    var height10 = width10 / 1.2;
     var width11 = document.getElementById('container_psnsdl').offsetWidth;
-    var height11 = width11 / 2.5;
+    var height11 = width11 / 2.8;
 
     var svg1, svg2, svg3, svg4, svg5, svg6, svg7;
 
@@ -611,18 +615,18 @@
     //data_prepare();
 
     function setup() {
-        margin1 = { top: 30, right: 0, bottom: 10, left: 10 },
-            width4 = width4 - margin1.left - margin1.right,
+        margin1 = { top: 0, right: 0, bottom: 0, left: 10 },
+            width1 = width1 - margin1.left - margin1.right,
             height1 = height1 - margin1.top - margin1.bottom;
 
         svg1 = d3.select("#container_map").append("svg")
-            .attr("width", width4 + margin1.left + margin1.right)
+            .attr("width", width1 + margin1.left + margin1.right)
             .attr("height", height1 + margin1.top + margin1.bottom)
             .append("g")
             .attr("transform",
                 "translate(" + margin1.left + "," + margin1.top + ")");
 
-        margin2 = { top: 80, right: 30, bottom: 40, left: 60 },
+        margin2 = { top: 60, right: 30, bottom: 40, left: 60 },
             width2 = width2 - margin2.left - margin2.right,
             height2 = height2 - margin2.top - margin2.bottom;
 
@@ -655,7 +659,7 @@
             .attr("transform",
                 "translate(" + margin4.left + "," + margin4.top + ")");
 
-        margin5 = { top: 260, right: 10, bottom: 0, left: 10 },
+        margin5 = { top: 260, right: 10, bottom: 0, left: 40 },
             width5 = width5 - margin5.left - margin5.right,
             height5 = height5 - margin5.top - margin5.bottom;
 
@@ -690,7 +694,7 @@
             .attr("transform",
                 "translate(" + margin7.left + "," + margin7.top + ")");
         if (flag) {
-            margin8 = { top: 270, right: 120, bottom: 30, left: 120 },
+            margin8 = { top: 210, right: 20, bottom: 30, left: 40 },
                 width8 = width8 - margin8.left - margin8.right,
                 height8 = height8 - margin8.top - margin8.bottom;
 
@@ -724,7 +728,7 @@
             .attr("transform",
                 "translate(" + margin10.left + "," + margin10.top + ")");
 
-        margin11 = { top: 50, right: 50, bottom: 30, left: 10 },
+        margin11 = { top: 10, right: 50, bottom: 30, left: 10 },
             width11 = width11 - margin11.left - margin11.right,
             height11 = height11 - margin11.top - margin11.bottom;
 
@@ -737,15 +741,15 @@
     }
 
     function redraw() {
-        width4 = document.getElementById('container_map').offsetWidth;
-        height1 = width4 / 1.03;
+        width1 = document.getElementById('container_map').offsetWidth;
+        height1 = width1 / 1.2;
         width2 = document.getElementById('container_stacked').offsetWidth;
-        height2 = width2 / 2.88;
+        height2 = width2 / 3;
         width3 = document.getElementById('container_line').offsetWidth;
         height3 = width3 / 2.7;
         width4 = document.getElementById('container_sankey').offsetWidth;
         height4 = width4 / 1.46;
-        width5 = document.getElementById('container_bubble').offsetWidth;
+        width5 = document.getElementById('container_bubble').offsetWidth-40;
         height5 = width5 / 1.03;
         width6 = document.getElementById('container_circular').offsetWidth;
         height6 = width6 / 1.35;
