@@ -9,7 +9,7 @@ function draw_personal_map(read_file, choose_id) {
 
     d3.csv("data/sid.csv", function(sid) {
         d3.json("data/sid_peoplecount" + read_file + ".json", function(count) {
-            d3.csv("data/day1.csv", function(list) {
+            d3.csv("data/day" + read_file + ".csv", function(list) {
                 d3.select("#map_1").selectAll("svg").remove()
                 d3.select("#map1_1").selectAll("svg").remove()
                     //initial
@@ -997,7 +997,7 @@ function draw_personal_map(read_file, choose_id) {
 					}*/
 
                 //Refresh map and route
-                // change();
+                //change();
 
                 //var refresh_map = setInterval(function(){timecount()},100);
                 var refresh_map = setInterval(function() { timecount() }, 1000);
@@ -1128,6 +1128,7 @@ function draw_personal_map(read_file, choose_id) {
                         }
 
                         // document.getElementById("personal_map_time").innerHTML = "Time " + (7 + Math.floor(temp_time / 60)) + " : " + temp_time % 60;
+                        document.getElementById("map_time_1").innerHTML = "Time " + (7 + Math.floor(temp_time / 60)) + " : " + (temp_time % 60);
 
                         if (time_flag == 1) {
                             if (temp_time >= 660) {
@@ -1433,7 +1434,7 @@ function draw_personal_map(read_file, choose_id) {
                                 ],
                                 fill: 0,
                                 fill1: 0,
-                                value: color_arr[i * line_length + j].value,
+                                value: 0,
                                 x_axis: i,
                                 y_axis: j
                             });
@@ -1497,7 +1498,7 @@ function draw_personal_map(read_file, choose_id) {
                                 ],
                                 fill: 0,
                                 fill1: 0,
-                                value: color_arr[(i + 30) * line_length + j].value,
+                                value: 0,
                                 x_axis: i,
                                 y_axis: j
                             });

@@ -452,8 +452,14 @@
                         <div id="container_personalMap" class="psnMap">
                             <h5 id="personalMap" class="h5c">PersonalMap</h5>
                             <div id="but_div_1">
-								<input type="hidden" name="beans_1" id="beans_1" min="0" max="659" step="1" value="0" >
-								<input type="submit" class="btn btn-info btn-sm" value="Play animation" id="but_animation_1">                           
+								<!--<input type="hidden" name="beans_1" id="beans_1" min="0" max="659" step="1" value="0" >-->
+								<select id="but_day_1" class="btn btn-info btn-sm" name="day_select">
+			                        <option>Day1</option>
+			                        <option>Day2</option>
+			                        <option>Day3</option>
+			                    </select>
+								<input type="submit" class="btn btn-info btn-sm" value="Play animation" id="but_animation_1">
+								<span id="map_time_1">Time 7 : 0</span>                           
                             </div>
 							<div id="map-div_1">
 								<div id="map_1"></div>
@@ -774,6 +780,7 @@
         setup();
         var but_day_choice = document.getElementById("but_day").value.substring(3,4);
 
+        document.getElementById("but_choice").value = "Frame";
         draw_map(but_day_choice);
         draw_sankey("data_sankey" + but_day_choice);
         draw_line(but_day_choice, mainHall);
@@ -798,7 +805,6 @@
             redraw();
         }, 200);
     }
-
 </script>
 
 </html>

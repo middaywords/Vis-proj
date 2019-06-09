@@ -1,7 +1,7 @@
 function draw_feature(choose_sid) {
     d3.csv("data/feature.csv", function(read_data) {
         var data = [];
-        var Tag = ["Specialist", "Newsman", "VIP", "Staff", "Exhibitor", "Audience"];
+        var Tag = ["Specialist", "Newsman", "VIP", "Staff", "Exhibitor", "Ordinary People"];
         var trueOpen = -1;
         var trueFeature = -1;
         var stay_area = "";
@@ -236,6 +236,8 @@ function draw_feature(choose_sid) {
             .attr('fill', function(d, i) {
                 if (i == 5)
                     return Color[trueFeature];
+                else if (i == 4)
+                    return Color[3];
                 else
                     return Color[i];
             })
@@ -308,6 +310,8 @@ function draw_feature(choose_sid) {
             .attr('fill', function(d, i) {
                 if (i == 5)
                     return Color[trueFeature];
+                else if (i == 4)
+                    return Color[3];
                 else
                     return Color[i];
             })

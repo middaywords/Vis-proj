@@ -160,7 +160,7 @@ function drawPersonalSchedule(pid) {
         [3, 9, 6, 1, B],
         [3, 10, 6, 1, C],
         [10, 8, 4, 3, M],
-        [8, 11, 3, 1, A]
+        [3, 11, 8, 1, A]
     ]
 
 
