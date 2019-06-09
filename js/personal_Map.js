@@ -795,9 +795,12 @@ function draw_personal_map(read_file, choose_id) {
                     for (var i = 0; i < list.length; i++) {
                         if (list[i].id == id) {
                             sid_data.push(list[i].sid);
-                            time_data.push(Math.floor(parseInt(list[i].time) / 60) - 420);
+                            time_data.push(parseInt(list[i].time) - 25200);
                         }
                     }
+
+                    console.log("sid_date = ");
+                    console.log(sid_data);
 
                     for (var i = 0; i < sid_data.length; i++) {
                         for (var j = 0; j < sid.length; j++) {
@@ -816,6 +819,9 @@ function draw_personal_map(read_file, choose_id) {
 
                     var line_data_arr = [];
                     var line_data_arr1 = [];
+
+                    console.log(line_data_arr);
+                    console.log(line_data_arr1);
 
                     var temp = [];
 
@@ -862,7 +868,7 @@ function draw_personal_map(read_file, choose_id) {
                         opac = '0.2';
 
                         svg1.append('path')
-                            .attr("id", "indiv_line1" + i.toString())
+                            .attr("id", "indiv_line_map1" + i.toString())
                             .attr('stroke', route_color)
                             .attr('stroke-width', '4')
                             .attr('fill', 'none')
@@ -1000,7 +1006,7 @@ function draw_personal_map(read_file, choose_id) {
                 //change();
 
                 //var refresh_map = setInterval(function(){timecount()},100);
-                var refresh_map = setInterval(function() { timecount() }, 1000);
+                var refresh_map = setInterval(function() { timecount() }, 500);
                 clearInterval(refresh_map);
 
                 var temp_time = 0; //temperature time
@@ -1018,7 +1024,7 @@ function draw_personal_map(read_file, choose_id) {
                 	Refresh_route(choose_id, temp_time);
                 }*/
                 function timecount() {
-                    temp_time = (temp_time + 1) % 660; //whole time == 660
+                    temp_time = (temp_time + 1) % 39600; //whole time == 660
 
                     //heatmap(temp_time); //map
 
@@ -1040,7 +1046,7 @@ function draw_personal_map(read_file, choose_id) {
                     for (var i = 0; i < list.length; i++) {
                         if (list[i].id == choose_id) {
                             sid_data.push(list[i].sid);
-                            time_data.push(Math.floor(parseInt(list[i].time) / 60) - 420);
+                            time_data.push(parseInt(list[i].time) - 25200);
                         }
                     }
 
@@ -1107,7 +1113,7 @@ function draw_personal_map(read_file, choose_id) {
                                 .attr('stroke-width', '4')
                                 .attr('fill', 'none')
                                 //    设置路径信息
-                                .attr('d', lineGenerator(line_data_arr[i]))
+                                //.attr('d', lineGenerator(line_data_arr[i]))
                                 .attr('opacity', opac)
                         }
 
@@ -1118,24 +1124,28 @@ function draw_personal_map(read_file, choose_id) {
                                 //console.log("right");
                             } else opac = '0.2';
 
-                            d3.select("#indiv_line1" + i.toString())
+                            d3.select("#indiv_line_map1" + i.toString())
                                 .attr('stroke', route_color)
                                 .attr('stroke-width', '4')
                                 .attr('fill', 'none')
                                 //    设置路径信息
-                                .attr('d', lineGenerator(line_data_arr1[i]))
+                                //.attr('d', lineGenerator(line_data_arr1[i]))
                                 .attr('opacity', opac)
                         }
 
                         // document.getElementById("personal_map_time").innerHTML = "Time " + (7 + Math.floor(temp_time / 60)) + " : " + temp_time % 60;
-                        document.getElementById("map_time_1").innerHTML = "Time " + (7 + Math.floor(temp_time / 60)) + " : " + (temp_time % 60);
+                        document.getElementById("map_time_1").innerHTML = "Time " + (7 + Math.floor(temp_time / 3600)) + " : " + (Math.floor(temp_time / 60) % 60) + " : " + ((temp_time % 3600) % 60);
 
-                        if (time_flag == 1) {
+                        /*if (time_flag == 1) {
                             if (temp_time >= 660) {
                                 temp_time = 0;
                             } else {
                                 temp_time++;
                             }
+                        }*/
+
+                        if (time_flag == 1){
+                            temp_time = (temp_time + 1) % 39600;
                         }
                     }
                 }
@@ -1151,7 +1161,7 @@ function draw_personal_map(read_file, choose_id) {
                             //console.log("Stop");
                             map_flag = 0;
                         } else if (map_flag == 0) {
-                            refresh_map = setInterval(function() { timecount() }, 100);
+                            refresh_map = setInterval(function() { timecount() }, 500);
                             //console.log("Start");
                             map_flag = 1;
 
