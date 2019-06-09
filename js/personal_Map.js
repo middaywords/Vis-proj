@@ -102,18 +102,18 @@ function draw_personal_map(read_file, choose_id){
 					    .style("fill", function(d) { return myColor(d.value)} )
 					    //.attr("class", function(d) { return d.fill ? "fill" : null; })
 					   	.style("stroke", "grey")
-					    .on("mousedown", mousedown)
+					    /*.on("mousedown", mousedown)
 					    .on("mousemove", mousemove)
-					    .on("mouseup", mouseup);
+					    .on("mouseup", mouseup);*/
 
 					svg.append("path")
 					    .datum(topojson.mesh(topology, topology.objects.hexagons))
 					    .attr("class", "mesh")
 					    .attr("d", path);
 
-					var border = svg.append("path")
+					/*var border = svg.append("path")
 					    .attr("class", "border")
-					    .call(redraw);
+					    .call(redraw);*/
 
 					//map1
 					var topology1 = hexTopology1(radius, width, height);
@@ -156,21 +156,21 @@ function draw_personal_map(read_file, choose_id){
 					    .style("fill", function(d) { return myColor(d.value)} )
 					    //.attr("class", function(d) { return d.fill ? "fill" : null; })
 					    .style("stroke", "grey")
-					    .on("mousedown", mousedown1)
+					    /*.on("mousedown", mousedown1)
 					    .on("mousemove", mousemove1)
-					    .on("mouseup", mouseup1);
+					    .on("mouseup", mouseup1);*/
 
 					svg1.append("path")
 					    .datum(topojson.mesh(topology1, topology1.objects.hexagons))
 					    .attr("class", "mesh1")
 					    .attr("d", path1);
 
-				    var border1 = svg1.append("path")
+				    /*var border1 = svg1.append("path")
 								 .attr("class","border1")
-								 .call(redraw1);
+								 .call(redraw1);*/
 
 					// create a tooltip
-					var tooltip = d3.select("#text-div_1")
+					/*var tooltip = d3.select("#text-div_1")
 									.append("div")
 								    .attr("id","tool")
 								    .style("opacity", 1)
@@ -181,7 +181,7 @@ function draw_personal_map(read_file, choose_id){
 								    .style("border-radius", "5px")
 								    .style("padding", "5px");
 
-					tooltip.html("The exact time is: " + "7 : 0");
+					tooltip.html("The exact time is: " + "7 : 0");*/
 
 				//Draw room
 					var path_length = radius * 1.5;
@@ -1208,12 +1208,13 @@ function draw_personal_map(read_file, choose_id){
 								refresh_map = setInterval(function(){timecount()},100);
 								//console.log("Start");
 								map_flag = 1;
+
 							}
 						}
 					}
 
 			    //Draw frame
-				    var mousing = 0;
+				    /*var mousing = 0;
 
 					var select_square = [];
 
@@ -1446,7 +1447,7 @@ function draw_personal_map(read_file, choose_id){
 
 					function redraw1(border1) {
 					  border1.attr("d", path(topojson.mesh(topology1, topology1.objects.hexagons, function(a, b) { return a.fill ^ b.fill; })));
-					}
+					}*/
 
 					/*function redraw1(border1) {
 					  border1.attr("d", path(topojson.mesh(topology, topology.objects.hexagons, function(a, b) { return a.fill1 ^ b.fill1; })));
@@ -1558,16 +1559,16 @@ function draw_personal_map(read_file, choose_id){
 					}
 
 				//map function
-					function change(){
+					/*function change(){
 						var bean = document.getElementById("beans_1");
 						bean.onmousemove = function(){
 							var value = bean.value;
 							heatmap(value);
 						}
-					}
+					}*/
 
 					function heatmap(value){
-						var fill_arr = [];
+						/*var fill_arr = [];
 
 						for (var i = 0; i < 60; i++)
 						{
@@ -1630,7 +1631,7 @@ function draw_personal_map(read_file, choose_id){
 							    		fill_arr[(i+30) * line_length + j] = 1;
 						    	}
 							}
-						}
+						}*/
 
 						var num = 0;
 
@@ -1677,11 +1678,11 @@ function draw_personal_map(read_file, choose_id){
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
 							  .style("stroke", "grey")
-							  .on("mousedown", mousedown)
+							  /*.on("mousedown", mousedown)
 							  .on("mousemove", mousemove)
-							  .on("mouseup", mouseup);
+							  .on("mouseup", mouseup);*/
 
-						var mousing = 0;
+						/*var mousing = 0;
 
 						var select_square = [];
 
@@ -1797,10 +1798,10 @@ function draw_personal_map(read_file, choose_id){
 
 						function redraw(border) {
 						  border.attr("d", path(topojson.mesh(topology, topology.objects.hexagons, function(a, b) { return a.fill ^ b.fill; })));
-						}
+						}*/
 
 						//write fill feature
-						for (var i = 0; i < 30; i++)
+						/*for (var i = 0; i < 30; i++)
 						{
 							for (var j = 1; j <= 16; j++)
 							{
@@ -1827,7 +1828,7 @@ function draw_personal_map(read_file, choose_id){
 							}
 						}
 
-						border.call(redraw);
+						border.call(redraw);*/
 
 						/*d3.select(".mesh")
 							.selectAll("path")
@@ -1866,11 +1867,11 @@ function draw_personal_map(read_file, choose_id){
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
 							  .style("stroke", "grey")
-							  .on("mousedown", mousedown1)
+							  /*.on("mousedown", mousedown1)
 							  .on("mousemove", mousemove1)
-							  .on("mouseup", mouseup1);
+							  .on("mouseup", mouseup1);*/
 
-						var mousing1 = 0;
+						/*var mousing1 = 0;
 
 						var select_square1 = [];
 
@@ -1985,10 +1986,10 @@ function draw_personal_map(read_file, choose_id){
 
 						function redraw1(border1) {
 						  border1.attr("d", path(topojson.mesh(topology1, topology1.objects.hexagons, function(a, b) { return a.fill ^ b.fill; })));
-						}
+						}*/
 
 						//write fill feature
-						for (var i = 0; i < 30; i++)
+						/*for (var i = 0; i < 30; i++)
 						{
 							for (var j = 1; j <= 16; j++)
 							{
@@ -2015,9 +2016,9 @@ function draw_personal_map(read_file, choose_id){
 							}
 						}
 
-						border1.call(redraw1);
+						border1.call(redraw1);*/
 
-						tooltip.html("The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60));
+						//tooltip.html("The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60));
 					}
 
 					function heatmap_noframe(value){
@@ -2043,9 +2044,9 @@ function draw_personal_map(read_file, choose_id){
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
 							  .style("stroke", "grey")
-							  .on("mousedown", select_room)
+							  /*.on("mousedown", select_room)
 							  .on("mousemove", null_function)
-							  .on("mouseup", null_function);
+							  .on("mouseup", null_function);*/
 
 						var topology1 = hexTopology1(radius, width, height);
 
@@ -2056,15 +2057,15 @@ function draw_personal_map(read_file, choose_id){
 							  .style("fill", function(d) { return myColor(d.value)} )
 							    //.attr("class", function(d) { return d.fill ? "fill" : null; })
 							  .style("stroke", "grey")
-							  .on("mousedown", select_room)
+							  /*.on("mousedown", select_room)
 							  .on("mousemove", null_function)
-							  .on("mouseup", null_function);
+							  .on("mouseup", null_function);*/
 
-						tooltip.html("The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60));
+						//tooltip.html("The exact time is: " + (Math.floor(value / 60) + 7) + " : " + Math.floor(value % 60));
 					}
 			
 				//Choice
-					var choice_flag = "frame";
+					/*var choice_flag = "frame";
 					choice();
 
 					function choice(){
@@ -2074,11 +2075,13 @@ function draw_personal_map(read_file, choose_id){
 							{
 								heatmap_noframe(0);
 								choice_flag = "noframe";
+								but_choice.value = "Room";
 							}
 							else if (choice_flag == "noframe")
 							{
 								heatmap(0);
 								choice_flag = "frame";
+								but_choice = "Frame";
 							}
 							
 						}
@@ -2198,7 +2201,7 @@ function draw_personal_map(read_file, choose_id){
 
 					function null_function(){
 
-					}
+					}*/
 			})
 		})
 	})

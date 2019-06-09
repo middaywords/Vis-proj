@@ -374,6 +374,16 @@
     h4{
         color: #faa755;
     }
+
+    .custom-range
+    {
+        width: 25%;
+    }
+
+    .btn_css{
+        width: 30%;
+    }
+    
 </style>
 
 
@@ -388,15 +398,15 @@
                                 <div id="container_map">
                                     <h4 id="map_time">The exact time is: 7 : 0</h4>
                                     <div id="but_div">
-										<input type="range" name="beans" id="beans" min="0" max="659" step="1" value="0">
-										<input type="submit" value="Play animation" id="but_animation">
-										<input type="submit" value="Frame" id="but_choice">
-                                        <select id="but_day" name="day_select">
+										<input type="range" class="custom-range" name="beans" id="beans" min="0" max="659" step="1" value="0">
+										<input type="submit" class="btn btn-info btn-sm" value="Play animation" id="but_animation">
+										<input type="submit" class="btn btn-info btn-sm" value="Frame" id="but_choice">
+                                        <select id="but_day" class="btn btn-info btn-sm" name="day_select">
                                           <option>Day1</option>
                                           <option>Day2</option>
                                           <option>Day3</option>
                                         </select>
-                                        <input type="submit" value="Submit" id="but_day_submit">
+                                        <input type="submit" class="btn btn-info btn-sm" value="Submit" id="but_day_submit">
 									</div>
 									<div id="map-div">
 										<div id="map"></div>
@@ -461,10 +471,8 @@
                             <h4 id="personalMap">PersonalMap</h4>
                             <h5 id="personal_map_time">The exact time is: 7 : 0</h5>
                             <div id="but_div_1">
-								<input type="range" name="beans_1" id="beans_1" min="0" max="659" step="1" value="0">
-								<input type="submit" value="Play animation" id="but_animation_1">
-								<input type="submit" value="Frame/Room" id="but_choice_1">                                
-							</div>
+							     <input type="submit" class="btn btn-info btn-sm" value="Play animation" id="but_animation_1">
+                            </div>
 							<div id="map-div_1">
 								<div id="map_1"></div>
 								<div id="map1_1"></div>
