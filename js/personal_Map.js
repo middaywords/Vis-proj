@@ -1,4 +1,4 @@
-function draw_personal_map(choose_id){
+function draw_personal_map(read_file, choose_id){
 	var color_arr = [];
 
 	for (var i = 0; i < 60; i++)
@@ -9,8 +9,8 @@ function draw_personal_map(choose_id){
 		}
 	}
 
-	d3.csv("data/sid2.csv", function(sid) {
-		d3.json("data/sid_peoplecount.json", function(count){
+	d3.csv("data/sid.csv", function(sid) {
+		d3.json("data/sid_peoplecount" + read_file + ".json", function(count){
 			d3.csv("data/day1.csv", function(list){
 				//initial
 				  	var num = 0;
