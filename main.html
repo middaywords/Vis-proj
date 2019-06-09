@@ -340,7 +340,7 @@
 
 	.link {
         fill: none;
-        stroke: #000;
+        stroke: white;
         stroke-opacity: .2;
     }
     .link:hover {
@@ -621,7 +621,7 @@
     draw_map(but_day_choice);
     draw_sankey("data_sankey" + but_day_choice);
     draw_line(but_day_choice, mainHall);
-    draw_stack(but_day_choice, ["toilet1", "toilet2", "toilet3"]);
+    draw_stack(but_day_choice, ["mainHall"]);
     draw_bubble();
     var gt = document.getElementById("beans").value;
     draw_pie(parseInt(but_day_choice), gt, ["mainHall"]);
@@ -779,7 +779,7 @@
         draw_map(but_day_choice);
         draw_sankey("data_sankey" + but_day_choice);
         draw_line(but_day_choice, mainHall);
-        draw_stack(but_day_choice, ["toilet1", "toilet2", "toilet3"]);
+        draw_stack(but_day_choice, ["mainHall"]);
         draw_bubble();
         var gt = document.getElementById("beans").value;
         draw_pie(parseInt(but_day_choice), gt, ["mainHall"]);

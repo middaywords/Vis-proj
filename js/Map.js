@@ -252,6 +252,9 @@ function draw_map(read_file){
 					}*/
 
 			    //refresh map
+			    	var select_room_sid = [];
+					select_room_sid.push("mainHall");
+
 			    	var choice_flag = "frame";
 
 			    	change();
@@ -272,7 +275,6 @@ function draw_map(read_file){
 			        	{
 			        		heatmap_noframe(temp_time);
 			        	}
-			        	
 
 			        	document.getElementById("beans").value = temp_time; //range control
 
@@ -1438,8 +1440,6 @@ function draw_map(read_file){
 					}
 
 				//map function
-					var select_room_sid = [];
-					select_room_sid.push("mainHall");
 
 					function change(){
 
@@ -2323,7 +2323,14 @@ function draw_map(read_file){
 					var select_room_arr = [];
 					for (var i = 0; i <= 21; i++)
 					{
-						select_room_arr.push(0);
+						if (i == 9)
+						{
+							select_room_arr.push(1);
+						}
+						else
+						{
+							select_room_arr.push(0);
+						}
 					}
 
 					function select_room(){
