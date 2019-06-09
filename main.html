@@ -32,53 +32,33 @@
 </head>
 <style>
     #container_map {
-        border: 1px solid #000;
-        border-radius: 0px;
     }
 
     #container_stacked {
-        border: 1px solid #000;
-        border-radius: 0px;
     }
 
     #container_line {
-        border: 1px solid #000;
-        border-radius: 0px;
     }
 
     #container_sankey {
-        border: 1px solid #000;
-        border-radius: 0px;
     }
 
     #container_bubble {
-        border: 1px solid #000;
-        border-radius: 0px;
     }
 
     #container_personalMap {
-        border: 1px solid rgb(255, 255, 255);
-        border-radius: 0px;
     }
 
     #container_personalBubble {
-        border: 1px solid rgb(255, 255, 255);
-        border-radius: 0px;
     }
 
     #container_feature {
-        border: 1px solid rgb(255, 255, 255);
-        border-radius: 0px;
     }
 
     #container_wordCloud {
-        border: 1px solid rgb(255, 255, 255);
-        border-radius: 0px;
     }
 
     #container_timeScheduler {
-        border: 1px solid rgb(255, 255, 255);
-        border-radius: 0px;
     }
 
     [class ^="col-md-12"] {
@@ -143,7 +123,6 @@
         width: 95%;
         height: 95%;
         padding: 10px;
-        border: 3px solid #ccc;
         z-index: 10;
     }
 
@@ -312,7 +291,6 @@
 
 	#map-div_1
 	{
-		border: 2px solid;
 		position: absolute;
 		top: 30%;
 		width: 100%;
@@ -322,7 +300,6 @@
 
 	#map_1
 	{
-		border: 2px solid;
 		position: absolute;
 		width: 50%;
 		height: 100%;
@@ -331,7 +308,6 @@
 
 	#map1_1
 	{
-		border: 2px solid;
 		position: absolute;
 		left: 50%;
 		width: 50%;
@@ -374,14 +350,20 @@
 
 
 <body class="bg-dark text-white">
-    <div class="container-fluid">
+    
+    <div class="container-fluid containers">
+        <div class="bnt">
+            <div class="topbnt_left fl"><br></div>
+            <h1 class="tith1 fl">China Vis 2019</h1>    
+            <div class="topbnt_right fl"><br></div>
+        </div>
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <div class="row clearfix">
                     <div class="col-md-7 column">
                         <div class="row clearfix">
                             <div class="col-md-6 column">
-                                <div id="container_map">
+                                <div id="container_map" class="mainTop">
                                     <h4 id="map_time">The exact time is: 7 : 0</h4>
                                     <div id="but_div">
 										<input type="range" name="beans" id="beans" min="0" max="659" step="1" value="0">
@@ -398,19 +380,17 @@
 										<div id="map"></div>
 										<div id="map1"></div>
 									</div>
-                                    <!--<div id="text-div"></div>-->
                                 </div>
                             </div>
                             <div class="col-md-6 column">
-                                <div id="container_bubble">
+                                <div id="container_bubble" class="mainTop">
                                     <h4>container_bubble</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="row clearfix">
                             <div class="col-md-4 column">
-                                <div id="container_circular">
-                                    <!--<h4>container_circular</h4>-->
+                                <div id="container_circular" class="mainBottom">
                                     <div id="circular_arr">mainHall</div>
                                     <div id="pie">
                                         <div id="fortip"></div>
@@ -418,7 +398,7 @@
                                 </div>
                             </div>
                             <div class="col-md-8 column">
-                                <div id="container_line">
+                                <div id="container_line" class="mainBottom">
                                     <h4 id="line_sid_number">container_line</h4>
                                 </div>
                             </div>
@@ -427,7 +407,7 @@
                     <div class="col-md-5 column">
                         <div class="row clearfix">
                             <div class="col-md-12 column">
-                                <div id="container_sankey">
+                                <div id="container_sankey" class="mainSankey">
                                     <h4>container_sankey</h4>
                                 </div>
                             </div>
@@ -435,7 +415,7 @@
 
                         <div class="row clearfix">
                             <div class="col-md-12 column">
-                                <div id="container_stacked">
+                                <div id="container_stacked" class="mainStack">
                                     <h4>container_stacked</h4>
                                 </div>
                             </div>
@@ -446,14 +426,13 @@
         </div>
     </div>
 
-
     <div id="choiceWindow">
         <label id="x" style="position: absolute;top:0px;left: 95%;font-size: 25px;">x</label>
         <div class="row clearfix">
             <div class="col-md-7 column">
                 <div class="row clearfix">
                     <div class="col-md-12 column">
-                        <div id="container_personalMap">
+                        <div id="container_personalMap" class="psnMap">
                             <h4 id="personalMap">PersonalMap</h4>
                             <h5 id="personal_map_time">The exact time is: 7 : 0</h5>
                             <div id="but_div_1">
@@ -470,7 +449,7 @@
                 </div>
                 <div class="row clearfix">
                     <div class="col-md-12 column">
-                        <div id="container_psnsdl">
+                        <div id="container_psnsdl" class="psnSchedule">
                             <h4>个人日程</h4>
                         </div>
                     </div>
@@ -479,130 +458,31 @@
             </div>
             <div class="col-md-5 column">
                 <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <div id="container_personalBubble" class="psnBubble">
+                            <h4>container_personalBubble</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
                     <div class="col-md-6 column">
-                        <div id="container_feature">
+                        <div id="container_feature" class="psnFeature">
                             <h4>身份判明</h4>
                         </div>
                     </div>
 
                     <div class="col-md-6 column">
-                        <div id="container_wordCloud">
+                        <div id="container_wordCloud" class="psnCloud">
                             <h4>container_wordCloud</h4>
-                            <div id="wordcloud"></div>
                         </div>
                     </div>
 
-                </div>
-                <div class="row clearfix">
-                    <div class="col-md-12 column">
-                        <div id="container_personalBubble">
-                            <h4>container_personalBubble</h4>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div id="backGround"></div>
-
-    <div class="wpbox">
-        <div class="bnt">
-            <div class="topbnt_left fl">
-                <ul>
-                    <li class="active"><a href="#">警情警力</a></li>
-                    <li><a href="#">实有人口</a></li>
-                    <li><a href="#">流动人口</a></li>
-                    <li><a href="#">实名制</a></li>
-                </ul>
-            </div>
-            <h1 class="tith1 fl">China Vis 2019</h1>
-            <div class=" fr topbnt_right">
-                <ul>
-                    <li><a href="#">返回</a></li>
-                    <li><a href="#">分析报告</a></li>
-                    <li><a href="#">交通</a></li>
-                    <li><a href="#">舆情</a></li>
-                    </ul>
-                </ul>
-            </div>
-        </div>
-        <!-- bnt end -->
-        <div class="left1">
-            <div class="aleftboxttop"><h2 class="tith2">今日矛盾纠纷数据统计</h2>
-                <div class="lefttoday_tit" style=" height:8%"><p class="fl">地区：甘孜</p><p class="fr">2018-06-14</p></div>
-                <div class="lefttoday_number">
-                    <div class="widget-inline-box text-center fl">
-                    </div>
-                </div>
-                <!-- lefttoday_number end -->
-            </div>
-            <div class="aleftboxtmidd">
-                <h2 class="tith2">矛盾纠纷地区统计</h2>
-                <div id="aleftboxtmidd" class="aleftboxtmiddcont"></div>
-            </div>
-            <div class="aleftboxtbott">
-                <h2 class="tith2">矛盾纠纷类型统计</h2>
-                    <div id="aleftboxtbott" class="aleftboxtbott_cont" >
-                        <div id="chord">
-                            <svg width="280" height="280"></svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--  left1 end -->
-        <div class="mrbox">
-            <div class="mrbox_topmidd" style="width: 69%;">
-                <div class="amiddboxttop">
-                    <h2 class="tith2 pt1">实时监控统计</h2>
-                        <div class="amiddboxttop_map" style="">
-                            <div id="main_active">
-                                <svg id="day_route" class="day_route"></svg>
-                                    <br>
-                                    <p id="time"></p>
-                                    start:<input type="text" id="start_time" onchange="changeStartTime(this.value)">
-                                    end:<input type="text" id="end_time" onchange="changeEndTime(this.value)">
-                                    day:<input type="text" id="day" onchange="changeDay(this.value)">
-                                    <button onclick="runRoute()">run</button>
-                                    <p id ="list"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--  amiddboxttop end-->
-                <div class="amidd_bott">
-                    <div class="amiddboxtbott1 fl" >
-                        <h2 class="tith2 pt1">矛盾纠纷环比分析</h2>
-                        <div id="amiddboxtbott1" class="amiddboxtbott1content" >
-                            <div id="bubble">
-                                <svg width="350" height="250" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="amiddboxtbott2 fl"><h2 class="tith2 pt1">案件统计</h2>
-                        <div class="amiddboxtbott2content">
-                    </div>
-                </div>
-                <!-- amidd_bott end -->
-            </div>
-            <!-- mrbox_top end -->
-            <div class="mrbox_top_right">
-                <div class="arightboxtop"><h2 class="tith2">人员分布统计图</h2>
-                
-                <div id="container" style="height: 100%; margin-bottom: 10%"></div>
-                </div>
-                <div class="arightboxbott"><h2 class="tith2 ">人员构成</h2>
-                <div id="arightboxbott" class="arightboxbottcont" style="">
-                    <div id="person_distribution"></div>
-                    <button value="0" onclick="ChangeDay(value)">day 1</button>
-                    <button value="1" onclick="ChangeDay(value)">day 2</button>
-                    <button value="2" onclick="ChangeDay(value)">day 3</button>
-                </div>
-            </div>
-            <!-- mrbox_top_right end -->
-        </div>
-    </div>
 
 </body>
 
@@ -727,7 +607,7 @@
     //data_prepare();
 
     function setup() {
-        margin1 = { top: 10, right: 10, bottom: 10, left: 10 },
+        margin1 = { top: 30, right: 0, bottom: 10, left: 10 },
             width4 = width4 - margin1.left - margin1.right,
             height1 = height1 - margin1.top - margin1.bottom;
 
@@ -738,7 +618,7 @@
             .attr("transform",
                 "translate(" + margin1.left + "," + margin1.top + ")");
 
-        margin2 = { top: 40, right: 120, bottom: 50, left: 60 },
+        margin2 = { top: 80, right: 30, bottom: 40, left: 60 },
             width2 = width2 - margin2.left - margin2.right,
             height2 = height2 - margin2.top - margin2.bottom;
 
@@ -749,7 +629,7 @@
             .attr("transform",
                 "translate(" + margin2.left + "," + margin2.top + ")");
 
-        margin3 = { top: 10, right: 30, bottom: 30, left: 50 },
+        margin3 = { top: 10, right: 30, bottom: 50, left: 50 },
             width3 = width3 - margin3.left - margin3.right,
             height3 = height3 - margin3.top - margin3.bottom;
 
@@ -760,7 +640,7 @@
             .attr("transform",
                 "translate(" + margin3.left + "," + margin3.top + ")");
 
-        margin4 = { top: 10, right: 10, bottom: 10, left: 10 },
+        margin4 = { top: 10, right: 30, bottom: 10, left: 10 },
             width4 = width4 - margin4.left - margin4.right,
             height4 = height4 - margin4.top - margin4.bottom;
 
@@ -771,7 +651,7 @@
             .attr("transform",
                 "translate(" + margin4.left + "," + margin4.top + ")");
 
-        margin5 = { top: 210, right: 10, bottom: 30, left: 10 },
+        margin5 = { top: 260, right: 10, bottom: 0, left: 10 },
             width5 = width5 - margin5.left - margin5.right,
             height5 = height5 - margin5.top - margin5.bottom;
 
@@ -795,7 +675,7 @@
     }
 
     function windowSetup(flag) {
-        margin7 = { top: 50, right: 50, bottom: 30, left: 10 },
+        margin7 = { top: 100, right: 50, bottom: 30, left: 10 },
             width7 = width7 - margin7.left - margin7.right,
             height7 = height7 - margin7.top - margin7.bottom;
 

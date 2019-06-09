@@ -1,32 +1,32 @@
-function draw_wordcloud(choose_id){
+function draw_wordcloud(choose_id) {
     // interface:
     // string id : "19145"
     // List of words
     var myWords = [];
-
     // set the dimensions and margins of the graph
     var WCwidth = width10,
         WCheight = height10;
 
     // append the svg object to the body of the page
     var svg = svg10
-    d3.json('data/person_room_count.json', function (error, data) {
+    d3.json('data/person_room_count.json', function(error, data) {
+        console.log("word cloud")
         layout = d3.layout.cloud()
             .size([WCwidth, WCheight])
-            .words(myWords.map(function(d) { return {text: d.word, size:d.size}; }))
-            .padding(5)        //space between words
+            .words(myWords.map(function(d) { return { text: d.word, size: d.size }; }))
+            .padding(5) //space between words
             .rotate(function() { return (Math.random() * 2) * 90 - 90; })
-            .fontSize(function(d) { return d.size; })      // font size of words
+            .fontSize(function(d) { return d.size; }) // font size of words
             .on("end", draw);
         layout.start();
 
-        wordCloudPlot(choose_id,data);
+        wordCloudPlot(choose_id, data);
     });
 
-    
+
 
     // ----------------------------------
-    function wordCloudPlot(id,data) {
+    function wordCloudPlot(id, data) {
         var person = id.toString();
         var words = data[person];
         var curWords = [];
@@ -41,25 +41,25 @@ function draw_wordcloud(choose_id){
                 rec[0] = words[wr];
             curWords.push(tmpdict);
         }
-        curWords.forEach(function (ele) {
+        curWords.forEach(function(ele) {
             ele.size = (ele.size - rec[0]) / (rec[1] - rec[0]) * 40 + 15;
         });
-
+        console.log(curWords)
         redraw(curWords);
     }
 
     function redraw(words) {
-        d3.select("#wordcloud").html("");
+        console.log("word cloud2")
 
         // append the svg object to the body of the page
         svg = svg10;
 
         layout = d3.layout.cloud()
             .size([WCwidth, WCheight])
-            .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
-            .padding(5)        //space between words
+            .words(words.map(function(d) { return { text: d.word, size: d.size }; }))
+            .padding(5) //space between words
             .rotate(function() { return (Math.random() * 2) * 90 - 90; })
-            .fontSize(function(d) { return d.size; })      // font size of words
+            .fontSize(function(d) { return d.size; }) // font size of words
             .on("end", draw);
         layout.start();
 
@@ -71,6 +71,8 @@ function draw_wordcloud(choose_id){
     // Wordcloud features that are THE SAME from one word to the other can be here
     function draw(words) {
 
+        console.log("word cloud3")
+        console.log(svg)
         svg
             .append("g")
             .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
