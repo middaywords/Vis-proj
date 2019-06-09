@@ -97,7 +97,9 @@ function draw_personal_bubble(id) {
                     highlight = this;
                     windowSetup(false);
                     draw_feature(d.data.name);
-                    draw_personal_map(1, d.data.name);
+                    var select_day_1_value = document.getElementById("but_day_1").value.substring(3,4);
+                    draw_personal_map(select_day_1_value, d.data.name);
+                    console.log("day+id = " + select_day_1_value + " " + focus.data.name);
                     draw_wordcloud(d.data.name)
                     drawPersonalSchedule(parseInt(d.data.name));
                 }
@@ -198,6 +200,34 @@ function draw_personal_bubble(id) {
             view = v;
             node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
             circle.attr("r", function(d) { return d.r * k; });
+        }
+
+        //day personal_map
+        refresh_personal_map();
+
+        function refresh_personal_map(){
+            var select_day_1 = document.getElementById("but_day_1");
+            select_day_1.onchange = function(){
+                var select_day_1_value = document.getElementById("but_day_1").value.substring(3,4);
+
+                //d3.select("#container_personalMap").selectAll("svg").remove();
+
+                width9 = document.getElementById('container_personalMap').offsetWidth;
+                height9 = width9 / 2.5;
+                margin9 = { top: 50, right: 50, bottom: 30, left: 10 },
+                    width9 = width9 - margin9.left - margin9.right,
+                    height9 = height9 - margin9.top - margin9.bottom;
+
+                svg9 = d3.select("#container_personalMap").append("svg")
+                    .attr("width", width9 + margin9.left + margin9.right)
+                    .attr("height", height9 + margin9.top + margin9.bottom)
+                    .append("g")
+                    .attr("transform",
+                        "translate(" + margin9.left + "," + margin9.top + ")");
+
+                draw_personal_map(select_day_1_value, focus.data.name);
+                console.log("day+id = " + select_day_1_value + " " + focus.data.name);
+            }
         }
     });
 }
