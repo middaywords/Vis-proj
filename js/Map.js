@@ -258,7 +258,7 @@ function draw_map(read_file) {
 
                     if (temp_time % 15 == 0) {
                         but_day_choice = document.getElementById("but_day").value.substring(3, 4);
-                        change_pie(parseInt(but_day_choice), Math.floor(temp_time / 15) * 15, select_room_sid);
+                        change_pie(parseInt(but_day_choice), Math.floor(temp_time / 5) * 5, select_room_sid);
                     }
 
                     document.getElementById("circular_arr").innerHTML = "";
@@ -1351,7 +1351,7 @@ function draw_map(read_file) {
                     bean.onmousemove = function() {
                         var value = bean.value;
                         but_day_choice = document.getElementById("but_day").value.substring(3, 4);
-                        change_pie(parseInt(but_day_choice), Math.floor(value / 15) * 15, select_room_sid);
+                        change_pie(parseInt(but_day_choice), Math.floor(value / 5) * 5, select_room_sid);
 
                         document.getElementById("circular_arr").innerHTML = "";
                         for (var i = 0; i < select_room_sid.length; i++) {

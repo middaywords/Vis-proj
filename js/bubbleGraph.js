@@ -76,7 +76,7 @@ function draw_bubble() {
                     height11 = width11 / 2.8;
                     windowSetup(true);
                     draw_feature(d.data.name);
-                    draw_personal_bubble("17662");
+                    draw_personal_bubble(d.data.name);
                     var but_day_choice = document.getElementById("but_day").value.substring(3, 4);
                     draw_personal_map(but_day_choice, d.data.name);
                     draw_wordcloud(d.data.name);
