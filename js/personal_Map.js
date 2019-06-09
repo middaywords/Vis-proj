@@ -997,7 +997,7 @@ function draw_personal_map(read_file, choose_id) {
 					}*/
 
                 //Refresh map and route
-                change();
+                //change();
 
                 //var refresh_map = setInterval(function(){timecount()},100);
                 var refresh_map = setInterval(function() { timecount() }, 1000);

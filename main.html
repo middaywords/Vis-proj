@@ -378,7 +378,7 @@
             <h1 class="tith1 fl">ChinaVis 2019</h1>    
             <div class="topbnt_right fl">
                 <div id="but_div_2">
-                    <select id="but_day" class="btn btn-info btn-sm" name="day_select" onchange="day_refresh()">
+                    <select id="but_day" class="btn btn-info btn-sm" name="day_select" onchange="redraw()">
                         <option>Day1</option>
                         <option>Day2</option>
                         <option>Day3</option>
@@ -452,7 +452,7 @@
                         <div id="container_personalMap" class="psnMap">
                             <h5 id="personalMap" class="h5c">PersonalMap</h5>
                             <div id="but_div_1">
-								<input type="hidden" name="beans_1" id="beans_1" min="0" max="659" step="1" value="0" >
+								<!--<input type="hidden" name="beans_1" id="beans_1" min="0" max="659" step="1" value="0" >-->
 								<input type="submit" class="btn btn-info btn-sm" value="Play animation" id="but_animation_1">                           
                             </div>
 							<div id="map-div_1">
@@ -797,12 +797,6 @@
         throttleTimer = window.setTimeout(function () {
             redraw();
         }, 200);
-    }
-
-    day_refresh();
-
-    function day_refresh(){
-            redraw();
     }
 </script>
 
