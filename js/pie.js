@@ -217,7 +217,7 @@ function draw_pie(day, gt, rooms){
         d3.selectAll(".legend").remove();
         for (let i = 0; i < rdata.length; i++) {
             svgPie.append("circle").attr("class", "legend").attr("cx",70).attr("cy",-50 + 30*i).attr("r", 6).style("fill", color_pie(rdata[i].label));
-            svgPie.append("text").attr("class", "legend").attr("x", 80).attr("y", -50 + 30*i).text(rdata[i].label).style("font-size", "15px").attr("alignment-baseline","middle")
+            svgPie.append("text").attr("class", "legend").attr("x", 80).attr("y", -50 + 30*i).text(rdata[i].label).style("font-size", "15px").attr("alignment-baseline","middle").style("fill", "#deab8a");
         }
 
         });

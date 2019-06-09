@@ -1,9 +1,32 @@
 function draw_personal_bubble(id) {
     var margin = 20
-    var color = d3.scaleLinear()
+    /*var color = d3.scaleLinear()
         .domain([-1, 5])
         .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-        .interpolate(d3.interpolateHcl);
+        .interpolate(d3.interpolateHcl);*/
+
+    var index_domain = [];
+
+    for (var i = 1; i <= 5; i++)
+    {
+        index_domain.push(i);
+    }
+
+    var color_range = [];
+
+    for (var i = -1; i <= 5; i++)
+    {
+        //if (i == 0)
+            //color_range.push("#424242");
+        //else
+        //{
+            color_range.push(d3.schemeReds[7][i+2]);
+        //}
+    }
+
+    var color = d3.scaleThreshold()
+              .domain(index_domain)
+              .range(color_range);
 
     var pack = d3.pack()
         .size([width8 - margin, width8 - margin])
@@ -30,7 +53,9 @@ function draw_personal_bubble(id) {
             .data(nodes)
             .enter().append("circle")
             .attr("class", function (d) { if (d.data.name == id) focus = d; return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-            .style("fill", function (d) { if (d == focus && d.children == undefined) { highlight = this; return "yellow"; } else return d.children ? color(d.depth) : null; })
+            .style("fill", function (d) { if (d == focus && d.children == undefined) { highlight = this; return "yellow"; } 
+                else if (d != focus && d.children == undefined) {return "#FFC1C1";}
+                else return d.children ? color(d.depth) : null; })
             .style("display", function (d) {
                 if (focus == root) {
                     if (d != root && d.parent == focus)
@@ -72,7 +97,7 @@ function draw_personal_bubble(id) {
                     height10 = width10 / 1.2;
                     width11 = document.getElementById('container_psnsdl').offsetWidth;
                     height11 = width11 / 2.57;
-                    highlight.style.fill = "black";
+                    highlight.style.fill = "#FFC1C1";
                     this.style.fill = "yellow";
                     highlight = this;
                     windowSetup(false);

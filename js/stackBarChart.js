@@ -16,9 +16,17 @@ function draw_stack(read_file, thisarea) {
 
         var keys = thisarea
         // color palette
+
+        var color_range = [];
+
+        for (var i = 0; i <= 8; i++)
+        {
+            color_range.push(d3.schemeCategory10[i+1]);
+        }
+
         var color = d3.scaleOrdinal()
             .domain(keys)
-            .range(d3.schemeCategory10);
+            .range(color_range);
 
         //stack the data?
         var stackedData = d3.stack()
