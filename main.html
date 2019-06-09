@@ -780,6 +780,7 @@
         setup();
         var but_day_choice = document.getElementById("but_day").value.substring(3,4);
 
+        document.getElementById("but_choice").value = "Frame";
         draw_map(but_day_choice);
         draw_sankey("data_sankey" + but_day_choice);
         draw_line(but_day_choice, mainHall);
