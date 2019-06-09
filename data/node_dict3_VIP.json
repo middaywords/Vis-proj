@@ -1,0 +1,71 @@
+{
+    "nodes":
+    [{"node": 0, "name": "mainHall-09-15"}, {"node": 1, "name": "mainHall-10-15"}, {"node": 2, "name": "left_out"}, {"node": 3, "name": "right_out"}, {"node": 4, "name": "room4-09-15"}, {"node": 5, "name": "room4-10-15"}, {"node": 6, "name": "poster-09-15"}, {"node": 7, "name": "mainHall-11-15"}, {"node": 8, "name": "hallA-11-15"}, {"node": 9, "name": "other-11-15"}, {"node": 10, "name": "room4-11-15"}],
+    "links":[
+    {
+        "source": 0,
+        "target": 1,
+        "value": 12
+    },
+    {
+        "source": 4,
+        "target": 1,
+        "value": 1
+    },
+    {
+        "source": 4,
+        "target": 5,
+        "value": 1
+    },
+    {
+        "source": 6,
+        "target": 3,
+        "value": 1
+    },
+    {
+        "source": 1,
+        "target": 7,
+        "value": 10
+    },
+    {
+        "source": 1,
+        "target": 8,
+        "value": 3
+    },
+    {
+        "source": 2,
+        "target": 9,
+        "value": 1
+    },
+    {
+        "source": 2,
+        "target": 10,
+        "value": 2
+    },
+    {
+        "source": 5,
+        "target": 7,
+        "value": 1
+    },
+    {
+        "source": 7,
+        "target": 3,
+        "value": 11
+    },
+    {
+        "source": 8,
+        "target": 3,
+        "value": 3
+    },
+    {
+        "source": 9,
+        "target": 3,
+        "value": 1
+    },
+    {
+        "source": 10,
+        "target": 3,
+        "value": 2
+    }
+]
+}

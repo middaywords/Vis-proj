@@ -1,87 +1,137 @@
 {
-    "nodes": [
-        {
-            "node": 0,
-            "name": "mainHall-09-15"
-        },
-        {
-            "node": 1,
-            "name": "mainHall-10-15"
-        },
-        {
-            "node": 2,
-            "name": "other-09-15"
-        },
-        {
-            "node": 3,
-            "name": "left_out"
-        },
-        {
-            "node": 4,
-            "name": "right_out"
-        },
-        {
-            "node": 5,
-            "name": "mainHall-11-15"
-        },
-        {
-            "node": 6,
-            "name": "other-11-15"
-        },
-        {
-            "node": 7,
-            "name": "other-12-30"
-        },
-        {
-            "node": 8,
-            "name": "diningHall-12-30"
-        }
-    ],
-    "links": [
+    "nodes":
+    [{"node": 0, "name": "left_out"}, {"node": 1, "name": "mainHall-10-00"}, {"node": 2, "name": "other-12-30"}, {"node": 3, "name": "diningHall-12-30"}, {"node": 4, "name": "right_out"}, {"node": 5, "name": "hallB-14-30"}, {"node": 6, "name": "hallD-14-30"}, {"node": 7, "name": "room2-14-30"}, {"node": 8, "name": "hallA-14-30"}, {"node": 9, "name": "other-14-30"}, {"node": 10, "name": "other-16-15"}, {"node": 11, "name": "room2-16-15"}, {"node": 12, "name": "hallA-17-00"}, {"node": 13, "name": "hallC-17-00"}, {"node": 14, "name": "other-17-00"}, {"node": 15, "name": "hallD-17-00"}, {"node": 16, "name": "room2-17-00"}],
+    "links":[
         {
             "source": 0,
             "target": 1,
-            "value": 20
+            "value": 13
+        },
+        {
+            "source": 1,
+            "target": 2,
+            "value": 3
+        },
+        {
+            "source": 1,
+            "target": 3,
+            "value": 9
+        },
+        {
+            "source": 1,
+            "target": 4,
+            "value": 1
         },
         {
             "source": 2,
-            "target": 1,
+            "target": 5,
+            "value": 1
+        },
+        {
+            "source": 2,
+            "target": 6,
+            "value": 1
+        },
+        {
+            "source": 2,
+            "target": 7,
             "value": 1
         },
         {
             "source": 3,
-            "target": 1,
-            "value": 4
+            "target": 8,
+            "value": 1
         },
         {
-            "source": 1,
+            "source": 3,
             "target": 5,
-            "value": 23
+            "value": 2
         },
         {
-            "source": 1,
+            "source": 3,
             "target": 6,
             "value": 2
         },
         {
-            "source": 5,
-            "target": 7,
-            "value": 19
-        },
-        {
-            "source": 5,
-            "target": 8,
-            "value": 4
-        },
-        {
-            "source": 6,
-            "target": 7,
-            "value": 2
+            "source": 3,
+            "target": 9,
+            "value": 3
         },
         {
             "source": 3,
             "target": 7,
             "value": 1
-        }
+        },
+        {
+            "source": 8,
+            "target": 10,
+            "value": 1
+        },
+        {
+            "source": 5,
+            "target": 10,
+            "value": 1
+        },
+        {
+            "source": 5,
+            "target": 11,
+            "value": 2
+        },
+        {
+            "source": 6,
+            "target": 11,
+            "value": 3
+        },
+        {
+            "source": 9,
+            "target": 11,
+            "value": 3
+        },
+        {
+            "source": 7,
+            "target": 10,
+            "value": 1
+        },
+        {
+            "source": 7,
+            "target": 11,
+            "value": 1
+        },
+        {
+            "source": 10,
+            "target": 12,
+            "value": 1
+        },
+        {
+            "source": 10,
+            "target": 13,
+            "value": 1
+        },
+        {
+            "source": 10,
+            "target": 14,
+            "value": 1
+        },
+        {
+            "source": 11,
+            "target": 12,
+            "value": 1
+        },
+        {
+            "source": 11,
+            "target": 15,
+            "value": 3
+        },
+        {
+            "source": 11,
+            "target": 14,
+            "value": 3
+        },
+        {
+            "source": 11,
+            "target": 16,
+            "value": 2
+        },
+        
     ]
 }

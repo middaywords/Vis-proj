@@ -1,0 +1,62 @@
+{
+    "nodes":
+    [{"node": 0, "name": "mainHall-09-15"}, {"node": 1, "name": "mainHall-10-15"}, {"node": 2, "name": "other-10-15"}, {"node": 3, "name": "left_out"}, {"node": 4, "name": "hallC-10-15"}, {"node": 5, "name": "exhibition-09-15"}, {"node": 6, "name": "exhibition-10-15"}, {"node": 7, "name": "hallA-11-15"}, {"node": 8, "name": "poster-11-15"}, {"node": 9, "name": "right_out"}, {"node": 10, "name": "exhibition-11-15"}],
+    "links":
+    [
+        {
+            "source": 0,
+            "target": 1,
+            "value": 1
+        },
+        {
+            "source": 0,
+            "target": 2,
+            "value": 1
+        },
+        {
+            "source": 3,
+            "target": 4,
+            "value": 1
+        },
+        {
+            "source": 5,
+            "target": 6,
+            "value": 2
+        },
+        {
+            "source": 1,
+            "target": 7,
+            "value": 1
+        },
+        {
+            "source": 4,
+            "target": 8,
+            "value": 1
+        },
+        {
+            "source": 2,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 6,
+            "target": 10,
+            "value": 2
+        },
+        {
+            "source": 7,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 10,
+            "target": 9,
+            "value": 2
+        },
+        {
+            "source": 8,
+            "target": 9,
+            "value": 1
+        }
+    ]
+}
