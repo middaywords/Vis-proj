@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="js/d3.layout.cloud.js"></script>
+    <script src="js/lineChart.js"></script>
+    <script src="js/heatMap.js"></script>
+    <script src="js/stackBarChart.js"></script>
+    <script src="js/feature.js"></script>
+    <script src="js/bubbleGraph.js"></script>
+    <script src="js/people_bubble.js"></script>
+    <script src="js/Map.js"></script>
+    <script src="js/sankey_draw.js"></script>
+    <script src="js/Sankey.js"></script>
+    <script src="js/personal_Map.js"></script>
+    <script src="js/pie.js"></script>
+    <script src="js/wordCloud.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<style>
+    #container_map {
+        border: 1px solid #000;
+        border-radius: 0px;
+    }
+
+    #container_stacked {
+        border: 1px solid #000;
+        border-radius: 0px;
+    }
+
+    #container_line {
+        border: 1px solid #000;
+        border-radius: 0px;
+    }
+
+    #container_sankey {
+        border: 1px solid #000;
+        border-radius: 0px;
+    }
+
+    #container_bubble {
+        border: 1px solid #000;
+        border-radius: 0px;
+    }
+
+    #container_personalMap {
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 0px;
+    }
+
+    #container_personalBubble {
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 0px;
+    }
+
+    #container_feature {
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 0px;
+    }
+
+    #container_wordCloud {
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 0px;
+    }
+
+    #container_timeScheduler {
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 0px;
+    }
+
+    [class ^="col-md-12"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    [class ^="col-md-7"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 30px;
+        padding-right: 15px;
+    }
+
+    [class ^="col-md-5"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 15px;
+        padding-right: 30px;
+    }
+
+    [class ^="col-md-4"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    [class ^="col-md-8"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    [class ^="col-md-6"] {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    path.domain {
+        stroke: white;
+    }
+
+    .tick text {
+        fill: white;
+    }
+
+    .tick line {
+        stroke: white;
+    }
+
+    #choiceWindow {
+        display: none;
+        position: absolute;
+        top: 2.5%;
+        left: 2.5%;
+        width: 95%;
+        height: 95%;
+        padding: 10px;
+        border: 3px solid #ccc;
+        z-index: 10;
+    }
+
+    #backGround {
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 1100px;
+        background-color: black;
+        z-index: 9;
+        -moz-opacity: 0.8;
+        opacity: 1.0;
+        filter: alpha(opacity=100);
+    }
+
+    #x:hover {
+        cursor: pointer;
+        color: rgb(55, 198, 192);
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .tooltip {
+        color: rgb(0, 0, 0);
+        background: #fff;
+        padding: .5em;
+        text-shadow: #f5f5f5 0 1px 0;
+        border-radius: 2px;
+        box-shadow: 0px 0px 2px 0px #a6a6a6;
+        opacity: 0.9;
+        position: absolute;
+    }
+
+    .tooltip_pie {
+        visibility: hidden;
+        z-index: 1;
+        opacity: .9;
+
+        padding: 10px 20px;
+
+        background: #333;
+        color: rgb(255, 255, 255);
+
+        position: absolute;
+        top:-140%;
+        left: -25%;
+
+
+        border-radius: 9px;
+        font: 20px;
+
+        transform: translateY(9px);
+        transition: all 0.3s ease-in-out;
+
+        box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
+    }
+
+    .hexagon {
+	  fill: white;
+	  pointer-events: all;
+	}
+
+	.hexagon path {
+	  -webkit-transition: fill 250ms linear;
+	  transition: fill 250ms linear;
+	}
+
+	.hexagon :hover {
+	  fill: pink;
+	}
+
+	.hexagon .fill {
+	  fill: red;
+	}
+
+	.mesh {
+	  fill: none;
+	  stroke: #000;
+	  stroke-opacity: .2;
+	  pointer-events: none;
+	}
+
+	.hexagon1 {
+	  fill: white;
+	  pointer-events: all;
+	}
+
+	.hexagon1 path {
+	  -webkit-transition: fill 250ms linear;
+	  transition: fill 250ms linear;
+	}
+
+	.hexagon1 :hover {
+	  fill: pink;
+	}
+
+	.hexagon1 .fill {
+	  fill: red;
+	}
+
+	.mesh1 {
+	  fill: none;
+	  stroke: #000;
+	  stroke-opacity: .2;
+	  pointer-events: none;
+	}
+
+	.border {
+	  fill: none;
+	  stroke: #000;
+	  stroke-width: 2px;
+	  pointer-events: none;
+	}
+
+	.border1 {
+	  fill: none;
+	  stroke: #000;
+	  stroke-width: 2px;
+	  pointer-events: none;
+	}
+
+	#but-div
+	{
+		position: absolute;
+		width: 100%;
+		height: 20%;
+	}
+
+	#map-div
+	{
+		position: absolute;
+		top: 20%;
+		width: 100%;
+		height: 70%;
+		text-align: center;
+	}
+
+	#map
+	{
+		position: absolute;
+		width: 100%;
+		height: 50%;
+		text-align: center;
+	}
+
+    #map1
+    {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        height: 50%;
+        text-align: center;
+    }
+
+	#but-div_1
+	{
+		border: 2px solid;
+		position: absolute;
+		width: 100%;
+		height: 30%;
+	}
+
+	#map-div_1
+	{
+		border: 2px solid;
+		position: absolute;
+		top: 30%;
+		width: 100%;
+		height: 70%;
+		text-align: center;
+	}
+
+	#map_1
+	{
+		border: 2px solid;
+		position: absolute;
+		width: 50%;
+		height: 100%;
+		text-align: center;
+	}
+
+	#map1_1
+	{
+		border: 2px solid;
+		position: absolute;
+		left: 50%;
+		width: 50%;
+		height: 100%;
+		text-align: center;
+	}
+
+	.link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .2;
+    }
+    .link:hover {
+        stroke-opacity: .5;
+    }
+
+    #pie {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: relative;
+    }
+    text{
+        color: azure;
+    }
+    path.slice{
+        stroke-width:2px;
+    }
+
+    polyline{
+        opacity: .3;
+        stroke: black;
+        stroke-width: 2px;
+        fill: none;
+    }
+
+    #wordcloud{
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+
+<body class="bg-dark text-white">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="row clearfix">
+                    <div class="col-md-7 column">
+                        <div class="row clearfix">
+                            <div class="col-md-6 column">
+                                <div id="container_map">
+                                    <h4 id="map_time">The exact time is: 7 : 0</h4>
+                                    <div id="but_div">
+										<input type="range" name="beans" id="beans" min="0" max="659" step="1" value="0">
+										<input type="submit" value="Play animation" id="but_animation">
+										<input type="submit" value="Frame" id="but_choice">
+                                        <select id="but_day" name="day_select">
+                                          <option>Day1</option>
+                                          <option>Day2</option>
+                                          <option>Day3</option>
+                                        </select>
+                                        <input type="submit" value="Submit" id="but_day_submit">
+									</div>
+									<div id="map-div">
+										<div id="map"></div>
+										<div id="map1"></div>
+									</div>
+                                    <!--<div id="text-div"></div>-->
+                                </div>
+                            </div>
+                            <div class="col-md-6 column">
+                                <div id="container_bubble">
+                                    <h4>container_bubble</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-4 column">
+                                <div id="container_circular">
+                                    <!--<h4>container_circular</h4>-->
+                                    <div id="circular_arr">mainHall</div>
+                                    <div id="pie">
+                                        <div id="fortip"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 column">
+                                <div id="container_line">
+                                    <h4 id="line_sid_number">container_line</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 column">
+                        <div class="row clearfix">
+                            <div class="col-md-12 column">
+                                <div id="container_sankey">
+                                    <h4>container_sankey</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-12 column">
+                                <div id="container_stacked">
+                                    <h4>container_stacked</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="choiceWindow">
+        <label id="x" style="position: absolute;top:0px;left: 95%;font-size: 25px;">x</label>
+        <div class="row clearfix">
+            <div class="col-md-7 column">
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <div id="container_personalMap">
+                            <h4 id="personalMap">PersonalMap</h4>
+                            <h5 id="personal_map_time">The exact time is: 7 : 0</h5>
+                            <div id="but_div_1">
+								<input type="range" name="beans_1" id="beans_1" min="0" max="659" step="1" value="0">
+								<input type="submit" value="Play animation" id="but_animation_1">
+								<input type="submit" value="Frame/Room" id="but_choice_1">                                
+							</div>
+							<div id="map-div_1">
+								<div id="map_1"></div>
+								<div id="map1_1"></div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <div id="container_timeScheduler">
+                            <h4>个人日程</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-5 column">
+                <div class="row clearfix">
+                    <div class="col-md-6 column">
+                        <div id="container_feature">
+                            <h4>身份判明</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 column">
+                        <div id="container_wordCloud">
+                            <h4>container_wordCloud</h4>
+                            <div id="wordcloud"></div>
+                            <button id="wordcloudplot"> HEY HEY </button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <div id="container_personalBubble">
+                            <h4>container_personalBubble</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="backGround"></div>
+
+</body>
+
+<script>
+
+    d3.select(window).on("resize", throttle);
+    var width4 = document.getElementById('container_map').offsetWidth;
+    var height1 = width4 / 1.03;
+    var width2 = document.getElementById('container_stacked').offsetWidth;
+    var height2 = width2 / 2.88;
+    var width3 = document.getElementById('container_line').offsetWidth;
+    var height3 = width3 / 2.7;
+    var width4 = document.getElementById('container_sankey').offsetWidth;
+    var height4 = width4 / 1.46;
+    var width5 = document.getElementById('container_bubble').offsetWidth;
+    var height5 = width5 / 1.03;
+    var width6 = document.getElementById('container_circular').offsetWidth;
+    var height6 = width6 / 1.35;
+    var width7 = document.getElementById('container_feature').offsetWidth;
+    var height7 = width7 / 2.5;
+    var width8 = document.getElementById('container_personalBubble').offsetWidth;
+    var height8 = width8 / 2.5;
+    var width9 = document.getElementById('container_personalMap').offsetWidth;
+    var height9 = width9 / 2.5;
+    var width10 = document.getElementById('container_wordCloud').offsetWidth;
+    var height10 = width10 / 2.5;
+    var width11 = document.getElementById('container_timeScheduler').offsetWidth;
+    var height11 = width11 / 2.5;
+
+    var svg1, svg2, svg3, svg4, svg5, svg6, svg7;
+
+    var throttleTimer;
+
+
+    setup();
+    var mainHall = [];
+    var a_string, b_string;
+    for (var a = 2; a < 12; ++a) {
+        for (var b = 19; b < 29; ++b) {
+            if (a < 10)
+                a_string = '10' + a.toString();
+            else
+                a_string = '1' + a.toString();
+            if (b < 10)
+                b_string = '0' + b.toString();
+            else
+                b_string = b.toString();
+            mainHall.push(a_string + b_string);
+        }
+    }
+
+    var HallA = [];
+    for (var a = 2; a < 4; ++a) {
+        for (var b = 1; b < 6; ++b) {
+            if (a < 10)
+                a_string = '10' + a.toString();
+            else
+                a_string = '1' + a.toString();
+            if (b < 10)
+                b_string = '0' + b.toString();
+            else
+                b_string = b.toString();
+            HallA.push(a_string + b_string);
+        }
+    }
+
+    var HallB = [];
+    for (var a = 4; a < 6; ++a) {
+        for (var b = 1; b < 6; ++b) {
+            if (a < 10)
+                a_string = '10' + a.toString();
+            else
+                a_string = '1' + a.toString();
+            if (b < 10)
+                b_string = '0' + b.toString();
+            else
+                b_string = b.toString();
+            HallB.push(a_string + b_string);
+        }
+    }
+
+    var HallC = [];
+    for (var a = 6; a < 8; ++a) {
+        for (var b = 1; b < 6; ++b) {
+            if (a < 10)
+                a_string = '10' + a.toString();
+            else
+                a_string = '1' + a.toString();
+            if (b < 10)
+                b_string = '0' + b.toString();
+            else
+                b_string = b.toString();
+            HallC.push(a_string + b_string);
+        }
+    }
+
+    var HallD = [];
+    var a_string, b_string;
+    for (var a = 8; a < 10; ++a) {
+        for (var b = 1; b < 6; ++b) {
+            if (a < 10)
+                a_string = '10' + a.toString();
+            else
+                a_string = '1' + a.toString();
+            if (b < 10)
+                b_string = '0' + b.toString();
+            else
+                b_string = b.toString();
+            HallD.push(a_string + b_string);
+        }
+    }
+
+    var but_day_choice = document.getElementById("but_day").value.substring(3,4);
+
+    draw_map(but_day_choice);
+    draw_sankey("data_sankey" + but_day_choice);
+    draw_line(but_day_choice, mainHall);
+    draw_stack(but_day_choice, ["toilet1", "toilet2", "toilet3"]);
+    draw_bubble();
+    var gt = document.getElementById("beans").value;
+    draw_pie(parseInt(but_day_choice), gt, ["mainHall"]);
+    //data_prepare();
+
+    function setup() {
+        margin1 = { top: 10, right: 10, bottom: 10, left: 10 },
+            width4 = width4 - margin1.left - margin1.right,
+            height1 = height1 - margin1.top - margin1.bottom;
+
+        svg1 = d3.select("#container_map").append("svg")
+            .attr("width", width4 + margin1.left + margin1.right)
+            .attr("height", height1 + margin1.top + margin1.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin1.left + "," + margin1.top + ")");
+
+        margin2 = { top: 40, right: 120, bottom: 50, left: 60 },
+            width2 = width2 - margin2.left - margin2.right,
+            height2 = height2 - margin2.top - margin2.bottom;
+
+        svg2 = d3.select("#container_stacked").append("svg")
+            .attr("width", width2 + margin2.left + margin2.right)
+            .attr("height", height2 + margin2.top + margin2.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin2.left + "," + margin2.top + ")");
+
+        margin3 = { top: 10, right: 30, bottom: 30, left: 50 },
+            width3 = width3 - margin3.left - margin3.right,
+            height3 = height3 - margin3.top - margin3.bottom;
+
+        svg3 = d3.select("#container_line").append("svg")
+            .attr("width", width3 + margin3.left + margin3.right)
+            .attr("height", height3 + margin3.top + margin3.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin3.left + "," + margin3.top + ")");
+
+        margin4 = { top: 10, right: 10, bottom: 10, left: 10 },
+            width4 = width4 - margin4.left - margin4.right,
+            height4 = height4 - margin4.top - margin4.bottom;
+
+        svg4 = d3.select("#container_sankey").append("svg")
+            .attr("width", width4 + margin4.left + margin4.right)
+            .attr("height", height4 + margin4.top + margin4.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin4.left + "," + margin4.top + ")");
+
+        margin5 = { top: 210, right: 10, bottom: 30, left: 10 },
+            width5 = width5 - margin5.left - margin5.right,
+            height5 = height5 - margin5.top - margin5.bottom;
+
+        svg5 = d3.select("#container_bubble").append("svg")
+            .attr("width", width5 + margin5.left + margin5.right)
+            .attr("height", height5 + margin5.top + margin5.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + (width5 / 2 + margin5.left) + "," + margin5.top + ")");
+
+        margin6 = { top: 10, right: 10, bottom: 10, left: 10 },
+            width6 = width6 - margin6.left - margin6.right,
+            height6 = height6 - margin6.top - margin6.bottom;
+
+        svg6 = d3.select("#container_circular").append("svg")
+            .attr("width", width6 + margin6.left + margin6.right)
+            .attr("height", height6 + margin6.top + margin6.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin6.left + "," + margin6.top + ")");
+    }
+
+    function windowSetup(flag) {
+        margin7 = { top: 50, right: 50, bottom: 30, left: 10 },
+            width7 = width7 - margin7.left - margin7.right,
+            height7 = height7 - margin7.top - margin7.bottom;
+
+        svg7 = d3.select("#container_feature").append("svg")
+            .attr("width", width7 + margin7.left + margin7.right)
+            .attr("height", height7 + margin7.top + margin7.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin7.left + "," + margin7.top + ")");
+        if (flag) {
+            margin8 = { top: 170, right: 120, bottom: 30, left: 120 },
+                width8 = width8 - margin8.left - margin8.right,
+                height8 = height8 - margin8.top - margin8.bottom;
+
+            svg8 = d3.select("#container_personalBubble").append("svg")
+                .attr("width", width8 + margin8.left + margin8.right)
+                .attr("height", height8 + margin8.top + margin8.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + (width8 / 2 + margin8.left) + "," + margin8.top + ")");
+        }
+
+        margin9 = { top: 50, right: 50, bottom: 30, left: 10 },
+            width9 = width9 - margin9.left - margin9.right,
+            height9 = height9 - margin9.top - margin9.bottom;
+
+        svg9 = d3.select("#container_personalMap").append("svg")
+            .attr("width", width9 + margin9.left + margin9.right)
+            .attr("height", height9 + margin9.top + margin9.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin9.left + "," + margin9.top + ")");
+
+        margin10 = { top: 50, right: 50, bottom: 30, left: 10 },
+            width10 = width10 - margin10.left - margin10.right,
+            height10 = height10 - margin10.top - margin10.bottom;
+
+        svg10 = d3.select("#container_wordCloud").append("svg")
+            .attr("width", width10 + margin10.left + margin10.right)
+            .attr("height", height10 + margin10.top + margin10.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin10.left + "," + margin10.top + ")");
+
+        margin11 = { top: 50, right: 50, bottom: 30, left: 10 },
+            width11 = width11 - margin11.left - margin11.right,
+            height11 = height11 - margin11.top - margin11.bottom;
+
+        svg11 = d3.select("#container_timeScheduler").append("svg")
+            .attr("width", width11 + margin11.left + margin11.right)
+            .attr("height", height11 + margin11.top + margin11.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin7.left + "," + margin7.top + ")");
+    }
+
+    function redraw() {
+        width4 = document.getElementById('container_map').offsetWidth;
+        height1 = width4 / 1.03;
+        width2 = document.getElementById('container_stacked').offsetWidth;
+        height2 = width2 / 2.88;
+        width3 = document.getElementById('container_line').offsetWidth;
+        height3 = width3 / 2.7;
+        width4 = document.getElementById('container_sankey').offsetWidth;
+        height4 = width4 / 1.46;
+        width5 = document.getElementById('container_bubble').offsetWidth;
+        height5 = width5 / 1.03;
+        width6 = document.getElementById('container_circular').offsetWidth;
+        height6 = width6 / 1.35;
+        width7 = document.getElementById('container_feature').offsetWidth;
+        height7 = width7 / 2.5;
+
+        $("#choiceWindow").slideUp(300);
+        $("#backGround").hide();
+        d3.select("#choiceWindow").selectAll('svg').remove();
+        d3.selectAll('svg').remove();
+        setup();
+        var but_day_choice = document.getElementById("but_day").value.substring(3,4);
+
+        draw_map(but_day_choice);
+        draw_sankey("data_sankey" + but_day_choice);
+        draw_line(but_day_choice, mainHall);
+        draw_stack(but_day_choice, ["toilet1", "toilet2", "toilet3"]);
+        draw_bubble();
+        var gt = document.getElementById("beans").value;
+        draw_pie(parseInt(but_day_choice), gt, ["mainHall"]);
+    }
+
+
+    $(document).ready(function () {
+        $("#x").click(function () {
+            $("#choiceWindow").slideUp(300);
+            $("#backGround").hide();
+            d3.select("#choiceWindow").selectAll('svg').remove();
+        })
+    });
+
+    function throttle() {
+        window.clearTimeout(throttleTimer);
+        throttleTimer = window.setTimeout(function () {
+            redraw();
+        }, 200);
+    }
+
+    day_refresh();
+
+    function day_refresh(){
+        var button_day = document.getElementById("but_day_submit");
+        button_day.onclick = function(){
+            redraw();
+        }
+    }
+</script>
+
+</html>
