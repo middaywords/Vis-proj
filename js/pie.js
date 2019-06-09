@@ -145,7 +145,25 @@ function draw_pie(day, gt, rooms){
                 stroke_color_rec = this.style.stroke;
                 this.style.fill = "white";
                 this.style.stroke = "black";
+
+                d3.select("#container_sankey").selectAll('svg').remove();
+                
+                width4 = document.getElementById('container_sankey').offsetWidth;
+                height4 = width4 / 1.46;
+
+                margin4 = { top: 10, right: 10, bottom: 10, left: 10 },
+                    width4 = width4 - margin4.left - margin4.right,
+                    height4 = height4 - margin4.top - margin4.bottom;
+
+                svg4 = d3.select("#container_sankey").append("svg")
+                    .attr("width", width4 + margin4.left + margin4.right)
+                    .attr("height", height4 + margin4.top + margin4.bottom)
+                    .append("g")
+                    .attr("transform",
+                        "translate(" + margin4.left + "," + margin4.top + ")");
+
                 var but_day_choice = document.getElementById("but_day").value.substring(3,4);
+
                 if(this.__data__.data.label == "Business Man"){
                     draw_sankey("node_dict" + but_day_choice + "_businessman");
                 }
@@ -165,18 +183,34 @@ function draw_pie(day, gt, rooms){
                 //return tooltip_pie.style("visibility", "visible");
             })
             .on("mousemove", function(ele){
-                /*return tooltip_pie.html(rdata[ele.index].label + ":" + rdata[ele.index].value)
+                /*return tooltip    _pie.html(rdata[ele.index].label + ":" + rdata[ele.index].value)
                     .style("left", (d3.event.pageX + 20) + "px")
                     .style("top", (d3.event.pageY + 20) + "px");*/
             })
             .on("mouseout", function(){
-
                 this.style.fill = fill_color_rec;
                 this.style.stroke = stroke_color_rec;
+
+                d3.select("#container_sankey").selectAll('svg').remove();
+
+                width4 = document.getElementById('container_sankey').offsetWidth;
+                height4 = width4 / 1.46;
+
+                margin4 = { top: 10, right: 10, bottom: 10, left: 10 },
+                    width4 = width4 - margin4.left - margin4.right,
+                    height4 = height4 - margin4.top - margin4.bottom;
+
+                svg4 = d3.select("#container_sankey").append("svg")
+                    .attr("width", width4 + margin4.left + margin4.right)
+                    .attr("height", height4 + margin4.top + margin4.bottom)
+                    .append("g")
+                    .attr("transform",
+                        "translate(" + margin4.left + "," + margin4.top + ")");
 
                 var but_day_choice = document.getElementById("but_day").value.substring(3,4);
 
                 draw_sankey("data_sankey" + but_day_choice);
+                console.log("data_sankey" + but_day_choice);
                 //return tooltip_pie.style("visibility", "hidden");
 
             });

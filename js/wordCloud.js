@@ -1,34 +1,51 @@
 function draw_wordcloud(choose_id){
     // interface:
     // string id : "19145"
+    var person_room_data;
+    d3.json('data/person_room_count.json', function (error, data) {
+        person_room_data = data;
+    });
+
     // List of words
     var myWords = [];
 
     // set the dimensions and margins of the graph
-    var WCwidth = width10,
-        WCheight = height10;
+    var WCmargin = {top: 10, right: 10, bottom: 10, left: 10},
+        WCwidth = width10 - WCmargin.left - WCmargin.right,
+        WCheight = height10 - WCmargin.top - WCmargin.bottom;
 
     // append the svg object to the body of the page
-    var svg = svg10
-    d3.json('data/person_room_count.json', function (error, data) {
-        layout = d3.layout.cloud()
-            .size([WCwidth, WCheight])
-            .words(myWords.map(function(d) { return {text: d.word, size:d.size}; }))
-            .padding(5)        //space between words
-            .rotate(function() { return (Math.random() * 2) * 90 - 90; })
-            .fontSize(function(d) { return d.size; })      // font size of words
-            .on("end", draw);
-        layout.start();
+    var svg = d3.select("#wordcloud").append("svg")
+        .attr("width", WCwidth + WCmargin.left + WCmargin.right)
+        .attr("height", WCheight + WCmargin.top + WCmargin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + WCmargin.left + "," + WCmargin.top + ")");
+    layout = d3.layout.cloud()
+        .size([WCwidth, WCheight])
+        .words(myWords.map(function(d) { return {text: d.word, size:d.size}; }))
+        .padding(5)        //space between words
+        .rotate(function() { return (Math.random() * 2) * 90 - 90; })
+        .fontSize(function(d) { return d.size; })      // font size of words
+        .on("end", draw);
+    layout.start();
 
-        wordCloudPlot(choose_id,data);
-    });
+    //wordCloudPlot(choose_id);
+    //wordCloudPlot('19145');
 
-    
+    refresh_wordcloud();
+
+    function refresh_wordcloud(){
+        var but_wordcloud_plot = document.getElementById("wordcloudplot");
+        but_wordcloud_plot.onclick = function(){
+            wordCloudPlot(choose_id);
+        }
+    }
 
     // ----------------------------------
-    function wordCloudPlot(id,data) {
+    function wordCloudPlot(id) {
         var person = id.toString();
-        var words = data[person];
+        var words = person_room_data[person];
         var curWords = [];
         var rec = [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER];
         for (var wr in words) {
@@ -52,7 +69,12 @@ function draw_wordcloud(choose_id){
         d3.select("#wordcloud").html("");
 
         // append the svg object to the body of the page
-        svg = svg10;
+        svg = d3.select("#wordcloud").append("svg")
+            .attr("width", WCwidth + WCmargin.left + WCmargin.right)
+            .attr("height", WCheight + WCmargin.top + WCmargin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + WCmargin.left + "," + WCmargin.top + ")");
 
         layout = d3.layout.cloud()
             .size([WCwidth, WCheight])
