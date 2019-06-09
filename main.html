@@ -644,7 +644,7 @@
             .attr("transform",
                 "translate(" + margin3.left + "," + margin3.top + ")");
 
-        margin4 = { top: 10, right: 30, bottom: 10, left: 10 },
+        margin4 = { top: 30, right: 30, bottom: 10, left: 10 },
             width4 = width4 - margin4.left - margin4.right,
             height4 = height4 - margin4.top - margin4.bottom;
 
@@ -679,7 +679,7 @@
     }
 
     function windowSetup(flag) {
-        margin7 = { top: 100, right: 50, bottom: 30, left: 10 },
+        margin7 = { top: 130, right: 50, bottom: 0, left: 10 },
             width7 = width7 - margin7.left - margin7.right,
             height7 = height7 - margin7.top - margin7.bottom;
 
@@ -690,7 +690,7 @@
             .attr("transform",
                 "translate(" + margin7.left + "," + margin7.top + ")");
         if (flag) {
-            margin8 = { top: 170, right: 120, bottom: 30, left: 120 },
+            margin8 = { top: 270, right: 120, bottom: 30, left: 120 },
                 width8 = width8 - margin8.left - margin8.right,
                 height8 = height8 - margin8.top - margin8.bottom;
 
@@ -713,7 +713,7 @@
                 "translate(" + margin9.left + "," + margin9.top + ")");
         }
         
-        margin10 = { top: 50, right: 50, bottom: 30, left: 10 },
+        margin10 = { top: 80, right: 50, bottom: 30, left: 10 },
             width10 = width10 - margin10.left - margin10.right,
             height10 = height10 - margin10.top - margin10.bottom;
 
@@ -733,7 +733,7 @@
             .attr("height", height11 + margin11.top + margin11.bottom)
             .append("g")
             .attr("transform",
-                "translate(" + margin7.left + "," + margin7.top + ")");
+                "translate(" + margin11.left + "," + margin11.top + ")");
     }
 
     function redraw() {
