@@ -78,6 +78,9 @@ function draw_personal_bubble(id) {
                     highlight = this;
                     windowSetup(false);
                     draw_feature(d.data.name);
+                    draw_personal_map(d.data.name);
+                    draw_wordcloud(d.data.name)
+                    drawPersonalSchedule(parseInt(d.data.name));
                 }
             })
             .on("mousemove", function (d) {

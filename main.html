@@ -466,7 +466,7 @@
                 </div>
                 <div class="row clearfix">
                     <div class="col-md-12 column">
-                        <div id="container_timeScheduler">
+                        <div id="container_psnsdl">
                             <h4>个人日程</h4>
                         </div>
                     </div>
@@ -485,7 +485,6 @@
                         <div id="container_wordCloud">
                             <h4>container_wordCloud</h4>
                             <div id="wordcloud"></div>
-                            <button id="wordcloudplot"> HEY HEY </button>
                         </div>
                     </div>
 
@@ -528,7 +527,7 @@
     var height9 = width9 / 2.5;
     var width10 = document.getElementById('container_wordCloud').offsetWidth;
     var height10 = width10 / 2.5;
-    var width11 = document.getElementById('container_timeScheduler').offsetWidth;
+    var width11 = document.getElementById('container_psnsdl').offsetWidth;
     var height11 = width11 / 2.5;
 
     var svg1, svg2, svg3, svg4, svg5, svg6, svg7;
@@ -715,7 +714,6 @@
                 .append("g")
                 .attr("transform",
                     "translate(" + (width8 / 2 + margin8.left) + "," + margin8.top + ")");
-        }
 
         margin9 = { top: 50, right: 50, bottom: 30, left: 10 },
             width9 = width9 - margin9.left - margin9.right,
@@ -727,7 +725,8 @@
             .append("g")
             .attr("transform",
                 "translate(" + margin9.left + "," + margin9.top + ")");
-
+        }
+        
         margin10 = { top: 50, right: 50, bottom: 30, left: 10 },
             width10 = width10 - margin10.left - margin10.right,
             height10 = height10 - margin10.top - margin10.bottom;
