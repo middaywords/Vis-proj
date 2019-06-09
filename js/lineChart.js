@@ -17,6 +17,7 @@ function draw_line(read_file, thisarea) {
             row1.value = num;
             data.push(row1);
         });
+        
         //console.log(data);
         var x = d3.scaleTime()
             .domain(d3.extent(data, function (d) { return d.date; }))
