@@ -65,7 +65,7 @@ function draw_bubble() {
                     $("#backGround").show();
                     document.getElementById('personalMap').innerHTML = "当前查看人员: " + d.data.name;
                     width7 = document.getElementById('container_feature').offsetWidth;
-                    height7 = width7 / 1.2;
+                    height7 = width7 / 1;
                     width8 = document.getElementById('container_personalBubble').offsetWidth - 40;
                     height8 = width8 / 2.1;
                     width9 = document.getElementById('container_personalMap').offsetWidth;
@@ -110,6 +110,7 @@ function draw_bubble() {
             .attr("text-anchor", "middle")
             .style("alignment-baseline", "middle")
             .style("font-size", "small")
+            .style("fill", "brown")
             .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
             .style("font-family", "微软正黑体")
             .style("display", function(d) { return d.parent === root ? "inline" : "none"; })

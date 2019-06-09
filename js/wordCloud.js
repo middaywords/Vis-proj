@@ -42,7 +42,7 @@ function draw_wordcloud(choose_id) {
             curWords.push(tmpdict);
         }
         curWords.forEach(function(ele) {
-            ele.size = (ele.size - rec[0]) / (rec[1] - rec[0]) * 40 + 15;
+            ele.size = (ele.size - rec[0]) / (rec[1] - rec[0]) * 40 + 30;
         });
         console.log(curWords)
         redraw(curWords);

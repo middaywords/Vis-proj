@@ -347,7 +347,7 @@
         height: 100%;
     }
 
-    h4{
+    h5{
         color: #faa755;
     }
 
@@ -378,12 +378,11 @@
             <h1 class="tith1 fl">ChinaVis 2019</h1>    
             <div class="topbnt_right fl">
                 <div id="but_div_2">
-                    <select id="but_day" class="btn btn-info btn-sm" name="day_select">
+                    <select id="but_day" class="btn btn-info btn-sm" name="day_select" onchange="day_refresh()">
                         <option>Day1</option>
                         <option>Day2</option>
                         <option>Day3</option>
                     </select>
-                    <input type="submit" class="btn btn-info btn-sm" value="Submit" id="but_day_submit">
                 </div>
             </div>
         </div>
@@ -402,7 +401,7 @@
                             </div>
                             <div class="col-md-6 column">
                                 <div id="container_bubble" class="mainTop">
-                                    <h4>container_bubble</h4>
+                                    <h5><br>container_bubble</h5>
                                 </div>
                             </div>
                         </div>
@@ -417,7 +416,7 @@
                             </div>
                             <div class="col-md-8 column">
                                 <div id="container_line" class="mainBottom">
-                                    <h4 id="line_sid_number">container_line</h4>
+                                    <h5 id="line_sid_number">container_line</h5>
                                 </div>
                             </div>
                         </div>
@@ -426,7 +425,7 @@
                         <div class="row clearfix">
                             <div class="col-md-12 column">
                                 <div id="container_sankey" class="mainSankey">
-                                    <h4>container_sankey</h4>
+                                    <h5><br>container_sankey</h5>
                                 </div>
                             </div>
                         </div>
@@ -434,7 +433,7 @@
                         <div class="row clearfix">
                             <div class="col-md-12 column">
                                 <div id="container_stacked" class="mainStack">
-                                    <h4>container_stacked</h4>
+                                    <h5>container_stacked</h5>
                                 </div>
                             </div>
                         </div>
@@ -451,7 +450,7 @@
                 <div class="row clearfix">
                     <div class="col-md-12 column">
                         <div id="container_personalMap" class="psnMap">
-                            <h4 id="personalMap">PersonalMap</h4>
+                            <h5 id="personalMap" class="h5c">PersonalMap</h5>
                             <div id="but_div_1">
 								<input type="hidden" name="beans_1" id="beans_1" min="0" max="659" step="1" value="0" >
 								<input type="submit" class="btn btn-info btn-sm" value="Play animation" id="but_animation_1">                           
@@ -466,7 +465,7 @@
                 <div class="row clearfix">
                     <div class="col-md-12 column">
                         <div id="container_psnsdl" class="psnSchedule">
-                            <h4>个人日程</h4>
+                            <h5 class="h5c">个人日程</h5>
                         </div>
                     </div>
                 </div>
@@ -476,20 +475,20 @@
                 <div class="row clearfix">
                     <div class="col-md-12 column">
                         <div id="container_personalBubble" class="psnBubble">
-                            <h4>container_personalBubble</h4>
+                            <h5 class="h5c">container_personalBubble</h5>
                         </div>
                     </div>
                 </div>
                 <div class="row clearfix">
                     <div class="col-md-6 column">
                         <div id="container_feature" class="psnFeature">
-                            <h4>身份判明</h4>
+                            <h5 class="h5c">身份判明</h5>
                         </div>
                     </div>
 
                     <div class="col-md-6 column">
                         <div id="container_wordCloud" class="psnCloud">
-                            <h4>container_wordCloud</h4>
+                            <h5 class="h5c">container_wordCloud</h5>
                         </div>
                     </div>
 
@@ -518,7 +517,7 @@
     var width6 = document.getElementById('container_circular').offsetWidth;
     var height6 = width6 / 1.35;
     var width7 = document.getElementById('container_feature').offsetWidth;
-    var height7 = width7 / 1.2;
+    var height7 = width7 / 1;
     var width8 = document.getElementById('container_personalBubble').offsetWidth-40;
     var height8 = width8 / 2.1;
     var width9 = document.getElementById('container_personalMap').offsetWidth;
@@ -675,7 +674,7 @@
             .attr("width", width5 + margin5.left + margin5.right)
             .attr("height", height5 + margin5.top + margin5.bottom)
             .attr("transform",
-                "translate(" + 20 + "," + 20 + ")")
+                "translate(" + 20 + "," + 10 + ")")
             .append("g")
             .attr("transform",
                 "translate(" + (width5 / 2 + margin5.left -30) + "," + (margin5.top - 40) + ")");
@@ -693,7 +692,7 @@
     }
 
     function windowSetup(flag) {
-        margin7 = { top: 130, right: 50, bottom: 0, left: 10 },
+        margin7 = { top: 80, right: 50, bottom: 30, left: 10 },
             width7 = width7 - margin7.left - margin7.right,
             height7 = height7 - margin7.top - margin7.bottom;
 
@@ -715,7 +714,7 @@
                     "translate(" + 20 + "," + 30 + ")")
                 .append("g")
                 .attr("transform",
-                    "translate(" + (width8 / 2 + margin8.left - 20) + "," + (margin8.top - 30) + ")");
+                    "translate(" + (width8 / 2 + margin8.left - 20) + "," + (margin8.top - 80) + ")");
 
         margin9 = { top: 50, right: 50, bottom: 30, left: 10 },
             width9 = width9 - margin9.left - margin9.right,
@@ -803,10 +802,7 @@
     day_refresh();
 
     function day_refresh(){
-        var button_day = document.getElementById("but_day_submit");
-        button_day.onclick = function(){
             redraw();
-        }
     }
 </script>
 
