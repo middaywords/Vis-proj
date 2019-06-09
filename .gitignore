@@ -1,3 +1,7 @@
 .vscode/*
-server/localJson
+.ipynb_checkpoints
+*/static/
 server/node_modules
+server/scheduleJson
+server/localJson
+sql/__pycache__
