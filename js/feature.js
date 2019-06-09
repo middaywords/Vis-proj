@@ -1,7 +1,7 @@
 function draw_feature(choose_sid) {
     d3.csv("data/feature.csv", function (read_data) {
         var data = [];
-        var Tag = ["专家大咖", "记者", "VIP", "工作人员", "普通观众"];
+        var Tag = ["Business Man", "Newsman", "Specialist", "Staff", "Ordinary People"];
         var trueFeatrue = -1;
         var stay_area = "";
         dm = d3.keys(read_data[0]).filter(function (d) { return d != "" })
@@ -175,7 +175,9 @@ function draw_feature(choose_sid) {
                 .call(yAxis)
         */
         // 将二维数组的第一维剥离，打散成n列
-        var Color = ["#53868B", "#EE3B3B", "#228B22", "#00688B", "#00688B", "#00688B"]
+        //var Color = ["#53868B", "#EE3B3B", "#228B22", "#00688B", "#00688B", "#00688B"]
+
+        var Color = ["#bb505d", "#f58220", "#faa755", "#f58f98", "#deab8a", "#8552a1"]
 
         var rectContainer = svg7.selectAll('rectContainer')
             .data(stackData)

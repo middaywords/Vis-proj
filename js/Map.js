@@ -265,6 +265,8 @@ function draw_map(read_file){
 			        var temp_time = 0; //temperature time
 
 			        function timecount(){
+			        	temp_time = parseInt(document.getElementById("beans").value);
+
 			        	temp_time = (temp_time + 1) % 660; //whole time == 660
 
 			        	if (choice_flag == "frame")

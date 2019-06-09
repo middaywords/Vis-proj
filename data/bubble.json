@@ -1,8 +1,8 @@
 {
-    "name": "参会人员",
+    "name": "Participants",
     "children": [
         {
-            "name": "工作人员",
+            "name": "Staff",
             "children": [
                 {
                     "name": "room5",
@@ -1341,7 +1341,7 @@
             ]
         },
         {
-            "name": "记者",
+            "name": "Newsman",
             "children": [
                 {
                     "name": "10019",
@@ -2483,7 +2483,7 @@
             ]
         },
         {
-            "name": "VIP",
+            "name": "Specialist",
             "children": [
                 {
                     "name": "10214",
@@ -2612,7 +2612,7 @@
             ]
         },
         {
-            "name": "普通观众",
+            "name": "Ordinary People",
             "children": [
                 {
                     "name": "Day 1 & 2 & 3",
@@ -21212,7 +21212,7 @@
             ]
         },
         {
-            "name": "专家大咖",
+            "name": "Business Man",
             "children":[
                 {
                     "name": "11662",

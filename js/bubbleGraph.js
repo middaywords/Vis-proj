@@ -5,10 +5,33 @@ function draw_bubble() {
         width5 = +svg5.attr("width"),
         g = svg5.append("g").attr("transform", "translate(" + width5 / 2 + "," + width5 / 2 + ")");*/
     var margin = 20
-    var color = d3.scaleLinear()
+    /*var color = d3.scaleLinear()
         .domain([-1, 5])
         .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-        .interpolate(d3.interpolateHcl);
+        .interpolate(d3.interpolateHcl);*/
+
+    var index_domain = [];
+
+    for (var i = 1; i <= 5; i++)
+    {
+        index_domain.push(i);
+    }
+
+    var color_range = [];
+
+    for (var i = -1; i <= 5; i++)
+    {
+        //if (i == 0)
+            //color_range.push("#424242");
+        //else
+        //{
+            color_range.push(d3.schemeReds[7][i+2]);
+        //}
+    }
+
+    var color = d3.scaleThreshold()
+              .domain(index_domain)
+              .range(color_range);
 
     var pack = d3.pack()
         .size([width5 - margin, width5 - margin])
@@ -31,7 +54,7 @@ function draw_bubble() {
             .data(nodes)
             .enter().append("circle")
             .attr("class", function (d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-            .style("fill", function (d) { return d.children ? color(d.depth) : null; })
+            .style("fill", function (d) { if (d.children == undefined) {return "#FFC1C1";} else return d.children ? color(d.depth) : null; })
             .style("display", function (d) { return d.parent === root || d === root ? "inline" : "none"; })
             
      ////////////////////////////////////////////////////////////////////////////

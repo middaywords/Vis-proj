@@ -78,7 +78,7 @@ function draw_wordcloud(choose_id){
             .data(words)
             .enter().append("text")
             .style("font-size", function(d) { return d.size; })
-            .style("fill", "#69b3a2")
+            .style("fill", "#8552a1")
             .attr("text-anchor", "middle")
             .style("font-family", "Impact")
             .attr("transform", function(d) {
