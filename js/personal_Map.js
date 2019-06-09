@@ -12,6 +12,8 @@ function draw_personal_map(read_file, choose_id){
 	d3.csv("data/sid.csv", function(sid) {
 		d3.json("data/sid_peoplecount" + read_file + ".json", function(count){
 			d3.csv("data/day1.csv", function(list){
+				d3.select("#map_1").selectAll("svg").remove()
+				d3.select("#map1_1").selectAll("svg").remove()
 				//initial
 				  	var num = 0;
 

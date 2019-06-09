@@ -59,7 +59,6 @@ function draw_personal_bubble(id) {
                 if (d.children == undefined) {
                     tooltip.classed("hidden", true);
                     d3.select("#container_feature").selectAll('svg').remove();
-                    d3.select("#container_personalMap").selectAll('svg').remove();
                     d3.select("#container_wordCloud").selectAll('svg').remove();
                     d3.select("#container_psnsdl").selectAll('svg').remove();
                     document.getElementById('personalMap').innerHTML = "当前查看人员: " + d.data.name;
@@ -78,7 +77,7 @@ function draw_personal_bubble(id) {
                     highlight = this;
                     windowSetup(false);
                     draw_feature(d.data.name);
-                    draw_personal_map(d.data.name);
+                    draw_personal_map(1,d.data.name);
                     draw_wordcloud(d.data.name)
                     drawPersonalSchedule(parseInt(d.data.name));
                 }
