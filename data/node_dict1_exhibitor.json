@@ -1,0 +1,78 @@
+{
+    "nodes":
+    [{"node": 0, "name": "left_out"}, {"node": 1, "name": "mainHall-10-00"}, {"node": 2, "name": "right_out"}, {"node": 3, "name": "other-12-30"}, {"node": 4, "name": "diningHall-12-30"}, {"node": 5, "name": "hallB-14-30"}, {"node": 6, "name": "exhibition-14-30"}, {"node": 7, "name": "hallC-14-30"}, {"node": 8, "name": "other-16-15"}, {"node": 9, "name": "hallB-17-00"}, {"node": 10, "name": "hallC-17-00"}, {"node": 11, "name": "hallD-17-00"}, {"node": 12, "name": "other-17-00"}],
+    "links":
+    [
+        {
+            "source": 0,
+            "target": 1,
+            "value": 2
+        },
+        {
+            "source": 1,
+            "target": 3,
+            "value": 1
+        },
+        {
+            "source": 1,
+            "target": 4,
+            "value": 1
+        },
+        {
+            "source": 3,
+            "target": 5,
+            "value": 1
+        },
+        {
+            "source": 4,
+            "target": 6,
+            "value": 1
+        },
+        {
+            "source": 0,
+            "target": 5,
+            "value": 1
+        },
+        {
+            "source": 0,
+            "target": 7,
+            "value": 2
+        },
+        {
+            "source": 5,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 7,
+            "target": 8,
+            "value": 2
+        },
+        {
+            "source": 6,
+            "target": 8,
+            "value": 1
+        },
+        {
+            "source": 8,
+            "target": 9,
+            "value": 1
+        },
+        {
+            "source": 8,
+            "target": 10,
+            "value": 1
+        },
+        {
+            "source": 8,
+            "target": 11,
+            "value": 1
+        },
+        {
+            "source": 8,
+            "target": 12,
+            "value": 2
+        }
+        
+    ]
+}

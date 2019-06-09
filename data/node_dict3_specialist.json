@@ -1,52 +1,12 @@
 {
-    "nodes": [
-        {
-            "node": 0,
-            "name": "mainHall-09-15"
-        },
-        {
-            "node": 1,
-            "name": "mainHall-10-15"
-        },
-        {
-            "node": 2,
-            "name": "other-09-15"
-        },
-        {
-            "node": 3,
-            "name": "other-10-15"
-        },
-        {
-            "node": 4,
-            "name": "right_out"
-        },
-        {
-            "node": 5,
-            "name": "left_out"
-        },
-        {
-            "node": 6,
-            "name": "mainHall-11-15"
-        },
-        {
-            "node": 7,
-            "name": "hallA-11-15"
-        },
-        {
-            "node": 8,
-            "name": "other-11-15"
-        }
-    ],
-    "links": [
+    "nodes":
+    [{"node": 0, "name": "mainHall-09-15"}, {"node": 1, "name": "mainHall-10-15"}, {"node": 2, "name": "left_out"}, {"node": 3, "name": "room2-10-15"}, {"node": 4, "name": "room2-09-15"}, {"node": 5, "name": "mainHall-11-15"}, {"node": 6, "name": "hallA-11-15"}, {"node": 7, "name": "other-11-15"}, {"node": 8, "name": "right_out"}],
+    "links":
+    [
         {
             "source": 0,
             "target": 1,
-            "value": 12
-        },
-        {
-            "source": 2,
-            "target": 1,
-            "value": 1
+            "value": 8
         },
         {
             "source": 2,
@@ -54,44 +14,49 @@
             "value": 1
         },
         {
-            "source": 2,
-            "target": 4,
+            "source": 4,
+            "target": 3,
             "value": 1
         },
         {
             "source": 1,
+            "target": 5,
+            "value": 3
+        },
+        {
+            "source": 1,
             "target": 6,
-            "value": 10
+            "value": 4
         },
         {
             "source": 1,
             "target": 7,
-            "value": 3
+            "value": 1
         },
         {
             "source": 3,
-            "target": 6,
+            "target": 5,
+            "value": 1
+        },
+        {
+            "source": 3,
+            "target": 8,
             "value": 1
         },
         {
             "source": 5,
             "target": 8,
-            "value": 3
+            "value": 4
         },
         {
             "source": 6,
-            "target": 4,
-            "value": 11
+            "target": 8,
+            "value": 4
         },
         {
             "source": 7,
-            "target": 4,
-            "value": 3
-        },
-        {
-            "source": 8,
-            "target": 4,
-            "value": 3
+            "target": 8,
+            "value": 1
         }
     ]
 }
