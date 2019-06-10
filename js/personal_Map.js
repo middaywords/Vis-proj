@@ -626,6 +626,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('register')
                     .attr("x", 2.1 * path_length)
                     .attr('y', 13.3 * path_length)
+                    .attr("font-size", 13)
                     .style("fill", text_color)
 
                 //poster
@@ -641,7 +642,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('toilet1')
                     .attr("x", 10.1 * path_length)
                     .attr('y', 5.25 * path_length)
-                    .attr("font-size", 9)
+                    .attr("font-size", 7.5)
                     .style("fill", text_color)
 
                 //room1
@@ -649,7 +650,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('room1')
                     .attr("x", 10.1 * path_length)
                     .attr('y', 8.25 * path_length)
-                    .attr("font-size", 9)
+                    .attr("font-size", 7.5)
                     .style("fill", text_color)
 
                 //room2
@@ -657,7 +658,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('room2')
                     .attr("x", 10.1 * path_length)
                     .attr('y', 11.25 * path_length)
-                    .attr("font-size", 9)
+                    .attr("font-size", 7.5)
                     .style("fill", text_color)
 
                 //elevator_up_floor1
@@ -665,7 +666,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('elevator')
                     .attr("x", 10.1 * path_length)
                     .attr('y', 1.65 * path_length)
-                    .attr("font-size", 7)
+                    .attr("font-size", 6)
                     .style("fill", text_color)
 
                 //elevator_down_floor1
@@ -673,7 +674,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('elevator')
                     .attr("x", 10.1 * path_length)
                     .attr('y', 14.65 * path_length)
-                    .attr("font-size", 7)
+                    .attr("font-size", 6)
                     .style("fill", text_color)
 
                 //exhibition
@@ -696,14 +697,15 @@ function draw_personal_map(read_file, choose_id) {
                     .text('service')
                     .attr("x", 19.1 * path_length)
                     .attr('y', 15.125 * path_length)
-                    .attr("font-size", 8)
+                    .attr("font-size", 7)
                     .style("fill", text_color)
 
                 //room3
                 svg.append('text')
                     .text('room3')
-                    .attr("x", 21.3 * path_length)
-                    .attr('y', 15.3 * path_length)
+                    .attr("x", 22.2 * path_length)
+                    .attr('y', 15.125* path_length)
+                    .attr("font-size", 7)
                     .style("fill", text_color)
 
                 //room4
@@ -711,7 +713,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('room4')
                     .attr("x", 25.2 * path_length)
                     .attr('y', 15.125 * path_length)
-                    .attr("font-size", 8)
+                    .attr("font-size", 7)
                     .style("fill", text_color)
 
                 //toilet2
@@ -719,7 +721,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('toilet2')
                     .attr("x", 27.2 * path_length)
                     .attr('y', 15.125 * path_length)
-                    .attr("font-size", 8)
+                    .attr("font-size", 7)
                     .style("fill", text_color)
 
 
@@ -729,7 +731,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('diningHall')
                     .attr("x", 1.05 * path_length)
                     .attr('y', 6.5 * path_length)
-                    .attr("font-size", 15)
+                    .attr("font-size", 13)
                     .style("fill", text_color)
 
                 //room5
@@ -744,7 +746,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('recreationArea')
                     .attr("x", 0.2 * path_length)
                     .attr('y', 14.75 * path_length)
-                    .attr("font-size", 12)
+                    .attr("font-size", 10.5)
                     .style("fill", text_color)
 
                 //toilet3
@@ -752,7 +754,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('toilet3')
                     .attr("x", 10.1 * path_length)
                     .attr('y', 5.25 * path_length)
-                    .attr("font-size", 9)
+                    .attr("font-size", 7.5)
                     .style("fill", text_color)
 
                 //room6
@@ -760,7 +762,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('room6')
                     .attr("x", 10.1 * path_length)
                     .attr('y', 7.25 * path_length)
-                    .attr("font-size", 9)
+                    .attr("font-size", 7.5)
                     .style("fill", text_color)
 
                 //elevator_up_floor2
@@ -768,7 +770,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('elevator')
                     .attr("x", 10.1 * path_length)
                     .attr('y', 1.65 * path_length)
-                    .attr("font-size", 7)
+                    .attr("font-size", 6)
                     .style("fill", text_color)
 
                 //elevator_down_floor2
@@ -776,7 +778,7 @@ function draw_personal_map(read_file, choose_id) {
                     .text('elevator')
                     .attr("x", 10.1 * path_length)
                     .attr('y', 14.65 * path_length)
-                    .attr("font-size", 7)
+                    .attr("font-size", 6)
                     .style("fill", text_color)
 
                 //route

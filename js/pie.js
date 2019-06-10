@@ -178,6 +178,8 @@ function change_pie(day, t, rooms) {
                     draw_sankey("node_dict" + but_day_choice + "_staff");
                 } else if (this.__data__.data.label == "Exhibitor") {
                     draw_sankey("node_dict" + but_day_choice + "_exhibitor");
+                } else if (this.__data__.data.label == "Exhibitor") {
+                    draw_sankey("node_dict" + but_day_choice + "_exhibitor");
                 }
 
                 //return tooltip_pie.style("visibility", "visible");
@@ -217,8 +219,8 @@ function change_pie(day, t, rooms) {
         d3.selectAll(".legend").remove();
         for (let i = 0; i < rdata.length; i++) {
             console.log(rdata.length);
-            svgPie.append("circle").attr("class", "legend").attr("cx", 110).attr("cy", -50 + 20 * i).attr("r", 6).style("fill", color_pie(rdata[i].label));
-            svgPie.append("text").attr("class", "legend").attr("x", 120).attr("y", -50 + 20 * i).text(rdata[i].label).style("font-size", "12px").attr("alignment-baseline", "middle").style("fill", "white")
+            svgPie.append("circle").attr("class", "legend").attr("cx", 70).attr("cy", -50 + 20 * i).attr("r", 6).style("fill", color_pie(rdata[i].label));
+            svgPie.append("text").attr("class", "legend").attr("x", 80).attr("y", -50 + 20 * i).text(rdata[i].label).style("font-size", "12px").attr("alignment-baseline", "middle").style("fill", "white")
         }
     });
 };
