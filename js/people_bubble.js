@@ -97,7 +97,7 @@ function draw_personal_bubble(id) {
                     highlight = this;
                     windowSetup(false);
                     draw_feature(d.data.name);
-                    var select_day_1_value = document.getElementById("but_day_1").value.substring(3,4);
+                    var select_day_1_value = document.getElementById("but_day_1").value.substring(3, 4);
                     draw_personal_map(select_day_1_value, d.data.name);
                     console.log("day+id = " + select_day_1_value + " " + focus.data.name);
                     draw_wordcloud(d.data.name)
@@ -205,10 +205,10 @@ function draw_personal_bubble(id) {
         //day personal_map
         refresh_personal_map();
 
-        function refresh_personal_map(){
+        function refresh_personal_map() {
             var select_day_1 = document.getElementById("but_day_1");
-            select_day_1.onchange = function(){
-                var select_day_1_value = document.getElementById("but_day_1").value.substring(3,4);
+            select_day_1.onchange = function() {
+                var select_day_1_value = document.getElementById("but_day_1").value.substring(3, 4);
 
                 //d3.select("#container_personalMap").selectAll("svg").remove();
 

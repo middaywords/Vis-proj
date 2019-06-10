@@ -1,13 +1,10 @@
 {
     "name": "Participants",
-    "children": [
-        {
+    "children": [{
             "name": "Staff",
-            "children": [
-                {
+            "children": [{
                     "name": "room5",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "10037",
                             "size": 1
                         },
@@ -823,8 +820,7 @@
                 },
                 {
                     "name": "room6",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "10164",
                             "size": 1
                         },
@@ -1124,8 +1120,7 @@
                 },
                 {
                     "name": "service",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "10638",
                             "size": 1
                         },
@@ -1145,8 +1140,7 @@
                 },
                 {
                     "name": "register",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "10164",
                             "size": 1
                         },
@@ -1234,8 +1228,7 @@
                 },
                 {
                     "name": "exhibition",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "11026",
                             "size": 1
                         },
@@ -1263,8 +1256,7 @@
                 },
                 {
                     "name": "HallABCD",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "10309",
                             "size": 1
                         },
@@ -1294,8 +1286,7 @@
         },
         {
             "name": "Newsman",
-            "children": [
-                {
+            "children": [{
                     "name": "10019",
                     "size": 1
                 },
@@ -2435,8 +2426,7 @@
         },
         {
             "name": "VIP",
-            "children": [
-                {
+            "children": [{
                     "name": "10214",
                     "size": 1
                 },
@@ -2564,11 +2554,33 @@
         },
         {
             "name": "Audience",
-            "children": [
+            "children": [{
+                    "name": "Outliers",
+                    "children": [{
+                            "name": "16144",
+                            "size": 1
+                        },
+                        {
+                            "name": "12165",
+                            "size": 1
+                        },
+                        {
+                            "name": "15983",
+                            "size": 1
+                        },
+                        {
+                            "name": "17578",
+                            "size": 1
+                        },
+                        {
+                            "name": "10925",
+                            "size": 1
+                        }
+                    ]
+                },
                 {
                     "name": "Day 1 & 2 & 3",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "12534",
                             "size": 1
                         },
@@ -8636,8 +8648,7 @@
                 },
                 {
                     "name": "Day 1 & 2",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "14715",
                             "size": 1
                         },
@@ -12293,8 +12304,7 @@
                 },
                 {
                     "name": "Day 1 & 3",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "10882",
                             "size": 1
                         },
@@ -12886,8 +12896,7 @@
                 },
                 {
                     "name": "Day 2 & 3",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "14860",
                             "size": 1
                         },
@@ -15239,8 +15248,7 @@
                 },
                 {
                     "name": "Day 1",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "14370",
                             "size": 1
                         },
@@ -17020,8 +17028,7 @@
                 },
                 {
                     "name": "Day 2",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "10743",
                             "size": 1
                         },
@@ -20309,8 +20316,7 @@
                 },
                 {
                     "name": "Day 3",
-                    "children": [
-                        {
+                    "children": [{
                             "name": "17679",
                             "size": 1
                         },
@@ -21164,8 +21170,7 @@
         },
         {
             "name": "Specialist",
-            "children": [
-                {
+            "children": [{
                     "name": "11662",
                     "size": 1
                 },
@@ -21221,8 +21226,7 @@
         },
         {
             "name": "Exhibitor",
-            "children": [
-                {
+            "children": [{
                     "name": "11585",
                     "size": 1
                 },

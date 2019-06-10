@@ -1,7 +1,7 @@
-function draw_sankey(read_file){
+function draw_sankey(read_file) {
     // Color scale used
     var color = d3.scaleOrdinal(d3.schemeCategory20);
-    
+
     // Set the sankey diagram properties
     var sankey = d3.sankey()
         .nodeWidth(20)
@@ -24,7 +24,7 @@ function draw_sankey(read_file){
             .enter()
             .append("path")
             .attr("class", "link")
-            .attr("d", sankey.link() )
+            .attr("d", sankey.link())
             .style("stroke-width", function(d) { return Math.max(1, d.dy); })
             .sort(function(a, b) { return b.dy - a.dy; });
 
@@ -57,7 +57,8 @@ function draw_sankey(read_file){
             .attr("x", -6)
             .attr("y", function(d) { return d.dy / 2; })
             .attr("dy", ".35em")
-            .style("font-size", "12px")
+            .style("font-size", "6px")
+            .style("fill", "white")
             .attr("text-anchor", "end")
             .attr("transform", null)
             .text(function(d) { return d.name; })
@@ -69,13 +70,12 @@ function draw_sankey(read_file){
         function dragmove(d) {
             d3.select(this)
                 .attr("transform",
-                    "translate("
-                    + d.x + ","
-                    + (d.y = Math.max(
-                        0, Math.min(height - d.dy, d3.event.y))
-                    ) + ")");
+                    "translate(" +
+                    d.x + "," +
+                    (d.y = Math.max(
+                        0, Math.min(height - d.dy, d3.event.y))) + ")");
             sankey.relayout();
-            link.attr("d", sankey.link() );
+            link.attr("d", sankey.link());
         }
 
     });
