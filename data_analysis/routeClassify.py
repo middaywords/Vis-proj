@@ -28,7 +28,7 @@ class JudgeRegion():
         x, y, floor = self.getPara(num)
 
         if floor == 1:
-            if x == 15 and (y == 5 or y == 15 or y == 17):
+            if x == 15 and (y == 5 or y == 15 or y == 17) or x == 0 and y == 19:
                 return 'out'
 
             if 2 <= x < 4 and 1 <= y < 6:
@@ -48,7 +48,7 @@ class JudgeRegion():
                 # return 'poster'
 
             if 4 <= x < 6 and 10 <= y < 12:
-                # return 'toilet'
+                # return 'toilet1'
                 return 'other'
 
             if 6 <= x < 10 and 10 <= y < 12:
@@ -83,11 +83,11 @@ class JudgeRegion():
 
             if 14 <= x < 16 and 27 <= y < 29:
                 return 'other'
-                # return 'toilet'
+                # return 'toilet2'
 
             if x == 1 and 10 <= y < 12:
                 # return 'Up'
-                # return 'elevator'
+                # return 'elevatorUp'
                 return 'other'
 
             if x == 14 and 10 <= y < 12:
@@ -107,14 +107,14 @@ class JudgeRegion():
                 # return 'room5'
 
             if 13 <= x and 0 <= y < 6:
-                # return 'other'
-                return 'recreationArea'
-
-            if 10 <= x < 12 and 4 <= y < 6:
                 return 'other'
-                # return 'toilet'
+                # return 'recreationArea'
 
-            if 10 <= x < 12 and 6 <= y < 8:
+            if 4 <= x < 6 and 10 <= y < 12:
+                return 'other'
+                # return 'toilet3'
+
+            if 6 <= x < 8 and 10 <= y < 12:
                 return 'other'
                 # return 'room6'
 
@@ -151,10 +151,12 @@ def split_position_by_minute():
             if last_person_time == 0:
                 pass
             else:
-                for t in range(last_person_time, cur_time):
+                for t in range(last_person_time, cur_time + 1):
                     route_dict[last_person_id][t] = row['sid']
             last_person_time = cur_time
         else:
+            # for t in range(last_person_time, route_dict[last_person_id].shape[0]):
+                # route_dict[last_person_id][t] = route_dict[last_person_id][t-1]
             last_person_id = row['id']
             last_person_time = 0
 
@@ -167,7 +169,7 @@ def write_to_csv():
     :return: csv file of route
     """
     www = np.load('routeDict.npy').item()
-    f = open("route3.csv", "w+")
+    f = open("route3_edited.csv", "w+")
 
     for item in www:
         f.write("%d" % item)
@@ -175,7 +177,6 @@ def write_to_csv():
             f.write(",%d" % num)
         f.write("\n")
     f.close()
-
 
 
 def read_route(file_name):
@@ -270,7 +271,7 @@ def sankey_process():
     generate positions of different point-in-time.
     :return:
     """
-    route_data = read_route('route3.csv')
+    route_data = read_route('data/route3.csv')
     region = JudgeRegion()
     time_breakpoint = [get_minute(9, 15), get_minute(10, 15), get_minute(11, 15), get_minute(12, 30)]
     print(time_breakpoint)
@@ -311,7 +312,7 @@ def count_flow():
 
 if __name__ == '__main__':
 
-    # generate route data
+    # # generate route data
     # split_position_by_minute()
     # write_to_csv()
 

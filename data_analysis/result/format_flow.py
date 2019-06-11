@@ -1,5 +1,9 @@
 """
     File format_flow.py created on 2019/5/24 by kangjx
+    Description: generate json data for sankey graph.
+
+    Input : flow time files.
+    Output: links and nodes for json file.
 """
 
 import pandas as pd

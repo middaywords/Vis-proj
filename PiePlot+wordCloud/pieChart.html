@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 960px;
+  height: 500px;
+  position: relative;
+}
+svg{
+	width: 100%;
+	height: 100%;
+}
+text{
+    color: azure;
+}
+path.slice{
+	stroke-width:2px;
+}
+
+polyline{
+	opacity: .3;
+	stroke: black;
+	stroke-width: 2px;
+	fill: none;
+}
+
+</style>
+
+
+<body style="background: dimgray">
+Duration: 0<input type="range" id="duration" min="0" max="5000">5000 
+<br>
+<button class="randomize">randomize</button>
+<div id="fortip"></div>
+
+<link href="tooltipstyle.css" rel="stylesheet">
+<script src="d3.v4.min.js"></script>
+<script>
+
+var svg = d3.select("body")
+	.append("svg")
+	.append("g");
+
+svg.append("g")
+	.attr("class", "slices");
+svg.append("g")
+	.attr("class", "labels");
+svg.append("g")
+	.attr("class", "lines");
+
+
+
+
+var width = 960,
+    height = 450,
+	radius = Math.min(width, height) / 2;
+
+var pie = d3.pie()
+	.sort(null)
+	.value(function(d) {
+		return d.value;
+	});
+
+var arc = d3.arc()
+	.outerRadius(radius * 0.8)
+	.innerRadius(radius * 0.6);
+
+var outerArc = d3.arc()
+	.innerRadius(radius * 0.9)
+	.outerRadius(radius * 0.9);
+
+svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+var key = function(d){ return d.data.label; };
+
+var room_minute_data;
+
+
+var rooms = ['other'];
+var day = 1;
+var t = 100;
+
+// -----------------------------------
+d3.json('room_minute_count.json', function (error, data) {
+    room_minute_data = data;
+    change(randomData(t, rooms));
+});
+
+// -----------------------------------
+var color = d3.scaleOrdinal(d3.schemeCategory20)
+	.domain(["Staff", "Business Man", "Newsman", "Ordinary People", "Specialist"])
+	//.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+function randomData (t, rooms){
+    console.log(room_minute_data);
+    var time_point = t + 2;
+    var data_tpoint = room_minute_data[day - 1][time_point];
+    console.log(data_tpoint);
+
+    var name_list = ["Specialist", "Newsman", "Staff", "Business Man", "Ordinary People"];
+    var rdata = name_list.map(function (label) {
+        return {label: label, value: 0}
+    });
+
+    for (item in data_tpoint) {
+        console.log(item);
+        rooms.forEach(function (room) {
+            if (room == item){
+                for (let i = 0; i < 5; i++) {
+                    rdata[i].value += data_tpoint[item][i]
+                }
+            }
+        })
+    }
+    console.log('real R data');
+    console.log(rdata);
+
+    rdata.sort(function(a,b) {
+        return d3.ascending(a.label, b.label);
+    });
+
+	// var labels = color.domain();
+	// var rdata = labels.map(function(label){
+	// 	return { label: label, value: Math.random() }
+	// }).sort(function(a,b) {
+	// 	return d3.ascending(a.label, b.label);
+	// });
+	// console.log(rdata);
+	return rdata;
+}
+
+
+d3.select(".randomize")
+	.on("click", function(){
+		change(randomData(t, rooms));
+	});
+
+function mergeWithFirstEqualZero(first, second){
+	var secondSet = d3.set(); second.forEach(function(d) { secondSet.add(d.label); });
+
+	var onlyFirst = first
+		.filter(function(d){ return !secondSet.has(d.label) })
+		.map(function(d) { return {label: d.label, value: 0}; });
+	return d3.merge([ second, onlyFirst ])
+		.sort(function(a,b) {
+			return d3.ascending(a.label, b.label);
+		});
+}
+
+function change(data) {
+	var duration = +document.getElementById("duration").value;
+	var data0 = svg.select(".slices").selectAll("path.slice")
+		.data().map(function(d) { return d.data });
+	if (data0.length == 0) data0 = data;
+	var was = mergeWithFirstEqualZero(data, data0);
+	var is = mergeWithFirstEqualZero(data0, data);
+
+	/* ------- SLICE ARCS -------*/
+
+	var slice = svg.select(".slices").selectAll("path.slice")
+		.data(pie(was), key);
+
+	slice.enter()
+		.insert("path")
+		.attr("class", "slice")
+		.style("fill", function(d) { return color(d.data.label); })
+		.each(function(d) {
+			this._current = d;
+		});
+
+	slice = svg.select(".slices").selectAll("path.slice")
+		.data(pie(is), key);
+
+	slice		
+		.transition().duration(duration)
+		.attrTween("d", function(d) {
+			var interpolate = d3.interpolate(this._current, d);
+			var _this = this;
+			return function(t) {
+				_this._current = interpolate(t);
+				return arc(_this._current);
+			};
+		});
+
+	slice = svg.select(".slices").selectAll("path.slice")
+		.data(pie(data), key);
+
+	slice
+		.exit().transition().delay(duration).duration(0)
+		.remove();
+
+	/* ------- TEXT LABELS -------*/
+    /*
+	var text = svg.select(".labels").selectAll("text")
+		.data(pie(was), key);
+
+	text.enter()
+		.append("text")
+		.attr("dy", ".35em")
+		.style("opacity", 0)
+		.text(function(d) {
+			return d.data.label + ':' + d.data.value;
+		})
+		.each(function(d) {
+			this._current = d;
+		});
+
+	function midAngle(d){
+		return d.startAngle + (d.endAngle - d.startAngle)/2;
+	}
+
+	text = svg.select(".labels").selectAll("text")
+		.data(pie(is), key);
+
+	text.transition().duration(duration)
+		.style("opacity", function(d) {
+			return d.data.value == 0 ? 0 : 1;
+		})
+		.attrTween("transform", function(d) {
+			var interpolate = d3.interpolate(this._current, d);
+			var _this = this;
+			return function(t) {
+				var d2 = interpolate(t);
+				_this._current = d2;
+				var pos = outerArc.centroid(d2);
+				pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+				return "translate("+ pos +")";
+			};
+		})
+		.styleTween("text-anchor", function(d){
+			var interpolate = d3.interpolate(this._current, d);
+			return function(t) {
+				var d2 = interpolate(t);
+				return midAngle(d2) < Math.PI ? "start":"end";
+			};
+		});
+
+	text = svg.select(".labels").selectAll("text")
+		.data(pie(data), key);
+
+	text
+		.exit().transition().delay(duration)
+		.remove();
+    */
+	/* ------- SLICE TO TEXT POLYLINES -------*/
+    /*
+	var polyline = svg.select(".lines").selectAll("polyline")
+		.data(pie(was), key);
+
+	polyline.enter()
+		.append("polyline")
+		.style("opacity", 0)
+		.each(function(d) {
+			this._current = d;
+		});
+
+	polyline = svg.select(".lines").selectAll("polyline")
+		.data(pie(is), key);
+
+	polyline.transition().duration(duration)
+		.style("opacity", function(d) {
+			return d.data.value == 0 ? 0 : .5;
+		})
+		.attrTween("points", function(d){
+			this._current = this._current;
+			var interpolate = d3.interpolate(this._current, d);
+			var _this = this;
+			return function(t) {
+				var d2 = interpolate(t);
+				_this._current = d2;
+				var pos = outerArc.centroid(d2);
+				pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+				return [arc.centroid(d2), outerArc.centroid(d2), pos];
+			};
+		});
+
+	polyline = svg.select(".lines").selectAll("polyline")
+		.data(pie(data), key);
+
+	polyline
+		.exit().transition().delay(duration)
+		.remove();
+    */
+    // create a tooltip
+    var tooltip = d3.select("#fortip")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .text("I'm a circle!");
+    var fill_color_rec, stroke_color_rec;
+
+    d3.select(".slices").selectAll("path.slice")
+        .on("mouseover", function(){
+            fill_color_rec = this.style.fill;
+            stroke_color_rec = this.style.stroke;
+            this.style.fill = "white";
+            this.style.stroke = "black";
+
+            d3.select(this).transition().delay(500).attrTween("d", function (d) {
+                var i = d3.interpolate(d.outerRadius, radius*0.9);
+                return function (t) {
+                    d.outerRadius = i(t);
+                    return arc(d);
+                };
+            });
+
+            return tooltip.style("visibility", "visible");
+        })
+        .on("mousemove", function(ele){
+            return tooltip.html(data[ele.index].label + ":" + data[ele.index].value)
+                    .style("left", (d3.event.pageX + 20) + "px")
+                    .style("top", (d3.event.pageY + 20) + "px");
+        })
+        .on("mouseout", function(){
+            d3.select(this).transition().delay(500).attrTween("d", function (d) {
+                var i = d3.interpolate(d.outerRadius, radius*0.8);
+                return function (t) {
+                    d.outerRadius = i(t);
+                    return arc(d);
+                };
+            });
+
+            console.log(this.style.fill);
+            console.log(fill_color_rec);
+            this.style.fill = fill_color_rec;
+            this.style.stroke = stroke_color_rec;
+            return tooltip.style("visibility", "hidden");
+        });
+};
+
+</script>
+</body>

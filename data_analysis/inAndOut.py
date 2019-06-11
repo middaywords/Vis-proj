@@ -1,7 +1,5 @@
 """
     File inAndOut.py created on 2019/5/21 by kangjx
-    Output: Count in and Out for every regions
-    Input: positions of data in every minute. route.csv file.
 """
 
 import pandas as pd
